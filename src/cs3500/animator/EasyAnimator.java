@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 import javax.swing.JOptionPane;
 
 import cs3500.animator.model.model.AnimatorModel;
@@ -60,7 +61,7 @@ public final class EasyAnimator {
     }
     showError(errorMsg);
 
-    String output = "";
+    String output;
     if (Arrays.asList(args).contains("-o")) {
       int i;
       for (i = 0; i < args.length - 1; i++) {
@@ -97,14 +98,14 @@ public final class EasyAnimator {
   private static void showError(String errorMsg) {
     if (!errorMsg.equals("")) {
       JFrame error = new JFrame("Error");
-      error.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      error.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
       JOptionPane.showMessageDialog(error, errorMsg);
     }
   }
 
   private static IAnimationView viewFactory(String type, Appendable out, IAnimatorOperations model,
                                      int speed) {
-    String errorMsg = "";
+    String errorMsg;
     switch (type) {
       case "text":
         return new TextualView(out, model, speed);
