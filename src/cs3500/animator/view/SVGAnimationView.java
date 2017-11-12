@@ -3,6 +3,8 @@ package cs3500.animator.view;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import cs3500.animator.controller.ButtonListener;
+import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.shapes.IShape;
@@ -12,6 +14,8 @@ public class SVGAnimationView implements IAnimationView {
   private Appendable ap;
   private IAnimatorOperations model;
   private int speed;
+  private ViewType type = ViewType.SVG;
+
   private static int SVG_WIDTH = 1000;
   private static int SVG_HEIGHT = 1000;
 
@@ -20,11 +24,13 @@ public class SVGAnimationView implements IAnimationView {
    * @param ap    Where the view sends its output.
    * @param model The model where the necessary data is stored.
    */
-  public SVGAnimationView(Appendable ap, IAnimatorOperations model, int speed) {
+  public SVGAnimationView(Appendable ap, IAnimatorOperations model, int speed, boolean start) {
     this.ap = ap;
     this.model = model;
     this.speed = speed;
-    this.display();
+    if (start) {
+      this.display();
+    }
   }
 
   /**
@@ -70,6 +76,21 @@ public class SVGAnimationView implements IAnimationView {
   @Override
   public void run() {
     throw new UnsupportedOperationException("The SVG View does not run animations.");
+  }
+
+  @Override
+  public ViewType getViewType() {
+    return this.type;
+  }
+
+  @Override
+  public void setButtonListener(ButtonListener bl) {
+    throw new UnsupportedOperationException("SVG views don't have button listeners.");
+  }
+
+  @Override
+  public void setTextFieldListener(TextFieldListener tfl) {
+    throw new UnsupportedOperationException("SVG views don't have text field listeners.");
   }
 
   /**

@@ -6,17 +6,20 @@ import java.awt.Dimension;
 import javax.swing.*;
 
 
+import cs3500.animator.controller.ButtonListener;
+import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.model.model.IAnimatorOperations;
 
 /**
  * Displays an animation visually inside a new window.
  */
 public class VisualAnimationView extends JFrame implements IAnimationView {
-  protected IAnimatorOperations model;
-  protected int speed;
+  private IAnimatorOperations model;
+  private int speed;
+  private ViewType type = ViewType.VISUAL;
 
-  protected static int FRAME_WIDTH = 1000;
-  protected static int FRAME_HEIGHT = 800;
+  private static int FRAME_WIDTH = 1000;
+  private static int FRAME_HEIGHT = 800;
 
   /**
    * Constructs a VisualAnimationView.
@@ -68,5 +71,20 @@ public class VisualAnimationView extends JFrame implements IAnimationView {
         }
       }
     }
+  }
+
+  @Override
+  public ViewType getViewType() {
+    return this.type;
+  }
+
+  @Override
+  public void setButtonListener(ButtonListener bl) {
+    throw new UnsupportedOperationException("Visual views don't have button listeners.");
+  }
+
+  @Override
+  public void setTextFieldListener(TextFieldListener tfl) {
+    throw new UnsupportedOperationException("Visual views don't have text field listeners.");
   }
 }

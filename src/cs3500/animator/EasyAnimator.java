@@ -13,6 +13,7 @@ import cs3500.animator.model.model.AnimatorModel;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.view.AnimationFileReader;
 import cs3500.animator.view.IAnimationView;
+import cs3500.animator.view.InteractiveView;
 import cs3500.animator.view.SVGAnimationView;
 import cs3500.animator.view.TextualView;
 import cs3500.animator.view.VisualAnimationView;
@@ -103,6 +104,15 @@ public final class EasyAnimator {
     }
   }
 
+  /**
+   * Generates a view base on the given type string.
+   *
+   * @param type  The type of view to create
+   * @param out   The appendable that the view may need
+   * @param model The model whose data the view will use
+   * @param speed The speed at which the animation will run
+   * @return      The view
+   */
   private static IAnimationView viewFactory(String type, Appendable out, IAnimatorOperations model,
                                      int speed) {
     String errorMsg;
@@ -112,7 +122,9 @@ public final class EasyAnimator {
       case "visual":
         return new VisualAnimationView(model, speed);
       case "svg":
-        return new SVGAnimationView(out, model, speed);
+        return new SVGAnimationView(out, model, speed, true);
+      case "interactive":
+        return new InteractiveView(out, model, speed);
       default:
         errorMsg = "Invalid view type provided";
     }
