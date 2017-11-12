@@ -58,7 +58,6 @@ public class SVGAnimationView implements IAnimationView {
         s += "</ellipse>\n\n";
       }
     }
-
     s += "</svg>";
 
     try {
@@ -66,6 +65,11 @@ public class SVGAnimationView implements IAnimationView {
     } catch (IOException e) {
       System.out.println(e.getMessage());
     }
+  }
+
+  @Override
+  public void run() {
+    throw new UnsupportedOperationException("The SVG View does not run animations.");
   }
 
   /**
@@ -79,7 +83,6 @@ public class SVGAnimationView implements IAnimationView {
     for (IAction a : sh.getActions()) {
       s += a.getSVGDescription(speed);
     }
-
     return s;
   }
 }

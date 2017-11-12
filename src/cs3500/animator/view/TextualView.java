@@ -71,4 +71,9 @@ public class TextualView implements IAnimationView {
       System.out.println(e.getMessage());
     }
   }
+
+  @Override
+  public void run() {
+    throw new UnsupportedOperationException("The Textual View does not run animations.");
+  }
 }

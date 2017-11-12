@@ -3,9 +3,7 @@ package cs3500.animator.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 
 import cs3500.animator.model.model.IAnimatorOperations;
@@ -33,7 +31,7 @@ public class VisualAnimationView extends JFrame implements IAnimationView {
 
     this.setTitle("Easy Animator Application");
     this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     this.setLayout(new BorderLayout());
     JPanel animationPanel = new AnimationPanel(this.model.getShapes());
@@ -43,13 +41,17 @@ public class VisualAnimationView extends JFrame implements IAnimationView {
 
     this.pack();
     this.setVisible(true);
-    this.display();
+    this.run();
   }
 
-  /**
-   * Runs and displays an animation visually in a JFrame.
-   */
+  @Override
   public void display() {
+    throw new UnsupportedOperationException(
+            "The visual view does not output any text descriptions.");
+  }
+
+  @Override
+  public void run() {
     double waitTime = 1000 / (double) speed;
 
     while (true) {
@@ -65,7 +67,6 @@ public class VisualAnimationView extends JFrame implements IAnimationView {
           e.printStackTrace();
         }
       }
-      t = 0;
     }
   }
 }

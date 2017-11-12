@@ -6,7 +6,12 @@ package cs3500.animator.view;
 public interface IAnimationView {
 
   /**
-   * Displays an animation in a certain format.
+   * Displays an animation in a certain text format.
    */
   void display();
+
+  /**
+   * Runs an animation.
+   */
+  void run();
 }
