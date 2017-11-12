@@ -14,11 +14,11 @@ import cs3500.animator.model.model.IAnimatorOperations;
  * Displays an animation visually inside a new window.
  */
 public class VisualAnimationView extends JFrame implements IAnimationView {
-  private IAnimatorOperations model;
-  private int speed;
+  protected IAnimatorOperations model;
+  protected int speed;
 
-  private static int FRAME_WIDTH = 1000;
-  private static int FRAME_HEIGHT = 800;
+  protected static int FRAME_WIDTH = 1000;
+  protected static int FRAME_HEIGHT = 800;
 
   /**
    * Constructs a VisualAnimationView.
@@ -30,7 +30,6 @@ public class VisualAnimationView extends JFrame implements IAnimationView {
     super();
     this.model = model;
     this.speed = speed;
-    int time = 0;
 
     this.setTitle("Easy Animator Application");
     this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
