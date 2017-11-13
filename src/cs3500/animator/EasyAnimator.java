@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import cs3500.animator.model.model.AnimatorModel;
 import cs3500.animator.model.model.IAnimatorOperations;
+import cs3500.animator.model.model.ReadOnlyAnimatorModel;
 import cs3500.animator.view.AnimationFileReader;
 import cs3500.animator.view.IAnimationView;
 import cs3500.animator.view.InteractiveView;
@@ -118,13 +119,13 @@ public final class EasyAnimator {
     String errorMsg;
     switch (type) {
       case "text":
-        return new TextualView(out, model, speed);
+        return new TextualView(out, new ReadOnlyAnimatorModel(model), speed);
       case "visual":
-        return new VisualAnimationView(model, speed);
+        return new VisualAnimationView(new ReadOnlyAnimatorModel(model), speed);
       case "svg":
-        return new SVGAnimationView(out, model, speed, true);
+        return new SVGAnimationView(out, new ReadOnlyAnimatorModel(model), speed, true);
       case "interactive":
-        return new InteractiveView(out, model, speed);
+        return new InteractiveView(out, new ReadOnlyAnimatorModel(model), speed);
       default:
         errorMsg = "Invalid view type provided";
     }
