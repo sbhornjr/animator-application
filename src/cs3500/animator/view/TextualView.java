@@ -29,8 +29,6 @@ public class TextualView implements IAnimationView {
     this.ap = ap;
     this.model = model;
     this.speed = speed;
-
-    this.display();
   }
 
   /**

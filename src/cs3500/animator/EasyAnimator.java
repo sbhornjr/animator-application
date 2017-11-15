@@ -123,7 +123,7 @@ public final class EasyAnimator {
       case "visual":
         return new VisualAnimationView(new ReadOnlyAnimatorModel(model), speed);
       case "svg":
-        return new SVGAnimationView(out, new ReadOnlyAnimatorModel(model), speed, true);
+        return new SVGAnimationView(out, new ReadOnlyAnimatorModel(model), speed);
       case "interactive":
         return new InteractiveView(out, new ReadOnlyAnimatorModel(model), speed);
       default:
