@@ -24,23 +24,4 @@ public interface IAnimationView {
    * @return  The type
    */
   ViewType getViewType();
-
-  /**
-   * Sets this view's button listener to the given one.
-   *
-   * @param bl  The button listener to be set
-   */
-  void setButtonListener(ButtonListener bl);
-
-  /**
-   * Sets this view's text field listener to the given one.
-   *
-   * @param tfl  The text field listener to be set
-   */
-  void setTextFieldListener(TextFieldListener tfl);
-
-  /**
-   * Adds the newly set listeners to each button.
-   */
-  void addActionListeners();
 }

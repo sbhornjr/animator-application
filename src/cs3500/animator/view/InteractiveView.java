@@ -10,11 +10,14 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public class InteractiveView extends JFrame implements IAnimationView {
+public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView {
   private SVGAnimationView svgView;
   private IAnimatorOperations model;
-  private int speed;
-  private ViewType type = ViewType.INTERACTIVE;
+  private double speed;
+  private ViewType type;
+  private boolean paused;
+  private boolean looping;
+  private boolean go;
 
   JButton startButton;
   JButton pauseButton;
@@ -28,10 +31,14 @@ public class InteractiveView extends JFrame implements IAnimationView {
   private static int FRAME_WIDTH = 1000;
   private static int FRAME_HEIGHT = 800;
 
-  public InteractiveView(Appendable ap, IAnimatorOperations model, int speed) {
+  public InteractiveView(Appendable ap, IAnimatorOperations model, double speed) {
     this.model = model;
     this.speed = speed;
     this.svgView = new SVGAnimationView(ap, model, speed, false);
+    this.type = ViewType.INTERACTIVE;
+    this.paused = false;
+    this.looping = false;
+    this.go = true;
 
     this.setTitle("Easy Animator Application");
     this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -73,9 +80,55 @@ public class InteractiveView extends JFrame implements IAnimationView {
     this.svgView.display();
   }
 
+  /**
   @Override
   public void run() {
+    double waitTime = 1000 / speed;
 
+    while (!paused) {
+      double t;
+      for (t = 0; t <= model.getEndTime(); t += 1 / speed) {
+        for (int i = 0; i < model.getActions().size(); i++) {
+          model.executeAction(i, t * speed);
+        }
+        this.repaint();
+        try {
+          Thread.sleep((long) waitTime);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+  }*/
+
+  @Override
+  public void run() {
+    go = true;
+    int currTime = 0;
+
+    while (go) {
+      while (!paused) {
+        double waitTime = 1000 / speed;
+        if (currTime == model.getEndTime()) {
+          if (looping) {
+            currTime = 0;
+          }
+          else {
+            break;
+          }
+        }
+        for (int i = 0; i < model.getActions().size(); i++) {
+          model.executeAction(i, currTime * speed);
+        }
+        this.repaint();
+        try {
+          Thread.sleep((long)waitTime);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+        currTime++;
+      }
+    }
   }
 
   @Override
@@ -105,5 +158,26 @@ public class InteractiveView extends JFrame implements IAnimationView {
     loopButton.addActionListener(bl);
     exportButton.addActionListener(bl);
     speedChanger.addActionListener(tfl);
+  }
+
+  @Override
+  public void togglePause() {
+    paused = !paused;
+  }
+
+  @Override
+  public void toggleLoop() {
+    looping = !looping;
+  }
+
+  @Override
+  public void setSpeed(double newSpeed) {
+    speed = newSpeed;
+  }
+
+  @Override
+  public void restart() {
+    go = false;
+    run();
   }
 }

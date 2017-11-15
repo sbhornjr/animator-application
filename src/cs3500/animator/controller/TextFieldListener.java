@@ -1,5 +1,6 @@
 package cs3500.animator.controller;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,18 +8,20 @@ import java.awt.event.ActionListener;
  * An ActionListener class that deals exclusively with JTextFields.
  */
 public class TextFieldListener implements ActionListener {
-  private AnimationController controller;
+  private InteractiveAnimationController controller;
 
   /**
    * Constructor for the TextFieldListener.
    * @param cont  The controller that created this listener.
    */
-  public TextFieldListener(AnimationController cont) {
+  public TextFieldListener(InteractiveAnimationController cont) {
     controller = cont;
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-
+    String text = ((JTextField)e.getSource()).getText();
+    double speed = Double.parseDouble(text);
+    controller.speedChanged(speed);
   }
 }

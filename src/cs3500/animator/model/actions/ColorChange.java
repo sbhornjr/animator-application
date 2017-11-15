@@ -87,7 +87,7 @@ public class ColorChange implements IAction {
   }
 
   @Override
-  public String getSVGDescription(int speed) {
+  public String getSVGDescription(double speed) {
     String str = "";
     str += "    <animate attributeType=\"xml\" begin=\""
             + (int) ((this.duration.getX() / speed) * 1000) + "ms\" dur=\""
