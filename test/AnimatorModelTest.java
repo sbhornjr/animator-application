@@ -72,6 +72,9 @@ public class AnimatorModelTest {
             am.getDescription());
   }
 
+  /**
+   * Tests that calling getDescription on an empty animation is handled correctly.
+   */
   @Test
   public void testEmptyAnimation() {
     assertEquals("Shapes:\n", mt.getDescription());

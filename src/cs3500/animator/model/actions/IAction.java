@@ -56,5 +56,5 @@ public interface IAction {
    * @param   speed The speed of the animation.
    * @return  The SVG description.
    */
-  String getSVGDescription(int speed);
+  String getSVGDescription(double speed);
 }

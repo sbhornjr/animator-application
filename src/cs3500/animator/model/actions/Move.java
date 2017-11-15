@@ -76,7 +76,7 @@ public class Move implements IAction {
   }
 
   @Override
-  public String getSVGDescription(int speed) {
+  public String getSVGDescription(double speed) {
     String str = "";
     if (this.oldLocation.getIntX() != this.newLocation.getIntX()) {
       str += "    <animate attributeType=\"xml\" begin=\""

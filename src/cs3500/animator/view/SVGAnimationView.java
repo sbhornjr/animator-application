@@ -13,7 +13,7 @@ import cs3500.animator.model.shapes.ShapeType;
 public class SVGAnimationView implements IAnimationView {
   private Appendable ap;
   private IAnimatorOperations model;
-  private int speed;
+  private double speed;
   private ViewType type = ViewType.SVG;
 
   private static int SVG_WIDTH = 1000;
@@ -24,7 +24,7 @@ public class SVGAnimationView implements IAnimationView {
    * @param ap    Where the view sends its output.
    * @param model The model where the necessary data is stored.
    */
-  public SVGAnimationView(Appendable ap, IAnimatorOperations model, int speed, boolean start) {
+  public SVGAnimationView(Appendable ap, IAnimatorOperations model, double speed, boolean start) {
     this.ap = ap;
     this.model = model;
     this.speed = speed;
@@ -81,21 +81,6 @@ public class SVGAnimationView implements IAnimationView {
   @Override
   public ViewType getViewType() {
     return this.type;
-  }
-
-  @Override
-  public void setButtonListener(ButtonListener bl) {
-    throw new UnsupportedOperationException("SVG views don't have button listeners.");
-  }
-
-  @Override
-  public void setTextFieldListener(TextFieldListener tfl) {
-    throw new UnsupportedOperationException("SVG views don't have text field listeners.");
-  }
-
-  @Override
-  public void addActionListeners() {
-    throw new UnsupportedOperationException("SVG views don't have listeners.");
   }
 
   /**

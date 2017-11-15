@@ -83,19 +83,4 @@ public class TextualView implements IAnimationView {
   public ViewType getViewType() {
     return this.type;
   }
-
-  @Override
-  public void setButtonListener(ButtonListener bl) {
-    throw new UnsupportedOperationException("Textual views don't have button listeners.");
-  }
-
-  @Override
-  public void setTextFieldListener(TextFieldListener tfl) {
-    throw new UnsupportedOperationException("Textual views don't have text field listeners.");
-  }
-
-  @Override
-  public void addActionListeners() {
-    throw new UnsupportedOperationException("Textual views don't have listeners.");
-  }
 }

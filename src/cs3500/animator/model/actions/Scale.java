@@ -80,7 +80,7 @@ public class Scale implements IAction {
   }
 
   @Override
-  public String getSVGDescription(int speed) {
+  public String getSVGDescription(double speed) {
     String str = "";
     if (this.oldDimensions.getIntX() != this.newDimensions.getIntX()) {
       str += "    <animate attributeType=\"xml\" begin=\""
