@@ -44,7 +44,6 @@ public class VisualAnimationView extends JFrame implements IAnimationView {
 
     this.pack();
     this.setVisible(true);
-    this.run();
   }
 
   @Override
