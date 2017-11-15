@@ -8,8 +8,6 @@ import cs3500.animator.model.misc.Posn;
  */
 public class MyOval extends Shape {
 
-  private ShapeType type;
-
   /**
    * Constructs a MyOval without a given amount of sides because it must be 1.
    *
@@ -28,10 +26,5 @@ public class MyOval extends Shape {
   public String[] getWLTypes() {
     String[] arr = {"X radius", "Y radius"};
     return arr;
-  }
-
-  @Override
-  public ShapeType getType() {
-    return this.type;
   }
 }

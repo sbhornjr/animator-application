@@ -16,7 +16,7 @@ public abstract class Shape implements IShape {
   protected Posn dimensions;
   protected MyColor color;
   protected Posn lifetime;
-  private ShapeType type;
+  protected ShapeType type;
   protected ArrayList<IAction> actions;
 
   /**

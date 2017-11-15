@@ -8,8 +8,6 @@ import cs3500.animator.model.misc.Posn;
  */
 public class MyRectangle extends Shape {
 
-  private ShapeType type;
-
   /**
    * Constructs a MyRectangle without a given amount of sides because it must be 4.
    *
@@ -28,10 +26,5 @@ public class MyRectangle extends Shape {
   @Override
   public String getPosLocation() {
     return "Lower-left corner";
-  }
-
-  @Override
-  public ShapeType getType() {
-    return this.type;
   }
 }

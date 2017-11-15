@@ -30,11 +30,11 @@ public class SVGViewTest {
     } catch (FileNotFoundException e) {
       out.append(e.getMessage());
     }
-    new SVGAnimationView(out, am, 2);
+    new SVGAnimationView(out, am, 2, true);
 
     IAnimatorOperations am2 = new AnimatorModel();
     out2 = new StringBuffer();
-    new SVGAnimationView(out2, am2, 2);
+    new SVGAnimationView(out2, am2, 2, true);
   }
 
   /**

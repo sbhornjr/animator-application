@@ -93,6 +93,11 @@ public class SVGAnimationView implements IAnimationView {
     throw new UnsupportedOperationException("SVG views don't have text field listeners.");
   }
 
+  @Override
+  public void addActionListeners() {
+    throw new UnsupportedOperationException("SVG views don't have listeners.");
+  }
+
   /**
    * Creates svg descriptions for all of the actions that affect the given shape.
    *

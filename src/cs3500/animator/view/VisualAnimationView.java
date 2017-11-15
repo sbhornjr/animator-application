@@ -87,4 +87,9 @@ public class VisualAnimationView extends JFrame implements IAnimationView {
   public void setTextFieldListener(TextFieldListener tfl) {
     throw new UnsupportedOperationException("Visual views don't have text field listeners.");
   }
+
+  @Override
+  public void addActionListeners() {
+    throw new UnsupportedOperationException("Visual views don't have listeners.");
+  }
 }
