@@ -72,6 +72,10 @@ public class AnimatorModelTest {
             am.getDescription());
   }
 
+  /**
+   * Tests that an empty animation can be made and the model will produce the correct text
+   * description
+   */
   @Test
   public void testEmptyAnimation() {
     assertEquals("Shapes:\n", mt.getDescription());
