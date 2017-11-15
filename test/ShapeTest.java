@@ -18,7 +18,7 @@ public class ShapeTest {
           new MyColor(0, 0, 1), new Posn(6, 100));
 
   /**
-   * Tests that the getType method works correctly.
+   * Tests that the getViewType method works correctly.
    */
   @Test
   public void testGetType() {

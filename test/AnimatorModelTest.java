@@ -73,7 +73,8 @@ public class AnimatorModelTest {
   }
 
   /**
-   * Tests that calling getDescription on an empty animation is handled correctly.
+   * Tests that an empty animation can be made and the model will produce the correct text
+   * description
    */
   @Test
   public void testEmptyAnimation() {
