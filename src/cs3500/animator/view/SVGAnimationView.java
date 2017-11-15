@@ -24,13 +24,10 @@ public class SVGAnimationView implements IAnimationView {
    * @param ap    Where the view sends its output.
    * @param model The model where the necessary data is stored.
    */
-  public SVGAnimationView(Appendable ap, IAnimatorOperations model, double speed, boolean start) {
+  public SVGAnimationView(Appendable ap, IAnimatorOperations model, double speed) {
     this.ap = ap;
     this.model = model;
     this.speed = speed;
-    if (start) {
-      this.display();
-    }
   }
 
   /**
