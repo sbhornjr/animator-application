@@ -3,10 +3,11 @@ package cs3500.animator.controller;
 import cs3500.animator.view.IInteractiveView;
 
 /**
- * The controller for the animation application:
+ * The controller for the interactive animation:
  * transmits inputs between the user and the view.
  */
 public class InteractiveAnimationController implements IAnimationController, IInteractiveAnimationController {
+
   private IInteractiveView view;
 
   /**

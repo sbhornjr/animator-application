@@ -34,7 +34,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   public InteractiveView(Appendable ap, IAnimatorOperations model, double speed) {
     this.model = model;
     this.speed = speed;
-    this.svgView = new SVGAnimationView(ap, model, speed, false);
+    this.svgView = new SVGAnimationView(ap, model, speed);
     this.type = ViewType.INTERACTIVE;
     this.paused = false;
     this.looping = false;
