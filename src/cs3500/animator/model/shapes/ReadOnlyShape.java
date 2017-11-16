@@ -106,4 +106,9 @@ public abstract class ReadOnlyShape implements IShape {
   public String getColorAsInt() {
     return shape.getColorAsInt();
   }
+
+  @Override
+  public void setDefault() {
+    shape.setDefault();
+  }
 }

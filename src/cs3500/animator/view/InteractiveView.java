@@ -1,5 +1,6 @@
 package cs3500.animator.view;
 
+import cs3500.animator.model.shapes.IShape;
 import sun.plugin.dom.exception.InvalidStateException;
 
 import cs3500.animator.controller.ButtonListener;
@@ -9,21 +10,26 @@ import cs3500.animator.model.model.IAnimatorOperations;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView {
-  private SVGAnimationView svgView;
+public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView, ActionListener {
   private IAnimatorOperations model;
   private double speed;
+  private double time;
   private ViewType type;
   private boolean paused;
   private boolean looping;
-  private boolean go;
+  private Timer timer;
+  private FileWriter fw;
 
   JButton startButton;
   JButton pauseButton;
   JButton restartButton;
   JButton loopButton;
-  JButton exportButton;
+  JTextField export;
   JTextField speedChanger;
   private ButtonListener bl;
   private TextFieldListener tfl;
@@ -31,14 +37,16 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   private static int FRAME_WIDTH = 1000;
   private static int FRAME_HEIGHT = 800;
 
-  public InteractiveView(Appendable ap, IAnimatorOperations model, double speed) {
+  public InteractiveView(IAnimatorOperations model, double speed) {
     this.model = model;
     this.speed = speed;
-    this.svgView = new SVGAnimationView(ap, model, speed);
     this.type = ViewType.INTERACTIVE;
     this.paused = false;
     this.looping = false;
-    this.go = true;
+
+    int delay = (int) (1000 / speed);
+    timer = new Timer(delay, this);
+    time = 0;
 
     this.setTitle("Easy Animator Application");
     this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -58,8 +66,10 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     pauseButton = new JButton("Pause");
     restartButton = new JButton("Restart");
     loopButton = new JButton("Toggle Looping");
-    exportButton = new JButton("Export as SVG");
-    speedChanger = new JTextField("new speed", 10);
+    export = new JTextField("Enter SVG file name", 22);
+    export.setToolTipText("Enter a filename here to export this animation.");
+    speedChanger = new JTextField("Enter new speed", 15);
+    speedChanger.setToolTipText("Change the speed of the animation by entering a new speed value here.");
 
     bl = null;
     tfl = null;
@@ -69,7 +79,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     buttonPanel.add(restartButton);
     buttonPanel.add(loopButton);
     buttonPanel.add(speedChanger);
-    buttonPanel.add(exportButton);
+    buttonPanel.add(export);
 
     this.pack();
     this.setVisible(true);
@@ -77,58 +87,18 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
   @Override
   public void display() {
-    this.svgView.display();
+    SVGAnimationView svgView = new SVGAnimationView(fw, model, speed);
+    svgView.display();
+    try {
+      fw.close();
+    } catch (IOException e) {
+      System.out.println("ERROR: " + e.getMessage());
+    }
   }
 
-  /**
   @Override
   public void run() {
-    double waitTime = 1000 / speed;
-
-    while (!paused) {
-      double t;
-      for (t = 0; t <= model.getEndTime(); t += 1 / speed) {
-        for (int i = 0; i < model.getActions().size(); i++) {
-          model.executeAction(i, t * speed);
-        }
-        this.repaint();
-        try {
-          Thread.sleep((long) waitTime);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
-    }
-  }*/
-
-  @Override
-  public void run() {
-    go = true;
-    int currTime = 0;
-
-    while (go) {
-      while (!paused) {
-        double waitTime = 1000 / speed;
-        if (currTime == model.getEndTime()) {
-          if (looping) {
-            currTime = 0;
-          }
-          else {
-            break;
-          }
-        }
-        for (int i = 0; i < model.getActions().size(); i++) {
-          model.executeAction(i, currTime * speed);
-        }
-        this.repaint();
-        try {
-          Thread.sleep((long)waitTime);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-        currTime++;
-      }
-    }
+    timer.start();
   }
 
   @Override
@@ -156,7 +126,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     pauseButton.addActionListener(bl);
     restartButton.addActionListener(bl);
     loopButton.addActionListener(bl);
-    exportButton.addActionListener(bl);
+    export.addActionListener(tfl);
     speedChanger.addActionListener(tfl);
   }
 
@@ -173,11 +143,52 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   @Override
   public void setSpeed(double newSpeed) {
     speed = newSpeed;
+    int delay = (int)(1000 / speed);
+    timer.setDelay(delay);
   }
 
   @Override
   public void restart() {
-    go = false;
-    run();
+    if (timer.isRunning()) {
+      timer.stop();
+    }
+    this.initShapes();
+    time = 0;
+    this.run();
+  }
+
+  @Override
+  public void export(String ofile) {
+    try {
+      fw = new FileWriter("resources/" + ofile);
+    } catch (IOException e) {
+      System.out.println("ERROR: " + e.getMessage());
+    }
+  }
+
+  /**
+   * Returns each shape in the model to their initial location, position, and color values.
+   */
+  private void initShapes() {
+    for (IShape sh : model.getShapes()) {
+      sh.setDefault();
+    }
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if (!paused) {
+      for (int i = 0; i < model.getActions().size(); i++) {
+        model.executeAction(i, time * speed);
+      }
+      this.repaint();
+      time += 1 / speed;
+      if ((time * speed) >= model.getEndTime() && looping) {
+        this.restart();
+      }
+      else if ((time * speed) >= model.getEndTime()) {
+        timer.stop();
+      }
+    }
   }
 }

@@ -18,7 +18,7 @@ public class VisualAnimationView extends JFrame implements IAnimationView, Actio
   private double time;
   private int speed;
   private Timer timer;
-  private ViewType type = ViewType.VISUAL;
+  private ViewType type;
 
   private static int FRAME_WIDTH = 1000;
   private static int FRAME_HEIGHT = 800;
@@ -34,6 +34,7 @@ public class VisualAnimationView extends JFrame implements IAnimationView, Actio
     this.model = model;
     this.speed = speed;
     time = 0;
+    type = ViewType.VISUAL;
 
     this.setTitle("Easy Animator Application");
     this.setSize(FRAME_WIDTH, FRAME_HEIGHT);

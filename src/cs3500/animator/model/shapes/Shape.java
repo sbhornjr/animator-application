@@ -18,6 +18,9 @@ public abstract class Shape implements IShape {
   protected Posn lifetime;
   protected ShapeType type;
   protected ArrayList<IAction> actions;
+  protected Posn initLocation;
+  protected Posn initDimensions;
+  protected MyColor initColor;
 
   /**
    * Represents a generic shape.
@@ -36,6 +39,9 @@ public abstract class Shape implements IShape {
     this.type = ShapeType.RECTANGLE;
     this.location = location;
     this.actions = new ArrayList<>();
+    this.initDimensions = dimensions;
+    this.initLocation = location;
+    this.initColor = color;
   }
 
   @Override
@@ -122,5 +128,12 @@ public abstract class Shape implements IShape {
   @Override
   public String getColorAsInt() {
     return this.color.asInt();
+  }
+
+  @Override
+  public void setDefault() {
+    this.dimensions = initDimensions;
+    this.location = initLocation;
+    this.color = initColor;
   }
 }

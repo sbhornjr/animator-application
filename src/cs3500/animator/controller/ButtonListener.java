@@ -34,9 +34,6 @@ public class ButtonListener implements ActionListener {
       case "Toggle Looping":
         controller.loopToggled();
         break;
-      case "Export as SVG":
-        controller.export();
-        break;
     }
   }
 }

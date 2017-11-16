@@ -20,8 +20,16 @@ public class TextFieldListener implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    String text = ((JTextField)e.getSource()).getText();
-    double speed = Double.parseDouble(text);
-    controller.speedChanged(speed);
+    JTextField jtx = (JTextField)e.getSource();
+    String text = jtx.getToolTipText();
+
+    if (text.equals("new speed:")) {
+      String s = jtx.getText();
+      double speed = Double.parseDouble(s);
+      controller.speedChanged(speed);
+    }
+    else {
+      controller.export(jtx.getText() + ".svg");
+    }
   }
 }
