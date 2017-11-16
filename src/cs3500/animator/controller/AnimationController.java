@@ -19,7 +19,6 @@ public class AnimationController implements IAnimationController {
     this.view = view;
   }
 
-
   @Override
   public void start() {
     if (view.getViewType() == ViewType.VISUAL) {
