@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import javax.swing.JOptionPane;
 
+import cs3500.animator.controller.AnimationController;
 import cs3500.animator.controller.IAnimationController;
 import cs3500.animator.controller.InteractiveAnimationController;
 import cs3500.animator.model.model.AnimatorModel;
@@ -16,6 +17,7 @@ import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.model.ReadOnlyAnimatorModel;
 import cs3500.animator.view.AnimationFileReader;
 import cs3500.animator.view.IAnimationView;
+import cs3500.animator.view.IInteractiveView;
 import cs3500.animator.view.InteractiveView;
 import cs3500.animator.view.SVGAnimationView;
 import cs3500.animator.view.TextualView;
@@ -102,8 +104,12 @@ public final class EasyAnimator {
     // creates the controller and starts the animation
     IAnimationController controller;
     if (view.getViewType() == ViewType.INTERACTIVE) {
-      controller = new InteractiveAnimationController((InteractiveView) view);
+      controller = new InteractiveAnimationController((IInteractiveView) view);
     }
+    else {
+      controller = new AnimationController(view);
+    }
+    controller.start();
   }
 
   /**

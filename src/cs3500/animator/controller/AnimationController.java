@@ -17,7 +17,6 @@ public class AnimationController implements IAnimationController {
    */
   public AnimationController(IAnimationView view) {
     this.view = view;
-    this.start();
   }
 
 
