@@ -9,14 +9,19 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import javax.swing.JOptionPane;
 
+import cs3500.animator.controller.AnimationController;
+import cs3500.animator.controller.IAnimationController;
+import cs3500.animator.controller.InteractiveAnimationController;
 import cs3500.animator.model.model.AnimatorModel;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.model.ReadOnlyAnimatorModel;
 import cs3500.animator.view.AnimationFileReader;
 import cs3500.animator.view.IAnimationView;
+import cs3500.animator.view.IInteractiveView;
 import cs3500.animator.view.InteractiveView;
 import cs3500.animator.view.SVGAnimationView;
 import cs3500.animator.view.TextualView;
+import cs3500.animator.view.ViewType;
 import cs3500.animator.view.VisualAnimationView;
 
 /**
@@ -35,6 +40,7 @@ public final class EasyAnimator {
     int speed = 1;
     String errorMsg = "";
 
+    // reads the command line input
     for (int i = 0; i < args.length; i += 2) {
       String identifier = args[i];
       String param = args[i + 1];
@@ -54,6 +60,7 @@ public final class EasyAnimator {
       showError(errorMsg);
     }
 
+    // creates the model
     AnimationFileReader afr = new AnimationFileReader();
     IAnimatorOperations model = new AnimatorModel();
     try {
@@ -63,6 +70,7 @@ public final class EasyAnimator {
     }
     showError(errorMsg);
 
+    // creates the appendable object for the view if it needs one.
     String output;
     if (Arrays.asList(args).contains("-o")) {
       int i;
@@ -77,19 +85,31 @@ public final class EasyAnimator {
       output = "out";
     }
 
+    // creates the view
+    FileWriter writer;
+    IAnimationView view = null;
     if (output.equals("out")) {
-      viewFactory(viewType, System.out, model, speed);
+      view = viewFactory(viewType, System.out, model, speed);
     }
     else {
       try {
-        FileWriter writer = new FileWriter("resources/" + output);
-        viewFactory(viewType, writer, model, speed);
-        writer.close();
+        writer = new FileWriter("resources/" + output);
+        view = viewFactory(viewType, writer, model, speed);
       } catch (IOException e) {
         errorMsg = e.getMessage();
       }
       showError(errorMsg);
     }
+
+    // creates the controller and starts the animation
+    IAnimationController controller;
+    if (view.getViewType() == ViewType.INTERACTIVE) {
+      controller = new InteractiveAnimationController((IInteractiveView) view);
+    }
+    else {
+      controller = new AnimationController(view);
+    }
+    controller.start();
   }
 
   /**

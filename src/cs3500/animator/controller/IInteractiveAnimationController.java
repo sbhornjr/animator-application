@@ -1,5 +1,8 @@
 package cs3500.animator.controller;
 
+/**
+ * Outlines the methods for a Controller used with the Interactive view
+ */
 public interface IInteractiveAnimationController extends IAnimationController {
 
   /**

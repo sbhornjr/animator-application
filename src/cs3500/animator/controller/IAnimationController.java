@@ -1,5 +1,8 @@
 package cs3500.animator.controller;
 
+/**
+ * Outlines the methods for a general animation controller.
+ */
 public interface IAnimationController {
 
   /**
