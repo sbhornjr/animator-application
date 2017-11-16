@@ -129,4 +129,9 @@ public interface IShape {
    * @return  The color as a String.
    */
   String getColorAsInt();
+
+  /**
+   * Resets this shape to its original values.
+   */
+  void setDefault();
 }

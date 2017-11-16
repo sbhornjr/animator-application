@@ -86,7 +86,7 @@ public final class EasyAnimator {
     }
 
     // creates the view
-    FileWriter writer;
+    FileWriter writer = null;
     IAnimationView view = null;
     if (output.equals("out")) {
       view = viewFactory(viewType, System.out, model, speed);
@@ -108,8 +108,14 @@ public final class EasyAnimator {
     }
     else {
       controller = new AnimationController(view);
+      controller.start();
     }
-    controller.start();
+    try {
+      writer.close();
+    } catch (IOException e) {
+      errorMsg = e.getMessage();
+    }
+    showError(errorMsg);
   }
 
   /**
@@ -145,7 +151,7 @@ public final class EasyAnimator {
       case "svg":
         return new SVGAnimationView(out, new ReadOnlyAnimatorModel(model), speed);
       case "interactive":
-        return new InteractiveView(out, new ReadOnlyAnimatorModel(model), speed);
+        return new InteractiveView(new ReadOnlyAnimatorModel(model), speed);
       default:
         errorMsg = "Invalid view type provided";
     }

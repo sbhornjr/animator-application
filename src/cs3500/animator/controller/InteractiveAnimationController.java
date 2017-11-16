@@ -43,8 +43,8 @@ public class InteractiveAnimationController implements IAnimationController, IIn
   }
 
   @Override
-  public void export() {
-    view.display();
+  public void export(String ofile) {
+    view.export(ofile);
   }
 
   @Override

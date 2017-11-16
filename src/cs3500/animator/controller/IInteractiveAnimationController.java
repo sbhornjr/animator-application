@@ -26,8 +26,9 @@ public interface IInteractiveAnimationController extends IAnimationController {
   /**
    * A listener has notified the controller that the export button has been pushed:
    * Relay this information to the view.
+   * @param ofile   The file to send the svg output to.
    */
-  void export();
+  void export(String ofile);
 
   /**
    * A listener has notified the controller that the user has changed the speed:
