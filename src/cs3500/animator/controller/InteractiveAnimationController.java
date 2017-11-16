@@ -24,7 +24,7 @@ public class InteractiveAnimationController implements IAnimationController, IIn
 
   @Override
   public void start() {
-    view.run();
+    view.restart();
   }
 
   @Override

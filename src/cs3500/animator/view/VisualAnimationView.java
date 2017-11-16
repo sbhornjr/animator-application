@@ -2,20 +2,22 @@ package cs3500.animator.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 
-import cs3500.animator.controller.ButtonListener;
-import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.model.model.IAnimatorOperations;
 
 /**
  * Displays an animation visually inside a new window.
  */
-public class VisualAnimationView extends JFrame implements IAnimationView {
+public class VisualAnimationView extends JFrame implements IAnimationView, ActionListener {
   private IAnimatorOperations model;
+  private double time;
   private int speed;
+  private Timer timer;
   private ViewType type = ViewType.VISUAL;
 
   private static int FRAME_WIDTH = 1000;
@@ -31,6 +33,7 @@ public class VisualAnimationView extends JFrame implements IAnimationView {
     super();
     this.model = model;
     this.speed = speed;
+    time = 0;
 
     this.setTitle("Easy Animator Application");
     this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -41,6 +44,10 @@ public class VisualAnimationView extends JFrame implements IAnimationView {
     animationPanel.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
     JScrollPane scrollPane = new JScrollPane(animationPanel);
     this.add(scrollPane, BorderLayout.CENTER);
+
+    int delay = 1000 / speed;
+    timer = new Timer(delay, this);
+    timer.setInitialDelay(0);
 
     this.pack();
     this.setVisible(true);
@@ -54,26 +61,20 @@ public class VisualAnimationView extends JFrame implements IAnimationView {
 
   @Override
   public void run() {
-    double waitTime = 1000 / (double) speed;
-
-    while (true) {
-      double t;
-      for (t = 0; t <= model.getEndTime(); t += 1 / (double) speed) {
-        for (int i = 0; i < model.getActions().size(); i++) {
-          model.executeAction(i, t * speed);
-        }
-        this.repaint();
-        try {
-          Thread.sleep((long) waitTime);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
-    }
+    timer.start();
   }
 
   @Override
   public ViewType getViewType() {
     return this.type;
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    for (int i = 0; i < model.getActions().size(); i++) {
+      model.executeAction(i, time * speed);
+    }
+    this.repaint();
+    time += 1 / (double) speed;
   }
 }
