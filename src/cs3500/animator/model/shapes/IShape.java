@@ -136,9 +136,14 @@ public interface IShape {
   void setDefault();
 
   /**
-   * Returns a simple text description of this shape.
+   * Is this shape currently visible or not?.
    *
-   * @return  the text
+   * @return  True if it's visible, false otherwise.
    */
-  String toString();
+  boolean isVisible();
+
+  /**
+   * Changes whether this shape is currently visible or not.
+   */
+  void setVisible();
 }

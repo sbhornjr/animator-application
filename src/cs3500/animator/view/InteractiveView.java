@@ -1,5 +1,6 @@
 package cs3500.animator.view;
 
+import cs3500.animator.controller.ComboBoxListener;
 import cs3500.animator.model.shapes.IShape;
 import sun.plugin.dom.exception.InvalidStateException;
 
@@ -14,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView, ActionListener {
   private IAnimatorOperations model;
@@ -35,6 +37,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   JComboBox<IShape> shapeRemover;
   private ButtonListener bl;
   private TextFieldListener tfl;
+  private ComboBoxListener cbl;
 
   private static int FRAME_WIDTH = 1000;
   private static int FRAME_HEIGHT = 700;
@@ -76,6 +79,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
     bl = null;
     tfl = null;
+    cbl = null;
 
     buttonPanel.add(startButton);
     buttonPanel.add(pauseButton);
@@ -90,7 +94,9 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
     IShape[] shapeArray = this.model.getShapes().toArray(new IShape[this.model.getShapes().size()]);
     shapeRemover = new JComboBox<>(shapeArray);
+    shapeRemover.setToolTipText("Select a shape in this drop box to make it invisible.");
     shapeAdder = new JComboBox<>();
+    shapeAdder.setToolTipText("Select a shape in this drop box to make it visible again.");
 
     dropDownPanel.add(shapeRemover);
     dropDownPanel.add(shapeAdder);
@@ -131,6 +137,11 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   }
 
   @Override
+  public void setComboBoxListener(ComboBoxListener cbl) {
+    this.cbl = cbl;
+  }
+
+  @Override
   public void addActionListeners() {
     if (bl == null || tfl == null) {
       throw new InvalidStateException("Listeners must be set before being added to buttons.");
@@ -142,6 +153,8 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     loopButton.addActionListener(bl);
     export.addActionListener(tfl);
     speedChanger.addActionListener(tfl);
+    shapeAdder.addActionListener(cbl);
+    shapeRemover.addActionListener(cbl);
   }
 
   @Override
@@ -179,6 +192,21 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
       System.out.println("ERROR: " + e.getMessage());
     }
     this.display();
+  }
+
+  @Override
+  public void removeShape(IShape s) {
+    System.out.println("HELLO");
+    s.setVisible();
+    shapeAdder.addItem(s);
+    shapeRemover.removeItem(s);
+  }
+
+  @Override
+  public void addShape(IShape s) {
+    s.setVisible();
+    shapeRemover.addItem(s);
+    shapeAdder.removeItem(s);
   }
 
   /**

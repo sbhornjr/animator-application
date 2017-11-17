@@ -20,6 +20,7 @@ public class InteractiveAnimationController implements IAnimationController, IIn
 
     view.setButtonListener(new ButtonListener(this));
     view.setTextFieldListener(new TextFieldListener(this));
+    view.setComboBoxListener(new ComboBoxListener(this));
     view.addActionListeners();
   }
 
@@ -54,7 +55,12 @@ public class InteractiveAnimationController implements IAnimationController, IIn
   }
 
   @Override
-  public void shapeSelected(IShape s) {
+  public void shapeRemoved(IShape s) {
+    view.removeShape(s);
+  }
 
+  @Override
+  public void shapeAdded(IShape s) {
+    view.addShape(s);
   }
 }

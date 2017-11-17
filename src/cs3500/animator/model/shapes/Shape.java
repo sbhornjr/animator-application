@@ -21,6 +21,7 @@ public abstract class Shape implements IShape {
   protected Posn initLocation;
   protected Posn initDimensions;
   protected MyColor initColor;
+  protected boolean isVisible;
 
   /**
    * Represents a generic shape.
@@ -41,6 +42,7 @@ public abstract class Shape implements IShape {
     this.initDimensions = dimensions;
     this.initLocation = location;
     this.initColor = color;
+    this.isVisible = true;
   }
 
   @Override
@@ -137,9 +139,30 @@ public abstract class Shape implements IShape {
   }
 
   @Override
+  public boolean isVisible() {
+    return this.isVisible;
+  }
+
+  @Override
+  public void setVisible() {
+    isVisible = !isVisible;
+  }
+
+  @Override
   public String toString() {
     String shapeType = type.toString();
     shapeType = shapeType.charAt(0) + shapeType.substring(1).toLowerCase();
     return shapeType + " " + name;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o instanceof Shape) {
+      return this.name.equals(((Shape) o).name)
+              && this.type == ((Shape) o).type;
+    }
+    else {
+      return false;
+    }
   }
 }

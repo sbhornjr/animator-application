@@ -113,7 +113,22 @@ public abstract class ReadOnlyShape implements IShape {
   }
 
   @Override
+  public boolean isVisible() {
+    return shape.isVisible();
+  }
+
+  @Override
+  public void setVisible() {
+    shape.setVisible();
+  }
+
+  @Override
   public String toString() {
     return shape.toString();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    return shape.equals(o);
   }
 }
