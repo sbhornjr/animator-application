@@ -25,12 +25,7 @@ public class ComboBoxListener implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     JComboBox<IShape> box = (JComboBox)e.getSource();
     IShape selected = (IShape)box.getSelectedItem();
-   
-    if (box.getToolTipText().equals("Select a shape in this drop box to make it invisible.")) {
-      controller.shapeRemoved(selected);
-    }
-    else {
-      controller.shapeAdded(selected);
-    }
+
+    controller.shapeToggled(selected);
   }
 }

@@ -50,17 +50,12 @@ public class InteractiveAnimationController implements IAnimationController, IIn
   }
 
   @Override
-  public void speedChanged(double newSpeed) {
+  public void speedChanged(int newSpeed) {
     view.setSpeed(newSpeed);
   }
 
   @Override
-  public void shapeRemoved(IShape s) {
-    view.removeShape(s);
-  }
-
-  @Override
-  public void shapeAdded(IShape s) {
-    view.addShape(s);
+  public void shapeToggled(IShape s) {
+    view.toggleShape(s);
   }
 }

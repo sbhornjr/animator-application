@@ -15,11 +15,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView, ActionListener {
   private IAnimatorOperations model;
-  private double speed;
+  private int speed;
   private double time;
   private ViewType type;
   private boolean paused;
@@ -33,7 +32,6 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   JButton loopButton;
   JTextField export;
   JTextField speedChanger;
-  JComboBox<IShape> shapeAdder;
   JComboBox<IShape> shapeRemover;
   private ButtonListener bl;
   private TextFieldListener tfl;
@@ -42,7 +40,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   private static int FRAME_WIDTH = 1000;
   private static int FRAME_HEIGHT = 700;
 
-  public InteractiveView(IAnimatorOperations model, double speed) {
+  public InteractiveView(IAnimatorOperations model, int speed) {
     this.model = model;
     this.speed = speed;
     this.type = ViewType.INTERACTIVE;
@@ -95,11 +93,9 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     IShape[] shapeArray = this.model.getShapes().toArray(new IShape[this.model.getShapes().size()]);
     shapeRemover = new JComboBox<>(shapeArray);
     shapeRemover.setToolTipText("Select a shape in this drop box to make it invisible.");
-    shapeAdder = new JComboBox<>();
-    shapeAdder.setToolTipText("Select a shape in this drop box to make it visible again.");
+    shapeRemover.setEditable(true);
 
     dropDownPanel.add(shapeRemover);
-    dropDownPanel.add(shapeAdder);
 
     this.pack();
     this.setVisible(true);
@@ -153,7 +149,6 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     loopButton.addActionListener(bl);
     export.addActionListener(tfl);
     speedChanger.addActionListener(tfl);
-    shapeAdder.addActionListener(cbl);
     shapeRemover.addActionListener(cbl);
   }
 
@@ -168,9 +163,9 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   }
 
   @Override
-  public void setSpeed(double newSpeed) {
+  public void setSpeed(int newSpeed) {
     speed = newSpeed;
-    int delay = (int)(1000 / speed);
+    int delay = 1000 / speed;
     timer.setDelay(delay);
   }
 
@@ -195,18 +190,8 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   }
 
   @Override
-  public void removeShape(IShape s) {
-    System.out.println("HELLO");
+  public void toggleShape(IShape s) {
     s.setVisible();
-    shapeAdder.addItem(s);
-    shapeRemover.removeItem(s);
-  }
-
-  @Override
-  public void addShape(IShape s) {
-    s.setVisible();
-    shapeRemover.addItem(s);
-    shapeAdder.removeItem(s);
   }
 
   /**
@@ -225,7 +210,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
         model.executeAction(i, time * speed);
       }
       this.repaint();
-      time += 1 / speed;
+      time += 1 / (double)speed;
       if ((time * speed) >= model.getEndTime() && looping) {
         this.restart();
       }

@@ -152,7 +152,14 @@ public abstract class Shape implements IShape {
   public String toString() {
     String shapeType = type.toString();
     shapeType = shapeType.charAt(0) + shapeType.substring(1).toLowerCase();
-    return shapeType + " " + name;
+    String s = shapeType + " " + name;
+
+    if (isVisible) {
+      return "✓" + s;
+    }
+    else {
+      return s;
+    }
   }
 
   @Override
