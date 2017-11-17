@@ -134,4 +134,11 @@ public interface IShape {
    * Resets this shape to its original values.
    */
   void setDefault();
+
+  /**
+   * Returns a simple text description of this shape.
+   *
+   * @return  the text
+   */
+  String toString();
 }

@@ -111,4 +111,9 @@ public abstract class ReadOnlyShape implements IShape {
   public void setDefault() {
     shape.setDefault();
   }
+
+  @Override
+  public String toString() {
+    return shape.toString();
+  }
 }

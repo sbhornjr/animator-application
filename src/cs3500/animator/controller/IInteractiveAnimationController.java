@@ -1,5 +1,7 @@
 package cs3500.animator.controller;
 
+import cs3500.animator.model.shapes.IShape;
+
 /**
  * Outlines the methods for a Controller used with the Interactive view
  */
@@ -36,4 +38,13 @@ public interface IInteractiveAnimationController extends IAnimationController {
    * @param newSpeed  The new speed that the user requested.
    */
   void speedChanged(double newSpeed);
+
+  /**
+   * A listener has notified the controller that the user has selected a shape from the drop-down
+   * menu:
+   * Relay this information to the view.
+   *
+   * @param s The shape that was selected
+   */
+  void shapeSelected(IShape s);
 }
