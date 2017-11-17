@@ -16,6 +16,9 @@ import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Displays an animation with an interface that allows a user to edit the playback of the animation.
+ */
 public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView, ActionListener {
   private IAnimatorOperations model;
   private int speed;
@@ -40,6 +43,12 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   private static int FRAME_WIDTH = 1000;
   private static int FRAME_HEIGHT = 700;
 
+  /**
+   * Constructs an InteractiveView.
+   *
+   * @param model The model containing the data for the animation
+   * @param speed The speed at which the animation will start running
+   */
   public InteractiveView(IAnimatorOperations model, int speed) {
     this.model = model;
     this.speed = speed;
@@ -68,9 +77,9 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     startButton = new JButton("Start");
     pauseButton = new JButton("Pause");
     loopButton = new JButton("Toggle Looping");
-    export = new JTextField("Enter SVG file name", 22);
+    export = new JTextField("Enter SVG file name", 11);
     export.setToolTipText("Enter a filename here to export this animation.");
-    speedChanger = new JTextField("Enter new speed", 15);
+    speedChanger = new JTextField("Enter new speed", 9);
     speedChanger.setToolTipText("Change the speed of the animation by entering a new speed value "
             + "here.");
 
@@ -83,6 +92,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     buttonPanel.add(loopButton);
     buttonPanel.add(speedChanger);
     buttonPanel.add(export);
+    buttonPanel.add(new JTextArea(".svg"));
 
     JPanel dropDownPanel = new JPanel();
     dropDownPanel.setLayout(new FlowLayout());

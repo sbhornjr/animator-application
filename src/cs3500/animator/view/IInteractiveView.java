@@ -5,6 +5,10 @@ import cs3500.animator.controller.ComboBoxListener;
 import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.model.shapes.IShape;
 
+/**
+ * The interface that dictates what methods a view for an interactive animation application must
+ * implement.
+ */
 public interface IInteractiveView {
 
   /**
@@ -44,30 +48,33 @@ public interface IInteractiveView {
   void addActionListeners();
 
   /**
-   *
+   * Toggles whether or not the animation is paused.
    */
   void togglePause();
 
   /**
-   *
+   * Toggles whether or not the animation will loop back to the start when it finishes.
    */
   void toggleLoop();
 
   /**
+   * Sets the animation's speed to the given new speed.
    *
-   * @param newSpeed
+   * @param newSpeed  The new speed
    */
   void setSpeed(int newSpeed);
 
   /**
    * Outputs the animation as a SVG animation to the specified output file.
+   *
    * @param ofile   The output file as a string.
    */
   void export(String ofile);
 
   /**
+   * Toggles whether or not the given shape is visible in the animation.
    *
-   * @param s
+   * @param s The shape
    */
   void toggleShape(IShape s);
 }

@@ -11,13 +11,13 @@ import cs3500.animator.model.shapes.IShape;
  * An ActionListener that responds to the JComboBox in the InteractiveView
  */
 public class ComboBoxListener implements ActionListener {
-  private InteractiveAnimationController controller;
+  private IInteractiveAnimationController controller;
 
   /**
    * Constructor for the ComboBoxListener.
    * @param cont  The controller that created this listener.
    */
-  public ComboBoxListener(InteractiveAnimationController cont) {
+  public ComboBoxListener(IInteractiveAnimationController cont) {
     controller = cont;
   }
 

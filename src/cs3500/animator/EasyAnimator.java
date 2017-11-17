@@ -60,6 +60,13 @@ public final class EasyAnimator {
       showError(errorMsg);
     }
 
+    if (inputFile.equals("")) {
+      showError("No input file provided.");
+    }
+    if (viewType.equals("")) {
+      showError("No view type provided.");
+    }
+
     // creates the model
     AnimationFileReader afr = new AnimationFileReader();
     IAnimatorOperations model = new AnimatorModel();

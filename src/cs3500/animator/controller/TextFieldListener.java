@@ -8,13 +8,13 @@ import java.awt.event.ActionListener;
  * An ActionListener class that deals exclusively with JTextFields.
  */
 public class TextFieldListener implements ActionListener {
-  private InteractiveAnimationController controller;
+  private IInteractiveAnimationController controller;
 
   /**
    * Constructor for the TextFieldListener.
    * @param cont  The controller that created this listener.
    */
-  public TextFieldListener(InteractiveAnimationController cont) {
+  public TextFieldListener(IInteractiveAnimationController cont) {
     controller = cont;
   }
 
