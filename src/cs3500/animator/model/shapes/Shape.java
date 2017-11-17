@@ -36,7 +36,6 @@ public abstract class Shape implements IShape {
     this.dimensions = dimensions;
     this.color = color;
     this.lifetime = lifetime;
-    this.type = ShapeType.RECTANGLE;
     this.location = location;
     this.actions = new ArrayList<>();
     this.initDimensions = dimensions;
@@ -135,5 +134,12 @@ public abstract class Shape implements IShape {
     this.dimensions = initDimensions;
     this.location = initLocation;
     this.color = initColor;
+  }
+
+  @Override
+  public String toString() {
+    String shapeType = type.toString();
+    shapeType = shapeType.charAt(0) + shapeType.substring(1).toLowerCase();
+    return shapeType + " " + name;
   }
 }

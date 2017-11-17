@@ -110,12 +110,15 @@ public final class EasyAnimator {
       controller = new AnimationController(view);
       controller.start();
     }
-    try {
-      writer.close();
-    } catch (IOException e) {
-      errorMsg = e.getMessage();
+
+    if (writer != null) {
+      try {
+        writer.close();
+      } catch (IOException e) {
+        errorMsg = e.getMessage();
+      }
+      showError(errorMsg);
     }
-    showError(errorMsg);
   }
 
   /**

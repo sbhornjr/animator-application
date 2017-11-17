@@ -1,5 +1,6 @@
 package cs3500.animator.controller;
 
+import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.view.IInteractiveView;
 
 /**
@@ -50,5 +51,10 @@ public class InteractiveAnimationController implements IAnimationController, IIn
   @Override
   public void speedChanged(double newSpeed) {
     view.setSpeed(newSpeed);
+  }
+
+  @Override
+  public void shapeSelected(IShape s) {
+
   }
 }

@@ -31,11 +31,13 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   JButton loopButton;
   JTextField export;
   JTextField speedChanger;
+  JComboBox<IShape> shapeAdder;
+  JComboBox<IShape> shapeRemover;
   private ButtonListener bl;
   private TextFieldListener tfl;
 
   private static int FRAME_WIDTH = 1000;
-  private static int FRAME_HEIGHT = 800;
+  private static int FRAME_HEIGHT = 700;
 
   public InteractiveView(IAnimatorOperations model, double speed) {
     this.model = model;
@@ -60,7 +62,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new FlowLayout());
-    this.add(buttonPanel,BorderLayout.SOUTH);
+    this.add(buttonPanel, BorderLayout.NORTH);
 
     startButton = new JButton("Start");
     pauseButton = new JButton("Pause");
@@ -69,7 +71,8 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     export = new JTextField("Enter SVG file name", 22);
     export.setToolTipText("Enter a filename here to export this animation.");
     speedChanger = new JTextField("Enter new speed", 15);
-    speedChanger.setToolTipText("Change the speed of the animation by entering a new speed value here.");
+    speedChanger.setToolTipText("Change the speed of the animation by entering a new speed value "
+            + "here.");
 
     bl = null;
     tfl = null;
@@ -80,6 +83,17 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     buttonPanel.add(loopButton);
     buttonPanel.add(speedChanger);
     buttonPanel.add(export);
+
+    JPanel dropDownPanel = new JPanel();
+    dropDownPanel.setLayout(new FlowLayout());
+    this.add(dropDownPanel, BorderLayout.SOUTH);
+
+    IShape[] shapeArray = this.model.getShapes().toArray(new IShape[this.model.getShapes().size()]);
+    shapeRemover = new JComboBox<>(shapeArray);
+    shapeAdder = new JComboBox<>();
+
+    dropDownPanel.add(shapeRemover);
+    dropDownPanel.add(shapeAdder);
 
     this.pack();
     this.setVisible(true);
@@ -164,6 +178,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     } catch (IOException e) {
       System.out.println("ERROR: " + e.getMessage());
     }
+    this.display();
   }
 
   /**

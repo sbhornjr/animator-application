@@ -23,7 +23,7 @@ public class TextFieldListener implements ActionListener {
     JTextField jtx = (JTextField)e.getSource();
     String text = jtx.getToolTipText();
 
-    if (text.equals("new speed:")) {
+    if (text.equals("Change the speed of the animation by entering a new speed value here.")) {
       String s = jtx.getText();
       double speed = Double.parseDouble(s);
       controller.speedChanged(speed);
