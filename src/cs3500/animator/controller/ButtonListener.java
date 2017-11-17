@@ -9,13 +9,13 @@ import javax.swing.JButton;
  * An ActionListener class that deals exclusively with JButtons.
  */
 public class ButtonListener implements ActionListener {
-  private InteractiveAnimationController controller;
+  private IInteractiveAnimationController controller;
 
   /**
    * Constructor for the ButtonListener.
    * @param cont  The controller that created this listener.
    */
-  public ButtonListener(InteractiveAnimationController cont) {
+  public ButtonListener(IInteractiveAnimationController cont) {
     controller = cont;
   }
 

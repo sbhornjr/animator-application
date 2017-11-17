@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests that the methods in an Interactive Animation Controller are called when they are supposed
+ * to and work as they should.
+ */
 public class ControllerTest {
   StringBuffer ap = new StringBuffer();
   IInteractiveView view = new TestInteractiveView(ap);
@@ -124,6 +128,7 @@ public class ControllerTest {
     speedChanger.setToolTipText("Change the speed of the animation by entering a new speed value "
             + "here.");
     speedChanger.addActionListener(tfl);
+    speedChanger.setText("10");
     ActionEvent e = new ActionEvent(speedChanger, 1, "Change Speed");
     tfl.actionPerformed(e);
     assertEquals("setSpeed called\n", ap.toString());

@@ -9,11 +9,19 @@ import cs3500.animator.view.TweenModelBuilder;
 
 import java.util.ArrayList;
 
+/**
+ * A read-only version of the AnimatorModel that cannot be mutated by any view.
+ */
 public class ReadOnlyAnimatorModel implements IAnimatorOperations {
   private IAnimatorOperations model;
   private ArrayList<IAction> actions;
   private ArrayList<IShape> shapes;
 
+  /**
+   * Constructs a ReadOnlyAnimatorModel from a given AnimatorModel
+   *
+   * @param model The AnimatorModel
+   */
   public ReadOnlyAnimatorModel(IAnimatorOperations model) {
     this.model = model;
     this.actions = model.getActions();

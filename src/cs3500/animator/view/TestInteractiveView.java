@@ -7,10 +7,18 @@ import cs3500.animator.model.shapes.IShape;
 
 import java.io.IOException;
 
+/**
+ * A mock interactive view used for testing purposes.
+ */
 public class TestInteractiveView implements IInteractiveView, IAnimationView {
   private ViewType type;
   private Appendable ap;
 
+  /**
+   * Constructs a TestInteractiveView.
+   *
+   * @param ap  Where the view will write its output
+   */
   public TestInteractiveView(Appendable ap) {
     this.type = ViewType.INTERACTIVE;
     this.ap = ap;
@@ -97,15 +105,6 @@ public class TestInteractiveView implements IInteractiveView, IAnimationView {
   public void setSpeed(int newSpeed) {
     try {
       ap.append("setSpeed called\n");
-    } catch (IOException e) {
-      System.out.println("ERROR: " + e.getMessage());
-    }
-  }
-
-  @Override
-  public void restart() {
-    try {
-      ap.append("restart called\n");
     } catch (IOException e) {
       System.out.println("ERROR: " + e.getMessage());
     }
