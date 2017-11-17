@@ -1,7 +1,9 @@
 package cs3500.animator.view;
 
 import cs3500.animator.controller.ButtonListener;
+import cs3500.animator.controller.ComboBoxListener;
 import cs3500.animator.controller.TextFieldListener;
+import cs3500.animator.model.shapes.IShape;
 
 public interface IInteractiveView {
 
@@ -28,6 +30,13 @@ public interface IInteractiveView {
    * @param tfl  The text field listener to be set
    */
   void setTextFieldListener(TextFieldListener tfl);
+
+  /**
+   * Sets this view's combo box listener to the given one.
+   *
+   * @param cbl  The combo box listener to be set
+   */
+  void setComboBoxListener(ComboBoxListener cbl);
 
   /**
    * Adds the newly set listeners to each button.
@@ -60,4 +69,16 @@ public interface IInteractiveView {
    * @param ofile   The output file as a string.
    */
   void export(String ofile);
+
+  /**
+   *
+   * @param s
+   */
+  void removeShape(IShape s);
+
+  /**
+   *
+   * @param s
+   */
+  void addShape(IShape s);
 }

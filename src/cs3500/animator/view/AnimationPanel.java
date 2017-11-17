@@ -24,13 +24,14 @@ public class AnimationPanel extends JPanel {
     super.paintComponent(g);
 
     for (IShape s : shapes) {
-      if (s.getType() == ShapeType.RECTANGLE) {
-        g.setColor(s.getColor());
-        g.fillRect(s.getX(), s.getY(), s.getWidth(), s.getHeight());
-      }
-      else {
-        g.setColor(s.getColor());
-        g.fillOval(s.getX(), s.getY(), s.getWidth(), s.getHeight());
+      if (s.isVisible()) {
+        if (s.getType() == ShapeType.RECTANGLE) {
+          g.setColor(s.getColor());
+          g.fillRect(s.getX(), s.getY(), s.getWidth(), s.getHeight());
+        } else {
+          g.setColor(s.getColor());
+          g.fillOval(s.getX(), s.getY(), s.getWidth(), s.getHeight());
+        }
       }
     }
   }

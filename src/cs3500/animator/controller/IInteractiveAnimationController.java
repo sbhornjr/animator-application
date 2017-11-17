@@ -41,10 +41,19 @@ public interface IInteractiveAnimationController extends IAnimationController {
 
   /**
    * A listener has notified the controller that the user has selected a shape from the drop-down
-   * menu:
+   * menu that removes shapes from the animation:
    * Relay this information to the view.
    *
    * @param s The shape that was selected
    */
-  void shapeSelected(IShape s);
+  void shapeRemoved(IShape s);
+
+  /**
+   * A listener has notified the controller that the user has selected a shape from the drop-down
+   * menu that adds shapes to the animation:
+   * Relay this information to the view.
+   *
+   * @param s The shape that was selected
+   */
+  void shapeAdded(IShape s);
 }
