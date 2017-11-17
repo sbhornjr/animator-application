@@ -26,17 +26,12 @@ public class InteractiveAnimationController implements IAnimationController, IIn
 
   @Override
   public void start() {
-    view.restart();
+    view.run();
   }
 
   @Override
   public void pauseToggled() {
     view.togglePause();
-  }
-
-  @Override
-  public void restart() {
-    view.restart();
   }
 
   @Override

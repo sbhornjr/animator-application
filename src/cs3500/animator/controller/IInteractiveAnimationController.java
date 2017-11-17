@@ -14,12 +14,6 @@ public interface IInteractiveAnimationController extends IAnimationController {
   void pauseToggled();
 
   /**
-   * A listener has notified the controller that the restart button has been pushed:
-   * Relay this information to the view.
-   */
-  void restart();
-
-  /**
    * A listener has notified the controller that the user has toggled looping:
    * Relay this information to the view.
    */

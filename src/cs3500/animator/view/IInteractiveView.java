@@ -60,11 +60,6 @@ public interface IInteractiveView {
   void setSpeed(int newSpeed);
 
   /**
-   *
-   */
-  void restart();
-
-  /**
    * Outputs the animation as a SVG animation to the specified output file.
    * @param ofile   The output file as a string.
    */
