@@ -20,22 +20,24 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   private IAnimatorOperations model;
   private int speed;
   private double time;
+  private int tick;
   private ViewType type;
   private boolean paused;
   private boolean looping;
   private Timer timer;
   private FileWriter fw;
 
-  JButton startButton;
-  JButton pauseButton;
-  JButton restartButton;
-  JButton loopButton;
-  JTextField export;
-  JTextField speedChanger;
-  JComboBox<IShape> shapeRemover;
+  private JButton startButton;
+  private JButton pauseButton;
+  private JButton restartButton;
+  private JButton loopButton;
+  private JTextField export;
+  private JTextField speedChanger;
+  private JComboBox<IShape> shapeRemover;
   private ButtonListener bl;
   private TextFieldListener tfl;
   private ComboBoxListener cbl;
+  private JTextArea stats;
 
   private static int FRAME_WIDTH = 1000;
   private static int FRAME_HEIGHT = 700;
@@ -44,12 +46,13 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     this.model = model;
     this.speed = speed;
     this.type = ViewType.INTERACTIVE;
-    this.paused = false;
+    this.paused = true;
     this.looping = false;
 
     int delay = (int) (1000 / speed);
     timer = new Timer(delay, this);
     time = 0;
+    tick = 0;
 
     this.setTitle("Easy Animator Application");
     this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -63,7 +66,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new FlowLayout());
-    this.add(buttonPanel, BorderLayout.NORTH);
+    this.add(buttonPanel, BorderLayout.SOUTH);
 
     startButton = new JButton("Start");
     pauseButton = new JButton("Pause");
@@ -88,17 +91,54 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
     JPanel dropDownPanel = new JPanel();
     dropDownPanel.setLayout(new FlowLayout());
-    this.add(dropDownPanel, BorderLayout.SOUTH);
+    this.add(dropDownPanel, BorderLayout.EAST);
 
     IShape[] shapeArray = this.model.getShapes().toArray(new IShape[this.model.getShapes().size()]);
     shapeRemover = new JComboBox<>(shapeArray);
     shapeRemover.setToolTipText("Select a shape in this drop box to make it invisible.");
     shapeRemover.setEditable(true);
-
     dropDownPanel.add(shapeRemover);
+
+    JPanel statsPanel = new JPanel();
+    this.add(statsPanel, BorderLayout.NORTH);
+    stats = new JTextArea(this.writeStats());
+    statsPanel.add(stats);
 
     this.pack();
     this.setVisible(true);
+  }
+
+  /**
+   * Returns a description of certain characteristics of the animation that the user may have
+   * altered.
+   *
+   * @return  The description
+   */
+  private String writeStats() {
+    String s = "Animation is";
+    if (paused) {
+      s += " not currently running.";
+    }
+    else {
+      s += " currently running at a speed of " + this.speed + ".";
+    }
+    s += " Looping is";
+    if (looping) {
+      s += " on.";
+    }
+    else {
+      s += " off.";
+    }
+    return s;
+  }
+
+  /**
+   * Returns each shape in the model to their initial location, position, and color values.
+   */
+  private void initShapes() {
+    for (IShape sh : model.getShapes()) {
+      sh.setDefault();
+    }
   }
 
   @Override
@@ -114,6 +154,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
   @Override
   public void run() {
+    this.paused = false;
     timer.start();
   }
 
@@ -176,6 +217,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     }
     this.initShapes();
     time = 0;
+    tick = 0;
     this.run();
   }
 
@@ -194,27 +236,20 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     s.setVisible();
   }
 
-  /**
-   * Returns each shape in the model to their initial location, position, and color values.
-   */
-  private void initShapes() {
-    for (IShape sh : model.getShapes()) {
-      sh.setDefault();
-    }
-  }
-
   @Override
   public void actionPerformed(ActionEvent e) {
+    stats.replaceRange(this.writeStats(), 0, stats.getText().length());
     if (!paused) {
       for (int i = 0; i < model.getActions().size(); i++) {
-        model.executeAction(i, time * speed);
+        model.executeAction(i, tick);
       }
       this.repaint();
       time += 1 / (double)speed;
-      if ((time * speed) >= model.getEndTime() && looping) {
+      tick++;
+      if (tick >= model.getEndTime() && looping) {
         this.restart();
       }
-      else if ((time * speed) >= model.getEndTime()) {
+      else if (tick >= model.getEndTime()) {
         timer.stop();
       }
     }
