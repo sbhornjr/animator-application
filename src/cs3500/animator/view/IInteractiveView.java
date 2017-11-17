@@ -57,7 +57,7 @@ public interface IInteractiveView {
    *
    * @param newSpeed
    */
-  void setSpeed(double newSpeed);
+  void setSpeed(int newSpeed);
 
   /**
    *
@@ -74,11 +74,5 @@ public interface IInteractiveView {
    *
    * @param s
    */
-  void removeShape(IShape s);
-
-  /**
-   *
-   * @param s
-   */
-  void addShape(IShape s);
+  void toggleShape(IShape s);
 }

@@ -37,7 +37,7 @@ public interface IInteractiveAnimationController extends IAnimationController {
    * Relay this information to the view.
    * @param newSpeed  The new speed that the user requested.
    */
-  void speedChanged(double newSpeed);
+  void speedChanged(int newSpeed);
 
   /**
    * A listener has notified the controller that the user has selected a shape from the drop-down
@@ -46,14 +46,5 @@ public interface IInteractiveAnimationController extends IAnimationController {
    *
    * @param s The shape that was selected
    */
-  void shapeRemoved(IShape s);
-
-  /**
-   * A listener has notified the controller that the user has selected a shape from the drop-down
-   * menu that adds shapes to the animation:
-   * Relay this information to the view.
-   *
-   * @param s The shape that was selected
-   */
-  void shapeAdded(IShape s);
+  void shapeToggled(IShape s);
 }
