@@ -23,13 +23,12 @@ public class ButtonListener implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     switch(((JButton)e.getSource()).getText()) {
       case "Start":
+      case "Restart":
         controller.start();
         break;
       case "Pause":
+      case "Play":
         controller.pauseToggled();
-        break;
-      case "Restart":
-        controller.restart();
         break;
       case "Toggle Looping":
         controller.loopToggled();

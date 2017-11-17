@@ -19,7 +19,6 @@ import java.io.IOException;
 public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView, ActionListener {
   private IAnimatorOperations model;
   private int speed;
-  private double time;
   private int tick;
   private ViewType type;
   private boolean paused;
@@ -29,7 +28,6 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
   private JButton startButton;
   private JButton pauseButton;
-  private JButton restartButton;
   private JButton loopButton;
   private JTextField export;
   private JTextField speedChanger;
@@ -51,7 +49,6 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
     int delay = (int) (1000 / speed);
     timer = new Timer(delay, this);
-    time = 0;
     tick = 0;
 
     this.setTitle("Easy Animator Application");
@@ -70,7 +67,6 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
     startButton = new JButton("Start");
     pauseButton = new JButton("Pause");
-    restartButton = new JButton("Restart");
     loopButton = new JButton("Toggle Looping");
     export = new JTextField("Enter SVG file name", 22);
     export.setToolTipText("Enter a filename here to export this animation.");
@@ -84,7 +80,6 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
     buttonPanel.add(startButton);
     buttonPanel.add(pauseButton);
-    buttonPanel.add(restartButton);
     buttonPanel.add(loopButton);
     buttonPanel.add(speedChanger);
     buttonPanel.add(export);
@@ -102,6 +97,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     JPanel statsPanel = new JPanel();
     this.add(statsPanel, BorderLayout.NORTH);
     stats = new JTextArea(this.writeStats());
+    stats.setEditable(false);
     statsPanel.add(stats);
 
     this.pack();
@@ -154,6 +150,14 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
   @Override
   public void run() {
+    if (timer.isRunning()) {
+      timer.stop();
+    }
+    else {
+      startButton.setText("Restart");
+    }
+    this.initShapes();
+    tick = 0;
     this.paused = false;
     timer.start();
   }
@@ -186,7 +190,6 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
     startButton.addActionListener(bl);
     pauseButton.addActionListener(bl);
-    restartButton.addActionListener(bl);
     loopButton.addActionListener(bl);
     export.addActionListener(tfl);
     speedChanger.addActionListener(tfl);
@@ -196,6 +199,12 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   @Override
   public void togglePause() {
     paused = !paused;
+    if (paused) {
+      pauseButton.setText("Play");
+    }
+    else {
+      pauseButton.setText("Pause");
+    }
   }
 
   @Override
@@ -208,17 +217,6 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     speed = newSpeed;
     int delay = 1000 / speed;
     timer.setDelay(delay);
-  }
-
-  @Override
-  public void restart() {
-    if (timer.isRunning()) {
-      timer.stop();
-    }
-    this.initShapes();
-    time = 0;
-    tick = 0;
-    this.run();
   }
 
   @Override
@@ -244,10 +242,9 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
         model.executeAction(i, tick);
       }
       this.repaint();
-      time += 1 / (double)speed;
       tick++;
       if (tick >= model.getEndTime() && looping) {
-        this.restart();
+        this.run();
       }
       else if (tick >= model.getEndTime()) {
         timer.stop();
