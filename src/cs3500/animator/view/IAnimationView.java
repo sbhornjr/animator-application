@@ -1,8 +1,5 @@
 package cs3500.animator.view;
 
-import cs3500.animator.controller.ButtonListener;
-import cs3500.animator.controller.TextFieldListener;
-
 /**
  * Describes the methods that an animation view must implement.
  */

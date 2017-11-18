@@ -21,7 +21,7 @@ public class ButtonListener implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    switch(((JButton)e.getSource()).getText()) {
+    switch (((JButton)e.getSource()).getText()) {
       case "Start":
       case "Restart":
         controller.start();
@@ -33,6 +33,8 @@ public class ButtonListener implements ActionListener {
       case "Toggle Looping":
         controller.loopToggled();
         break;
+      default:
+        // unreachable, only the buttons with the above texts can trigger this listener.
     }
   }
 }

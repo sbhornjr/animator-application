@@ -1,8 +1,5 @@
 package cs3500.animator.model.shapes;
 
-import cs3500.animator.model.misc.MyColor;
-import cs3500.animator.model.misc.Posn;
-
 /**
  * A read-only version of the MyOval class that cannot be mutated by the view.
  */

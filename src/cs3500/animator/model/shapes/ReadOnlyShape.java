@@ -131,4 +131,9 @@ public abstract class ReadOnlyShape implements IShape {
   public boolean equals(Object o) {
     return shape.equals(o);
   }
+
+  @Override
+  public int hashCode() {
+    return shape.hashCode();
+  }
 }

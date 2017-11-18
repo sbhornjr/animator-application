@@ -4,7 +4,12 @@ import cs3500.animator.model.actions.ActionType;
 import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.misc.Posn;
-import cs3500.animator.model.shapes.*;
+import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.model.shapes.MyRectangle;
+import cs3500.animator.model.shapes.MyOval;
+import cs3500.animator.model.shapes.ShapeType;
+import cs3500.animator.model.shapes.ReadOnlyRectangle;
+import cs3500.animator.model.shapes.ReadOnlyOval;
 import cs3500.animator.view.TweenModelBuilder;
 
 import java.util.ArrayList;
@@ -18,7 +23,7 @@ public class ReadOnlyAnimatorModel implements IAnimatorOperations {
   private ArrayList<IShape> shapes;
 
   /**
-   * Constructs a ReadOnlyAnimatorModel from a given AnimatorModel
+   * Constructs a ReadOnlyAnimatorModel from a given AnimatorModel.
    *
    * @param model The AnimatorModel
    */
@@ -40,12 +45,14 @@ public class ReadOnlyAnimatorModel implements IAnimatorOperations {
   }
 
   @Override
-  public void createShape(ShapeType st, String name, Posn location, Posn dimensions, int sides, MyColor color, Posn lifetime) {
+  public void createShape(ShapeType st, String name, Posn location, Posn dimensions, int sides,
+                          MyColor color, Posn lifetime) {
     throw new UnsupportedOperationException("You can't mutate the read-only model.");
   }
 
   @Override
-  public void createAction(ActionType at, String shapeName, Object oldTrait, Object newTrait, Posn duration) {
+  public void createAction(ActionType at, String shapeName, Object oldTrait, Object newTrait,
+                           Posn duration) {
     throw new UnsupportedOperationException("You can't mutate the read-only model.");
   }
 

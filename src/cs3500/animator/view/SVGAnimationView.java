@@ -3,8 +3,6 @@ package cs3500.animator.view;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import cs3500.animator.controller.ButtonListener;
-import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.shapes.IShape;
