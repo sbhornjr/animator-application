@@ -19,7 +19,8 @@ import java.io.IOException;
 /**
  * Displays an animation with an interface that allows a user to edit the playback of the animation.
  */
-public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView, ActionListener {
+public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView,
+        ActionListener {
   private IAnimatorOperations model;
   private int speed;
   private int tick;
@@ -232,7 +233,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   @Override
   public void export(String ofile) {
     try {
-      fw = new FileWriter("resources/" + ofile);
+      fw = new FileWriter(ofile);
     } catch (IOException e) {
       System.out.println("ERROR: " + e.getMessage());
     }
