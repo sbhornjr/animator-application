@@ -1,6 +1,6 @@
 package cs3500.animator.controller;
 
-import javax.swing.*;
+import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

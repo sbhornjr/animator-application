@@ -1,16 +1,24 @@
 package cs3500.animator.view;
 
 import cs3500.animator.controller.ComboBoxListener;
-import cs3500.animator.model.shapes.IShape;
-import sun.plugin.dom.exception.InvalidStateException;
-
 import cs3500.animator.controller.ButtonListener;
 import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.model.model.IAnimatorOperations;
+import cs3500.animator.model.shapes.IShape;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.Timer;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
@@ -19,7 +27,8 @@ import java.io.IOException;
 /**
  * Displays an animation with an interface that allows a user to edit the playback of the animation.
  */
-public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView, ActionListener {
+public class InteractiveView extends JFrame implements IAnimationView, IInteractiveView,
+        ActionListener {
   private IAnimatorOperations model;
   private int speed;
   private int tick;
@@ -195,7 +204,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   @Override
   public void addActionListeners() {
     if (bl == null || tfl == null) {
-      throw new InvalidStateException("Listeners must be set before being added to buttons.");
+      throw new IllegalStateException("Listeners must be set before being added to buttons.");
     }
 
     startButton.addActionListener(bl);
@@ -232,7 +241,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   @Override
   public void export(String ofile) {
     try {
-      fw = new FileWriter("resources/" + ofile);
+      fw = new FileWriter(ofile);
     } catch (IOException e) {
       System.out.println("ERROR: " + e.getMessage());
     }

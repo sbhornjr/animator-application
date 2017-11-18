@@ -3,12 +3,12 @@ package cs3500.animator.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JComboBox;
 
 import cs3500.animator.model.shapes.IShape;
 
 /**
- * An ActionListener that responds to the JComboBox in the InteractiveView
+ * This is an ActionListener that responds to the JComboBox in the InteractiveView.
  */
 public class ComboBoxListener implements ActionListener {
   private IInteractiveAnimationController controller;

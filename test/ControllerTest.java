@@ -1,4 +1,8 @@
-import cs3500.animator.controller.*;
+import cs3500.animator.controller.IInteractiveAnimationController;
+import cs3500.animator.controller.InteractiveAnimationController;
+import cs3500.animator.controller.ButtonListener;
+import cs3500.animator.controller.TextFieldListener;
+import cs3500.animator.controller.ComboBoxListener;
 import cs3500.animator.view.IInteractiveView;
 import cs3500.animator.view.TestInteractiveView;
 import org.junit.Test;

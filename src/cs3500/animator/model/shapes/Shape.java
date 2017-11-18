@@ -172,4 +172,14 @@ public abstract class Shape implements IShape {
       return false;
     }
   }
+
+  @Override
+  public int hashCode() {
+    int result = 0;
+    if (this.type == ShapeType.RECTANGLE) {
+      result += 1000;
+    }
+    return result + this.getHeight() + this.getWidth() + this.getX() + this.getY()
+            + this.getColor().getRGB();
+  }
 }

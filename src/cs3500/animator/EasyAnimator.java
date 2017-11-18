@@ -47,7 +47,7 @@ public final class EasyAnimator {
 
       switch (identifier) {
         case "-if":
-          inputFile = "resources/" + param;
+          inputFile = param;
           break;
         case "-iv":
           viewType = param;
@@ -100,7 +100,7 @@ public final class EasyAnimator {
     }
     else {
       try {
-        writer = new FileWriter("resources/" + output);
+        writer = new FileWriter(output);
         view = viewFactory(viewType, writer, model, speed);
       } catch (IOException e) {
         errorMsg = e.getMessage();

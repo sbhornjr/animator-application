@@ -3,7 +3,7 @@ package cs3500.animator.controller;
 import cs3500.animator.model.shapes.IShape;
 
 /**
- * Outlines the methods for a Controller used with the Interactive view
+ * Outlines the methods for a Controller used with the Interactive view.
  */
 public interface IInteractiveAnimationController extends IAnimationController {
 
