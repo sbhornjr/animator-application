@@ -3,8 +3,8 @@ package cs3500.animator.model.model;
 import java.util.ArrayList;
 
 import cs3500.animator.model.actions.IAction;
-import cs3500.animator.model.misc.MyColor;
-import cs3500.animator.model.misc.Posn;
+import cs3500.animator.model.misc.IMyColor;
+import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.model.actions.ActionType;
@@ -26,8 +26,8 @@ public interface IAnimatorOperations {
    * @param color       The color of the shape
    * @param lifetime    The times that the shape appears and disappears
    */
-  void createShape(ShapeType st, String name, Posn location, Posn dimensions, int sides,
-                          MyColor color, Posn lifetime);
+  void createShape(ShapeType st, String name, IPosn location, IPosn dimensions, int sides,
+                   IMyColor color, IPosn lifetime);
 
   /**
    * Creates a new action and adds it to the model.
@@ -39,7 +39,7 @@ public interface IAnimatorOperations {
    * @param duration  The duration of the action
    */
   void createAction(ActionType at, String shapeName, Object oldTrait, Object newTrait,
-                           Posn duration);
+                           IPosn duration);
 
   /**
    * Executes the action at the given index.

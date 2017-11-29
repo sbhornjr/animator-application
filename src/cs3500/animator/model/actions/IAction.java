@@ -1,6 +1,6 @@
 package cs3500.animator.model.actions;
 
-import cs3500.animator.model.misc.Posn;
+import cs3500.animator.model.misc.IPosn;
 
 /**
  * Details the methods that any action class must implement.
@@ -26,7 +26,7 @@ public interface IAction {
    *
    * @return  The duration
    */
-  Posn getDuration();
+  IPosn getDuration();
 
   /**
    * Gets this actions' type.

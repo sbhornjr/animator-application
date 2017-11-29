@@ -1,0 +1,65 @@
+package cs3500.animator.provider.view.stringbased;
+
+import cs3500.animator.provider.model.ShapeOperations;
+import cs3500.animator.provider.view.AbstractView;
+import cs3500.animator.provider.view.ShapeViewOperations;
+import cs3500.animator.provider.view.AnimationViewOperations;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+/**
+ * This view is used to output our animation as a string.
+ */
+public class TextualView extends AbstractView implements TextualViewOperations {
+
+  private Appendable ap;
+
+  /**
+   * The constructor used to build our TextualView.
+   * @param ap - where we want to output this view.
+   */
+  public TextualView(Appendable ap) {
+    this.ap = ap;
+  }
+
+  /**
+   * Gets this state printed as a string, using the tempo to convert ticks to time.
+   * @param tempo the rate we want to view our animation at.
+   * @param state the state we are going to view.
+   * @return this state as a string.
+   */
+  public String getInstance(int tempo, ArrayList<ShapeOperations> state) {
+    this.tempo = tempo;
+    this.initializeState(state);
+    String stringOutput = "";
+
+    for (ShapeViewOperations s : this.state) {
+      stringOutput += s.toViewString(this.tempo) + "\n";
+    }
+
+    for (ShapeViewOperations s : this.state) {
+      for (AnimationViewOperations a : s.getViewAnimations()) {
+        stringOutput += a.toString() + "\n";
+      }
+    }
+
+    return stringOutput.substring(0, stringOutput.length() - 1);
+  }
+
+  /**
+   * Used to output the given state to somewhere.
+   * @param tempo the rate we want to view our animation at.
+   * @param state the state we are given to view.
+   */
+  public void playAnimation(int tempo, ArrayList<ShapeOperations> state) {
+    this.tempo = tempo;
+    this.initializeState(state);
+    try {
+      ap.append(this.getInstance(tempo, state));
+    } catch (IOException e) {
+      System.err.println("caught IOException: " + e.getMessage());
+    }
+  }
+
+}
