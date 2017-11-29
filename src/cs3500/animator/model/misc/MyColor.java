@@ -5,7 +5,7 @@ import java.awt.Color;
 /**
  * A version of Java's Color that prints better.
  */
-public class MyColor extends Color {
+public class MyColor extends Color implements IMyColor {
 
   /**
    * Constructs a cs3500.animator.model.misc.MyColor object.
@@ -24,11 +24,7 @@ public class MyColor extends Color {
     return "(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
   }
 
-  /**
-   * Converts this color's rgb values to ints instead of floats and returns it as a string.
-   *
-   * @return  The color as a string.
-   */
+  @Override
   public String asInt() {
     float[] rgb = this.getRGBColorComponents(new float[3]);
     return "(" + (int)(rgb[0] * 255) + ","

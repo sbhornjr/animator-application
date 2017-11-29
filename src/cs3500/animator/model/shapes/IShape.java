@@ -3,8 +3,8 @@ package cs3500.animator.model.shapes;
 import java.util.ArrayList;
 
 import cs3500.animator.model.actions.IAction;
-import cs3500.animator.model.misc.MyColor;
-import cs3500.animator.model.misc.Posn;
+import cs3500.animator.model.misc.IMyColor;
+import cs3500.animator.model.misc.IPosn;
 
 /**
  * Details the methods that a shape in the animator must use.
@@ -37,7 +37,7 @@ public interface IShape {
    *
    * @return  The color
    */
-  MyColor getColor();
+  IMyColor getColor();
 
   /**
    * Gets this shape's width.
@@ -93,21 +93,21 @@ public interface IShape {
    *
    * @param newLocation The new location
    */
-  void setLocation(Posn newLocation);
+  void setLocation(IPosn newLocation);
 
   /**
    * Sets this shape's dimensions to the given pair of numbers.
    *
    * @param newDimensions The new dimensions
    */
-  void setDimensions(Posn newDimensions);
+  void setDimensions(IPosn newDimensions);
 
   /**
    * Sets this shape's color to the given one.
    *
    * @param newColor  The new color
    */
-  void setColor(MyColor newColor);
+  void setColor(IMyColor newColor);
 
   /**
    * Adds the given Action to this shape's list of actions.

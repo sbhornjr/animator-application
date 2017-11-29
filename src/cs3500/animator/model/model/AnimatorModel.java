@@ -22,8 +22,8 @@ public class AnimatorModel implements IAnimatorOperations {
    * Constructs an AnimatorModel.
    */
   public AnimatorModel() {
-    shapes = new ArrayList<IShape>();
-    actions = new ArrayList<IAction>();
+    shapes = new ArrayList<>();
+    actions = new ArrayList<>();
   }
 
   @Override
