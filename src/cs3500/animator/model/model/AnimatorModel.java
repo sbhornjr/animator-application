@@ -53,13 +53,13 @@ public class AnimatorModel implements IAnimatorOperations {
     IAction a;
     switch (at) {
       case MOVE:
-        a = new Move(s, (IPosn) oldTrait, (IPosn) newTrait, duration);
+        a = new Move(s, (Posn) oldTrait, (Posn) newTrait, (Posn) duration);
         break;
       case COLOR_CHANGE:
-        a = new ColorChange(s, (IMyColor) oldTrait, (IMyColor) newTrait, duration);
+        a = new ColorChange(s, (MyColor) oldTrait, (MyColor) newTrait, duration);
         break;
       default:
-        a = new Scale(s, (IPosn) oldTrait,(IPosn) newTrait, duration);
+        a = new Scale(s, (Posn) oldTrait,(Posn) newTrait, duration);
     }
     s.addAction(a);
     if (!checkDuration(at, shapeName, duration)) {

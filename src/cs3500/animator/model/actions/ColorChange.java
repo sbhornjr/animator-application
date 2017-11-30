@@ -24,10 +24,10 @@ public class ColorChange implements IAction {
    * @param newColor  The shape's new color after the change
    * @param duration  The duration of this color change
    */
-  public ColorChange(IShape s, IMyColor oldColor, IMyColor newColor, IPosn duration) {
+  public ColorChange(IShape s, MyColor oldColor, MyColor newColor, IPosn duration) {
     this.s = s;
-    this.oldColor = (MyColor) oldColor;
-    this.newColor = (MyColor) newColor;
+    this.oldColor = oldColor;
+    this.newColor = newColor;
     type = ActionType.COLOR_CHANGE;
 
     if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getY()) {

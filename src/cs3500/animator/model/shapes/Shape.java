@@ -3,16 +3,23 @@ package cs3500.animator.model.shapes;
 import java.awt.*;
 import java.util.ArrayList;
 
+import cs3500.animator.model.actions.ColorChange;
 import cs3500.animator.model.actions.IAction;
+import cs3500.animator.model.actions.Move;
+import cs3500.animator.model.actions.Scale;
 import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.misc.Posn;
+import cs3500.animator.provider.model.AnimationOperations;
+import cs3500.animator.provider.model.IDimension;
+import cs3500.animator.provider.model.ShapeOperations;
+import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
 /**
  * Represents a polygon in an animation.
  */
-public abstract class Shape implements IShape {
+public abstract class Shape implements IShape, ShapeOperations {
 
   protected String name;
   protected IPosn location;
@@ -184,5 +191,87 @@ public abstract class Shape implements IShape {
     }
     return result + this.getHeight() + this.getWidth() + this.getX() + this.getY()
             + this.getColor().getRGB();
+  }
+
+  //======================================================================================================
+
+  @Override
+  public void changeColor(Color fromColor, Color toColor, float from, float to, float currentTime) {
+    ColorChange cc = new ColorChange(this, (MyColor) fromColor, (MyColor) toColor, new Posn(from, to));
+    cc.execute(currentTime);
+    actions.add(cc);
+  }
+
+  @Override
+  public void changeAngle(float fromAngle, float toAngle, float from, float to, float currentTime) {
+
+  }
+
+  @Override
+  public void changePosition(IPosn fromPosn, IPosn toPosn, float from, float to, float currentTime) {
+    Move m = new Move(this, (Posn) fromPosn, (Posn) toPosn, new Posn(from, to));
+    m.execute(currentTime);
+    actions.add(m);
+  }
+
+  @Override
+  public void changeDimension(ArrayList<IDimension> fromDimension, ArrayList<IDimension> toDimension,
+                              float from, float to, float currentTime) {
+    Scale s = new Scale(this, )
+  }
+
+  @Override
+  public ArrayList<IDimension> getDimensions() {
+    return null;
+  }
+
+  @Override
+  public float getAngle() {
+    return 0;
+  }
+
+  @Override
+  public cs3500.animator.provider.model.IPosn getPosition() {
+    return null;
+  }
+
+  @Override
+  public float getAppearTime() {
+    return 0;
+  }
+
+  @Override
+  public float getDisappearTime() {
+    return 0;
+  }
+
+  @Override
+  public ArrayList<AnimationOperations> getAnimations() {
+    return null;
+  }
+
+  @Override
+  public void addAnimation(AnimationOperations... toBeAdded) {
+
+  }
+
+  @Override
+  public void animate(float currentTime) {
+
+  }
+
+  @Override
+  public void removeAnimation(AnimationOperations... toBeRemoved) {
+
+  }
+
+  @Override
+  public ShapeOperations makeClone() {
+    return null;
+  }
+
+  @Override
+  public <T> T accept(ShapeVisitor<T> v) {
+    return null;
   }
 }

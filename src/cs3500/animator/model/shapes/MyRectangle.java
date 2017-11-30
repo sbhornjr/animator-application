@@ -6,7 +6,7 @@ import cs3500.animator.model.misc.IPosn;
 /**
  * Represents a rectangle in an animation.
  */
-public class MyRectangle extends Shape {
+public class MyRectangle extends Shape implements cs3500.animator.model.shapes.IRectangle {
 
   /**
    * Constructs a MyRectangle without a given amount of sides because it must be 4.
