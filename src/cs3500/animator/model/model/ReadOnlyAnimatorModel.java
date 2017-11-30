@@ -2,6 +2,8 @@ package cs3500.animator.model.model;
 
 import cs3500.animator.model.actions.ActionType;
 import cs3500.animator.model.actions.IAction;
+import cs3500.animator.model.misc.IMyColor;
+import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.misc.Posn;
 import cs3500.animator.model.shapes.IShape;
@@ -45,14 +47,14 @@ public class ReadOnlyAnimatorModel implements IAnimatorOperations {
   }
 
   @Override
-  public void createShape(ShapeType st, String name, Posn location, Posn dimensions, int sides,
-                          MyColor color, Posn lifetime) {
+  public void createShape(ShapeType st, String name, IPosn location, IPosn dimensions, int sides,
+                          IMyColor color, IPosn lifetime) {
     throw new UnsupportedOperationException("You can't mutate the read-only model.");
   }
 
   @Override
   public void createAction(ActionType at, String shapeName, Object oldTrait, Object newTrait,
-                           Posn duration) {
+                           IPosn duration) {
     throw new UnsupportedOperationException("You can't mutate the read-only model.");
   }
 

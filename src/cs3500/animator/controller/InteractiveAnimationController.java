@@ -102,7 +102,7 @@ public class InteractiveAnimationController implements IAnimationController,
         pPause();
         break;
       case "RESET":
-        p
+        
       case "LOOP":
       case "SVG":
       case "SVG FIELD":
