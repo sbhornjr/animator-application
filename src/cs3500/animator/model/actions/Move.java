@@ -23,10 +23,10 @@ public class Move implements IAction {
    * @param newLocation  The shape's location after the move
    * @param duration     The duration of this move
    */
-  public Move(IShape s, IPosn oldLocation, IPosn newLocation, IPosn duration) {
+  public Move(IShape s, Posn oldLocation, Posn newLocation, Posn duration) {
     this.s = s;
-    this.oldLocation = (Posn) oldLocation;
-    this.newLocation = (Posn) newLocation;
+    this.oldLocation = oldLocation;
+    this.newLocation = newLocation;
     type = ActionType.MOVE;
 
     if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getY()) {

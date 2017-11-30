@@ -23,10 +23,10 @@ public class Scale implements IAction {
    * @param newDimensions The dimensions of the shape after the scaling
    * @param duration      The duration of this scaling
    */
-  public Scale(IShape s, IPosn oldDimensions, IPosn newDimensions, IPosn duration) {
+  public Scale(IShape s, Posn oldDimensions, Posn newDimensions, Posn duration) {
     this.s = s;
-    this.oldDimensions = (Posn) oldDimensions;
-    this.newDimensions = (Posn) newDimensions;
+    this.oldDimensions = oldDimensions;
+    this.newDimensions = newDimensions;
     this.type = ActionType.SCALE;
 
     if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getY()) {
