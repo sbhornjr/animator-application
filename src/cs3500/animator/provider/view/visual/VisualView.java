@@ -1,8 +1,4 @@
-package cs3500.animator.provider.view.visual;
-
-import cs3500.animator.provider.model.ShapeOperations;
-import cs3500.animator.provider.view.AbstractView;
-import cs3500.animator.provider.view.ShapeViewOperations;
+package cs3500.animator.view.visual;
 
 import java.awt.Toolkit;
 import java.awt.Dimension;
@@ -14,6 +10,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import cs3500.animator.model.shapes.ShapeOperations;
+import cs3500.animator.view.AbstractView;
+import cs3500.animator.view.animations.AnimationViewOperations;
+import cs3500.animator.view.shapes.ShapeViewOperations;
+import cs3500.animator.provider.view.visitors.AnimationVisitor;
+import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
 /**
  * Represents a Visual View of our animation using Java Swing.
@@ -30,8 +32,9 @@ public class VisualView extends AbstractView {
   /**
    * Used to construct our Visual View.
    */
-  public VisualView() {
-    super();
+  public VisualView(ShapeVisitor<ShapeViewOperations> sv,
+                    AnimationVisitor<AnimationViewOperations> av) {
+    super(sv, av);
     this.thisFrame = new JFrame();
 
     thisFrame.setTitle("Animator Program");

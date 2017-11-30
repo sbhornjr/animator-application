@@ -1,12 +1,14 @@
-package cs3500.animator.provider.view.stringbased;
-
-import cs3500.animator.provider.model.ShapeOperations;
-import cs3500.animator.provider.view.AbstractView;
-import cs3500.animator.provider.view.ShapeViewOperations;
-import cs3500.animator.provider.view.AnimationViewOperations;
+package cs3500.animator.view.stringbased;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import cs3500.animator.model.shapes.ShapeOperations;
+import cs3500.animator.view.AbstractView;
+import cs3500.animator.view.animations.AnimationViewOperations;
+import cs3500.animator.view.shapes.ShapeViewOperations;
+import cs3500.animator.provider.view.visitors.AnimationVisitor;
+import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
 /**
  * This view is used to output our animation as a string.
@@ -19,7 +21,9 @@ public class TextualView extends AbstractView implements TextualViewOperations {
    * The constructor used to build our TextualView.
    * @param ap - where we want to output this view.
    */
-  public TextualView(Appendable ap) {
+  public TextualView(Appendable ap, ShapeVisitor<ShapeViewOperations> sv,
+                     AnimationVisitor<AnimationViewOperations> av) {
+    super(sv, av);
     this.ap = ap;
   }
 

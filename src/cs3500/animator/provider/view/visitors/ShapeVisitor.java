@@ -1,7 +1,7 @@
-package cs3500.animator.provider.model;
+package cs3500.animator.provider.view.visitors;
 
-import cs3500.animator.model.shapes.Oval;
-import cs3500.animator.model.shapes.Rectangle;
+import cs3500.animator.model.shapes.IOval;
+import cs3500.animator.model.shapes.IRectangle;
 
 /**
  * Visitor used to add functionality to a shape object.
@@ -14,13 +14,13 @@ public interface ShapeVisitor<T> {
    * @param rect the rectangle we are adding functionality to.
    * @return whatever we wanted to use the rectangle for.
    */
-  T visit(Rectangle rect);
+  T visit(IRectangle rect);
 
   /**
    * Used to add functionality to an oval.
    * @param oval the oval we are adding functionality to.
    * @return whatever we wanted to use the oval for.
    */
-  T visit(Oval oval);
+  T visit(IOval oval);
 
 }

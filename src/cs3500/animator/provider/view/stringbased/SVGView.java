@@ -1,11 +1,13 @@
-package cs3500.animator.provider.view.stringbased;
-
-import cs3500.animator.provider.model.ShapeOperations;
-import cs3500.animator.provider.view.AbstractView;
-import cs3500.animator.provider.view.ShapeViewOperations;
+package cs3500.animator.view.stringbased;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import cs3500.animator.model.shapes.ShapeOperations;
+import cs3500.animator.view.AbstractView;
+import cs3500.animator.view.animations.AnimationViewOperations;
+import cs3500.animator.view.shapes.ShapeViewOperations;
+import cs3500.animator.provider.view.visitors.AnimationVisitor;
+import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
 /**
  * This class is used to print an animation in an svg format.
@@ -21,7 +23,9 @@ public class SVGView extends AbstractView implements TextualViewOperations {
    * @param svgHeight - the height we want our svg animation to be.
    * @param ap - where we want to output this view;
    */
-  public SVGView(int svgWidth, int svgHeight, Appendable ap) {
+  public SVGView(int svgWidth, int svgHeight, Appendable ap, ShapeVisitor<ShapeViewOperations> sv,
+                 AnimationVisitor<AnimationViewOperations> av) {
+    super(sv, av);
     this.svgWidth = svgWidth;
     this.svgHeight = svgHeight;
     this.ap = ap;
