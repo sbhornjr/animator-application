@@ -1,7 +1,8 @@
 package cs3500.animator.controller;
 
-import cs3500.animator.view.IAnimationView;
-import cs3500.animator.view.ViewType;
+import java.util.ArrayList;
+
+import cs3500.animator.provider.view.AnimatorViewOperations;
 
 /**
  * The controller for the animation application:
@@ -9,23 +10,20 @@ import cs3500.animator.view.ViewType;
  */
 public class AnimationController implements IAnimationController {
 
-  private IAnimationView view;
+  private AnimatorViewOperations view;
+  private int speed;
 
   /**
    * Constructor for the AnimationController.
    * @param view  The view.
    */
-  public AnimationController(IAnimationView view) {
+  public AnimationController(AnimatorViewOperations view, int speed) {
     this.view = view;
+    this.speed = speed;
   }
 
   @Override
   public void start() {
-    if (view.getViewType() == ViewType.VISUAL) {
-      view.run();
-    }
-    else {
-      view.display();
-    }
+    view.playAnimation(speed, new ArrayList<>());
   }
 }

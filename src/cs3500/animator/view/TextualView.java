@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.provider.model.ShapeOperations;
 
 /**
  * Displays an animation as a textual description.
@@ -78,5 +79,11 @@ public class TextualView implements IAnimationView {
   @Override
   public ViewType getViewType() {
     return this.type;
+  }
+
+  @Override
+  public void playAnimation(int tempo, ArrayList<ShapeOperations> state) {
+    this.speed = tempo;
+    display();
   }
 }

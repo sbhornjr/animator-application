@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import cs3500.animator.model.model.IAnimatorOperations;
+import cs3500.animator.provider.model.ShapeOperations;
 
 /**
  * Displays an animation visually inside a new window.
@@ -80,5 +82,11 @@ public class VisualAnimationView extends JFrame implements IAnimationView, Actio
     }
     this.repaint();
     time += 1 / (double) speed;
+  }
+
+  @Override
+  public void playAnimation(int tempo, ArrayList<ShapeOperations> state) {
+    speed = tempo;
+    run();
   }
 }

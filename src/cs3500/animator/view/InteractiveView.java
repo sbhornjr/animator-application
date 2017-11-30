@@ -5,6 +5,7 @@ import cs3500.animator.controller.ButtonListener;
 import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.provider.model.ShapeOperations;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -23,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Displays an animation with an interface that allows a user to edit the playback of the animation.
@@ -44,9 +46,6 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   private JTextField export;
   private JTextField speedChanger;
   private JComboBox<IShape> shapeRemover;
-  private ButtonListener bl;
-  private TextFieldListener tfl;
-  private ComboBoxListener cbl;
   private JTextArea stats;
 
   private static int FRAME_WIDTH = 1000;
@@ -87,14 +86,13 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     pauseButton = new JButton("Pause");
     loopButton = new JButton("Toggle Looping");
     export = new JTextField("Enter SVG file name", 11);
-    export.setToolTipText("Enter a filename here to export this animation.");
     speedChanger = new JTextField("Enter new speed", 9);
-    speedChanger.setToolTipText("Change the speed of the animation by entering a new speed value "
-            + "here.");
 
-    bl = null;
-    tfl = null;
-    cbl = null;
+    startButton.setActionCommand("START");
+    pauseButton.setActionCommand("TOGGLE PAUSE");
+    loopButton.setActionCommand("TOGGLE LOOP");
+    export.setActionCommand("EXPORT");
+    speedChanger.setActionCommand("SPEED CHANGE");
 
     buttonPanel.add(startButton);
     buttonPanel.add(pauseButton);
@@ -109,8 +107,8 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
     IShape[] shapeArray = this.model.getShapes().toArray(new IShape[this.model.getShapes().size()]);
     shapeRemover = new JComboBox<>(shapeArray);
-    shapeRemover.setToolTipText("Select a shape in this drop box to make it invisible.");
     shapeRemover.setEditable(true);
+    shapeRemover.setActionCommand("SHAPE REMOVED");
     dropDownPanel.add(shapeRemover);
 
     JPanel statsPanel = new JPanel();
@@ -187,42 +185,15 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
   }
 
   @Override
-  public void setButtonListener(ButtonListener bl) {
-    this.bl = bl;
-  }
-
-  @Override
-  public void setTextFieldListener(TextFieldListener tfl) {
-    this.tfl = tfl;
-  }
-
-  @Override
-  public void setComboBoxListener(ComboBoxListener cbl) {
-    this.cbl = cbl;
-  }
-
-  @Override
-  public void addActionListeners() {
-    if (bl == null || tfl == null) {
-      throw new IllegalStateException("Listeners must be set before being added to buttons.");
-    }
-
-    startButton.addActionListener(bl);
-    pauseButton.addActionListener(bl);
-    loopButton.addActionListener(bl);
-    export.addActionListener(tfl);
-    speedChanger.addActionListener(tfl);
-    shapeRemover.addActionListener(cbl);
-  }
-
-  @Override
   public void togglePause() {
     paused = !paused;
     if (paused) {
       pauseButton.setText("Play");
+      pauseButton.setActionCommand(pauseButton.getText());
     }
     else {
       pauseButton.setText("Pause");
+      pauseButton.setActionCommand(pauseButton.getText());
     }
   }
 
@@ -269,5 +240,57 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
         timer.stop();
       }
     }
+  }
+
+  @Override
+  public int getTempo() {
+    return this.speed;
+  }
+
+  @Override
+  public void loop() {
+    toggleLoop();
+  }
+
+  @Override
+  public void pause() {
+    this.paused = true;
+  }
+
+  @Override
+  public void play() {
+    this.paused = false;
+  }
+
+  @Override
+  public void setTempo(int tempo) {
+    speed = tempo;
+  }
+
+  @Override
+  public void reset() {
+    run();
+  }
+
+  @Override
+  public void setActionListener(ActionListener controller) {
+    startButton.addActionListener(controller);
+    pauseButton.addActionListener(controller);
+    loopButton.addActionListener(controller);
+    export.addActionListener(controller);
+    speedChanger.addActionListener(controller);
+    shapeRemover.addActionListener(controller);
+  }
+
+  @Override
+  public String getSVG(int tempo, ArrayList<ShapeOperations> state, int svgHeight, int svgWidth) {
+    // unsupported
+    return "";
+  }
+
+  @Override
+  public void playAnimation(int tempo, ArrayList<ShapeOperations> state) {
+    speed = tempo;
+    run();
   }
 }

@@ -1,9 +1,11 @@
 package cs3500.animator.view;
 
+import cs3500.animator.provider.view.AnimatorViewOperations;
+
 /**
  * Describes the methods that an animation view must implement.
  */
-public interface IAnimationView {
+public interface IAnimationView extends AnimatorViewOperations {
 
   /**
    * Displays an animation in a certain text format.

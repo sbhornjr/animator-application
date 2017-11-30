@@ -15,6 +15,7 @@ import cs3500.animator.controller.InteractiveAnimationController;
 import cs3500.animator.model.model.AnimatorModel;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.model.ReadOnlyAnimatorModel;
+import cs3500.animator.provider.view.AnimatorViewOperations;
 import cs3500.animator.view.AnimationFileReader;
 import cs3500.animator.view.IAnimationView;
 import cs3500.animator.view.IInteractiveView;
@@ -94,7 +95,7 @@ public final class EasyAnimator {
 
     // creates the view
     FileWriter writer = null;
-    IAnimationView view = null;
+    AnimatorViewOperations view = null;
     if (output.equals("out")) {
       view = viewFactory(viewType, System.out, model, speed);
     }
@@ -110,11 +111,11 @@ public final class EasyAnimator {
 
     // creates the controller and starts the animation
     IAnimationController controller;
-    if (view.getViewType() == ViewType.INTERACTIVE) {
+    if (viewType.equals("interactive") || viewType.equals("pinteractive")) {
       controller = new InteractiveAnimationController((IInteractiveView) view);
     }
     else {
-      controller = new AnimationController(view);
+      controller = new AnimationController(view, speed);
       controller.start();
     }
 
@@ -150,8 +151,8 @@ public final class EasyAnimator {
    * @param speed The speed at which the animation will run
    * @return      The view
    */
-  private static IAnimationView viewFactory(String type, Appendable out, IAnimatorOperations model,
-                                     int speed) {
+  private static AnimatorViewOperations viewFactory(String type, Appendable out, IAnimatorOperations model,
+                                                    int speed) {
     String errorMsg;
     switch (type) {
       case "text":
@@ -162,6 +163,15 @@ public final class EasyAnimator {
         return new SVGAnimationView(out, new ReadOnlyAnimatorModel(model), speed);
       case "interactive":
         return new InteractiveView(new ReadOnlyAnimatorModel(model), speed);
+      case "ptext":
+        return new cs3500.animator.provider.view.stringbased.TextualView(out);
+      case "pvisual":
+        return new cs3500.animator.provider.view.visual.VisualView();
+      case "psvg":
+        return new cs3500.animator.provider.view.stringbased.SVGView(1000, 1000,
+                out);
+      case "pinteractive":
+        return new cs3500.animator.provider.view.visual.HybridView();
       default:
         errorMsg = "Invalid view type provided";
     }

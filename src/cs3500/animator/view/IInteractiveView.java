@@ -4,12 +4,13 @@ import cs3500.animator.controller.ButtonListener;
 import cs3500.animator.controller.ComboBoxListener;
 import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.provider.view.visual.InteractiveViewOperations;
 
 /**
  * The interface that dictates what methods a view for an interactive animation application must
  * implement.
  */
-public interface IInteractiveView {
+public interface IInteractiveView extends InteractiveViewOperations {
 
   /**
    * Runs an animation.
@@ -20,32 +21,6 @@ public interface IInteractiveView {
    * Displays an animation in SVG text format.
    */
   void display();
-
-  /**
-   * Sets this view's button listener to the given one.
-   *
-   * @param bl  The button listener to be set
-   */
-  void setButtonListener(ButtonListener bl);
-
-  /**
-   * Sets this view's text field listener to the given one.
-   *
-   * @param tfl  The text field listener to be set
-   */
-  void setTextFieldListener(TextFieldListener tfl);
-
-  /**
-   * Sets this view's combo box listener to the given one.
-   *
-   * @param cbl  The combo box listener to be set
-   */
-  void setComboBoxListener(ComboBoxListener cbl);
-
-  /**
-   * Adds the newly set listeners to each button.
-   */
-  void addActionListeners();
 
   /**
    * Toggles whether or not the animation is paused.

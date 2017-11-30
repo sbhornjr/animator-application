@@ -7,6 +7,7 @@ import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.model.shapes.ShapeType;
+import cs3500.animator.provider.model.ShapeOperations;
 
 public class SVGAnimationView implements IAnimationView {
   private Appendable ap;
@@ -90,6 +91,12 @@ public class SVGAnimationView implements IAnimationView {
       s += a.getSVGDescription(speed);
     }
     return s;
+  }
+
+  @Override
+  public void playAnimation(int tempo, ArrayList<ShapeOperations> state) {
+    speed = tempo;
+    display();
   }
 }
 
