@@ -1,6 +1,13 @@
 package cs3500.animator.controller;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.*;
+
 import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.provider.controller.ControllerOperations;
+import cs3500.animator.provider.model.AnimatorModelOperations;
+import cs3500.animator.provider.view.visual.InteractiveViewOperations;
 import cs3500.animator.view.IInteractiveView;
 
 /**
@@ -8,7 +15,7 @@ import cs3500.animator.view.IInteractiveView;
  * transmits inputs between the user and the view.
  */
 public class InteractiveAnimationController implements IAnimationController,
-        IInteractiveAnimationController {
+        IInteractiveAnimationController, ControllerOperations, ProviderController {
 
   private IInteractiveView view;
 
@@ -18,11 +25,7 @@ public class InteractiveAnimationController implements IAnimationController,
    */
   public InteractiveAnimationController(IInteractiveView view) {
     this.view = view;
-
-    view.setButtonListener(new ButtonListener(this));
-    view.setTextFieldListener(new TextFieldListener(this));
-    view.setComboBoxListener(new ComboBoxListener(this));
-    view.addActionListeners();
+    this.view.setActionListener(this);
   }
 
   @Override
@@ -53,5 +56,92 @@ public class InteractiveAnimationController implements IAnimationController,
   @Override
   public void shapeToggled(IShape s) {
     view.toggleShape(s);
+  }
+
+  @Override
+  public void addModel(AnimatorModelOperations m) {
+
+  }
+
+  @Override
+  public void addView(InteractiveViewOperations v) {
+
+  }
+
+  @Override
+  public void startAnimator(int tempo) {
+
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    switch (e.getActionCommand()) {
+      case "START":
+        start();
+        break;
+      case "TOGGLE PAUSE":
+        pauseToggled();
+        break;
+      case "TOGGLE LOOP":
+        loopToggled();
+        break;
+      case "EXPORT":
+        export(((JTextField)e.getSource()).getText() + ".svg");
+        break;
+      case "SPEED CHANGE":
+        speedChanged(Integer.parseInt(((JTextField)e.getSource()).getText()));
+        break;
+      case "SHAPE REMOVED":
+        shapeToggled((IShape) ((JComboBox)e.getSource()).getSelectedItem());
+        break;
+
+      case "PLAY":
+        pPlay();
+        break;
+      case "PAUSE":
+        pPause();
+        break;
+      case "RESET":
+        p
+      case "LOOP":
+      case "SVG":
+      case "SVG FIELD":
+      case "SPEED":
+    }
+  }
+
+  @Override
+  public void pPlay() {
+
+  }
+
+  @Override
+  public void pPause() {
+
+  }
+
+  @Override
+  public void pReset() {
+
+  }
+
+  @Override
+  public void pLoop() {
+
+  }
+
+  @Override
+  public void psvg() {
+
+  }
+
+  @Override
+  public void psvgField() {
+
+  }
+
+  @Override
+  public void pSpeed() {
+
   }
 }

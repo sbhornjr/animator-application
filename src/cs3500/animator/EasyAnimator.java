@@ -93,45 +93,30 @@ public final class EasyAnimator {
       output = "out";
     }
 
+    // creates the view
     FileWriter writer = null;
-    if (viewType.charAt(0) == 'p') {
-      // creates the view
-      AnimatorViewOperations view = null;
-      if (output.equals("out")) {
-        view = pViewFactory(viewType.substring(1), System.out);
-      } else {
-        try {
-          writer = new FileWriter(output);
-          view = pViewFactory(viewType.substring(1), writer);
-        } catch (IOException e) {
-          errorMsg = e.getMessage();
-        }
-        showError(errorMsg);
-      }
+    AnimatorViewOperations view = null;
+    if (output.equals("out")) {
+      view = viewFactory(viewType, System.out, model, speed);
     }
     else {
-      // creates the view
-      IAnimationView view = null;
-      if (output.equals("out")) {
-        view = viewFactory(viewType, System.out, model, speed);
-      } else {
-        try {
-          writer = new FileWriter(output);
-          view = viewFactory(viewType, writer, model, speed);
-        } catch (IOException e) {
-          errorMsg = e.getMessage();
-        }
-        showError(errorMsg);
+      try {
+        writer = new FileWriter(output);
+        view = viewFactory(viewType, writer, model, speed);
+      } catch (IOException e) {
+        errorMsg = e.getMessage();
       }
+      showError(errorMsg);
+    }
 
-      // creates the controller and starts the animation
-      IAnimationController controller;
-      if (view.getViewType() == ViewType.INTERACTIVE) {
-        controller = new InteractiveAnimationController((IInteractiveView) view);
-      } else {
-        controller = new AnimationController(view);
-        controller.start();
-      }
+    // creates the controller and starts the animation
+    IAnimationController controller;
+    if (viewType.equals("interactive") || viewType.equals("pinteractive")) {
+      controller = new InteractiveAnimationController((IInteractiveView) view);
+    }
+    else {
+      controller = new AnimationController(view, speed);
+      controller.start();
     }
 
     if (writer != null) {
@@ -166,8 +151,8 @@ public final class EasyAnimator {
    * @param speed The speed at which the animation will run
    * @return      The view
    */
-  private static IAnimationView viewFactory(String type, Appendable out, IAnimatorOperations model,
-                                     int speed) {
+  private static AnimatorViewOperations viewFactory(String type, Appendable out, IAnimatorOperations model,
+                                                    int speed) {
     String errorMsg;
     switch (type) {
       case "text":
@@ -178,31 +163,14 @@ public final class EasyAnimator {
         return new SVGAnimationView(out, new ReadOnlyAnimatorModel(model), speed);
       case "interactive":
         return new InteractiveView(new ReadOnlyAnimatorModel(model), speed);
-      default:
-        errorMsg = "Invalid view type provided";
-    }
-    showError(errorMsg);
-    return null;
-  }
-
-  /**
-   * Generates a provider view base on the given type string.
-   *
-   * @param type  The type of view to create
-   * @param out   The appendable that the view may need
-   * @return      The view
-   */
-  private static AnimatorViewOperations pViewFactory(String type, Appendable out) {
-    String errorMsg;
-    switch (type) {
-      case "text":
+      case "ptext":
         return new cs3500.animator.provider.view.stringbased.TextualView(out);
-      case "visual":
+      case "pvisual":
         return new cs3500.animator.provider.view.visual.VisualView();
-      case "svg":
+      case "psvg":
         return new cs3500.animator.provider.view.stringbased.SVGView(1000, 1000,
                 out);
-      case "interactive":
+      case "pinteractive":
         return new cs3500.animator.provider.view.visual.HybridView();
       default:
         errorMsg = "Invalid view type provided";
