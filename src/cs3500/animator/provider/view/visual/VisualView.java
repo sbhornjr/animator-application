@@ -1,4 +1,4 @@
-package cs3500.animator.view.visual;
+package cs3500.animator.provider.view.visual;
 
 import java.awt.Toolkit;
 import java.awt.Dimension;
@@ -10,10 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JFrame;
 import javax.swing.Timer;
-import cs3500.animator.model.shapes.ShapeOperations;
-import cs3500.animator.view.AbstractView;
-import cs3500.animator.view.animations.AnimationViewOperations;
-import cs3500.animator.view.shapes.ShapeViewOperations;
+
+import cs3500.animator.provider.model.ShapeOperations;
+import cs3500.animator.provider.view.AbstractView;
+import cs3500.animator.provider.view.AnimationViewOperations;
+import cs3500.animator.provider.view.ShapeViewOperations;
 import cs3500.animator.provider.view.visitors.AnimationVisitor;
 import cs3500.animator.provider.view.visitors.ShapeVisitor;
 

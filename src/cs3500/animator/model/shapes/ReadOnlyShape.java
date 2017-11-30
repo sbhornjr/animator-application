@@ -1,9 +1,12 @@
 package cs3500.animator.model.shapes;
 
 import cs3500.animator.model.actions.IAction;
+import cs3500.animator.model.misc.IMyColor;
+import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.misc.Posn;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +41,7 @@ public abstract class ReadOnlyShape implements IShape {
   }
 
   @Override
-  public MyColor getColor() {
+  public Color getColor() {
     return shape.getColor();
   }
 
@@ -78,17 +81,17 @@ public abstract class ReadOnlyShape implements IShape {
   }
 
   @Override
-  public void setLocation(Posn newLocation) {
+  public void setLocation(IPosn newLocation) {
     throw new UnsupportedOperationException("Can't mutate shapes in a read-only model.");
   }
 
   @Override
-  public void setDimensions(Posn newDimensions) {
+  public void setDimensions(IPosn newDimensions) {
     throw new UnsupportedOperationException("Can't mutate shapes in a read-only model.");
   }
 
   @Override
-  public void setColor(MyColor newColor) {
+  public void setColor(IMyColor newColor) {
     throw new UnsupportedOperationException("Can't mutate shapes in a read-only model.");
   }
 
