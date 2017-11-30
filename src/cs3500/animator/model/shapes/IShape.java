@@ -1,5 +1,6 @@
 package cs3500.animator.model.shapes;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import cs3500.animator.model.actions.IAction;
@@ -37,7 +38,7 @@ public interface IShape {
    *
    * @return  The color
    */
-  IMyColor getColor();
+  Color getColor();
 
   /**
    * Gets this shape's width.

@@ -1,8 +1,11 @@
 package cs3500.animator.model.shapes;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import cs3500.animator.model.actions.IAction;
+import cs3500.animator.model.misc.IMyColor;
+import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.misc.Posn;
 
@@ -12,15 +15,15 @@ import cs3500.animator.model.misc.Posn;
 public abstract class Shape implements IShape {
 
   protected String name;
-  protected Posn location;
-  protected Posn dimensions;
-  protected MyColor color;
-  protected Posn lifetime;
+  protected IPosn location;
+  protected IPosn dimensions;
+  protected IMyColor color;
+  protected IPosn lifetime;
   protected ShapeType type;
   protected ArrayList<IAction> actions;
-  protected Posn initLocation;
-  protected Posn initDimensions;
-  protected MyColor initColor;
+  protected IPosn initLocation;
+  protected IPosn initDimensions;
+  protected IMyColor initColor;
   protected boolean isVisible;
 
   /**
@@ -32,7 +35,7 @@ public abstract class Shape implements IShape {
    * @param color       This shape's color
    * @param lifetime    The times that this shape appears and disappears
    */
-  public Shape(String name, Posn location, Posn dimensions, MyColor color, Posn lifetime) {
+  public Shape(String name, IPosn location, IPosn dimensions, IMyColor color, IPosn lifetime) {
     this.name = name;
     this.dimensions = dimensions;
     this.color = color;
@@ -61,8 +64,8 @@ public abstract class Shape implements IShape {
   }
 
   @Override
-  public MyColor getColor() {
-    return this.color;
+  public Color getColor() {
+    return (Color) this.color;
   }
 
   @Override
@@ -102,17 +105,17 @@ public abstract class Shape implements IShape {
   }
 
   @Override
-  public void setLocation(Posn newLocation) {
+  public void setLocation(IPosn newLocation) {
     location = newLocation;
   }
 
   @Override
-  public void setDimensions(Posn newDimensions) {
+  public void setDimensions(IPosn newDimensions) {
     dimensions = newDimensions;
   }
 
   @Override
-  public void setColor(MyColor newColor) {
+  public void setColor(IMyColor newColor) {
     color = newColor;
   }
 

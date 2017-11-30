@@ -1,7 +1,8 @@
 package cs3500.animator.model.shapes;
 
+import cs3500.animator.model.misc.IMyColor;
+import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
-import cs3500.animator.model.misc.Posn;
 
 /**
  * Represents an oval in the animator.
@@ -17,7 +18,7 @@ public class MyOval extends Shape {
    * @param color       This MyOval's color
    * @param lifetime    The times that this MyOval appears and disappears
    */
-  public MyOval(String name, Posn location, Posn dimensions, MyColor color, Posn lifetime) {
+  public MyOval(String name, IPosn location, IPosn dimensions, IMyColor color, IPosn lifetime) {
     super(name, location, dimensions, color, lifetime);
     this.type = ShapeType.OVAL;
   }

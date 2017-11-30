@@ -1,5 +1,6 @@
 package cs3500.animator.model.actions;
 
+import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.model.misc.Posn;
 
@@ -11,7 +12,7 @@ public class Scale implements IAction {
   private IShape s;
   private Posn oldDimensions;
   private Posn newDimensions;
-  private Posn duration;
+  private IPosn duration;
   private final ActionType type;
 
   /**
@@ -22,10 +23,10 @@ public class Scale implements IAction {
    * @param newDimensions The dimensions of the shape after the scaling
    * @param duration      The duration of this scaling
    */
-  public Scale(IShape s, Posn oldDimensions, Posn newDimensions, Posn duration) {
+  public Scale(IShape s, IPosn oldDimensions, IPosn newDimensions, IPosn duration) {
     this.s = s;
-    this.oldDimensions = oldDimensions;
-    this.newDimensions = newDimensions;
+    this.oldDimensions = (Posn) oldDimensions;
+    this.newDimensions = (Posn) newDimensions;
     this.type = ActionType.SCALE;
 
     if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getY()) {
@@ -54,7 +55,7 @@ public class Scale implements IAction {
   }
 
   @Override
-  public Posn getDuration() {
+  public IPosn getDuration() {
     return this.duration;
   }
 

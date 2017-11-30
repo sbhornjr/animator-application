@@ -1,5 +1,6 @@
 package cs3500.animator.view;
 
+import java.awt.Graphics;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import cs3500.animator.model.model.IAnimatorOperations;
+import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.provider.model.ShapeOperations;
 
 /**
@@ -46,7 +49,7 @@ public class VisualAnimationView extends JFrame implements IAnimationView, Actio
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     this.setLayout(new BorderLayout());
-    JPanel animationPanel = new AnimationPanel(this.model.getShapes());
+    JPanel animationPanel = new AnimationPanel();
     animationPanel.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
     JScrollPane scrollPane = new JScrollPane(animationPanel);
     this.add(scrollPane, BorderLayout.CENTER);
@@ -82,6 +85,29 @@ public class VisualAnimationView extends JFrame implements IAnimationView, Actio
     }
     this.repaint();
     time += 1 / (double) speed;
+  }
+
+  /**
+   * A JPanel with all of the shapes in the animation drawn on it.
+   */
+  private class AnimationPanel extends JPanel {
+
+    @Override
+    public void paintComponent(Graphics g) {
+      super.paintComponent(g);
+
+      for (IShape s : model.getShapes()) {
+        if (s.isVisible()) {
+          if (s.getType() == ShapeType.RECTANGLE) {
+            g.setColor(s.getColor());
+            g.fillRect(s.getX(), s.getY(), s.getWidth(), s.getHeight());
+          } else {
+            g.setColor(s.getColor());
+            g.fillOval(s.getX(), s.getY(), s.getWidth(), s.getHeight());
+          }
+        }
+      }
+    }
   }
 
   @Override

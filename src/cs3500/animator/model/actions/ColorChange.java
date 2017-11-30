@@ -1,8 +1,9 @@
 package cs3500.animator.model.actions;
 
-import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.model.misc.IMyColor;
+import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
-import cs3500.animator.model.misc.Posn;
+import cs3500.animator.model.shapes.IShape;
 
 /**
  * Represents a color change applied to a shape in the animator.
@@ -12,7 +13,7 @@ public class ColorChange implements IAction {
   private IShape s;
   private MyColor oldColor;
   private MyColor newColor;
-  private Posn duration;
+  private IPosn duration;
   private final ActionType type;
 
   /**
@@ -23,10 +24,10 @@ public class ColorChange implements IAction {
    * @param newColor  The shape's new color after the change
    * @param duration  The duration of this color change
    */
-  public ColorChange(IShape s, MyColor oldColor, MyColor newColor, Posn duration) {
+  public ColorChange(IShape s, IMyColor oldColor, IMyColor newColor, IPosn duration) {
     this.s = s;
-    this.oldColor = oldColor;
-    this.newColor = newColor;
+    this.oldColor = (MyColor) oldColor;
+    this.newColor = (MyColor) newColor;
     type = ActionType.COLOR_CHANGE;
 
     if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getY()) {
@@ -65,7 +66,7 @@ public class ColorChange implements IAction {
   }
 
   @Override
-  public Posn getDuration() {
+  public IPosn getDuration() {
     return this.duration;
   }
 
