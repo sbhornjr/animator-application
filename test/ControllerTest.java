@@ -4,7 +4,7 @@ import cs3500.animator.controller.ButtonListener;
 import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.controller.ComboBoxListener;
 import cs3500.animator.view.IInteractiveView;
-import cs3500.animator.view.TestInteractiveView;
+
 import org.junit.Test;
 
 import javax.swing.JButton;

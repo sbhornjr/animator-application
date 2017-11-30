@@ -1,10 +1,8 @@
 package cs3500.animator.view;
 
-import cs3500.animator.controller.ComboBoxListener;
-import cs3500.animator.controller.ButtonListener;
-import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.provider.model.ShapeOperations;
 
 import javax.swing.JFrame;
@@ -17,9 +15,7 @@ import javax.swing.WindowConstants;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
@@ -73,7 +69,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     this.setLayout(new BorderLayout());
-    JPanel animationPanel = new AnimationPanel(this.model.getShapes());
+    JPanel animationPanel = new AnimationPanel();
     animationPanel.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
     JScrollPane scrollPane = new JScrollPane(animationPanel);
     this.add(scrollPane, BorderLayout.CENTER);
@@ -238,6 +234,29 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
       }
       else if (tick >= model.getEndTime()) {
         timer.stop();
+      }
+    }
+  }
+
+  /**
+   * A JPanel with all of the shapes in the animation drawn on it.
+   */
+  private class AnimationPanel extends JPanel {
+
+    @Override
+    public void paintComponent(Graphics g) {
+      super.paintComponent(g);
+
+      for (IShape s : model.getShapes()) {
+        if (s.isVisible()) {
+          if (s.getType() == ShapeType.RECTANGLE) {
+            g.setColor(s.getColor());
+            g.fillRect(s.getX(), s.getY(), s.getWidth(), s.getHeight());
+          } else {
+            g.setColor(s.getColor());
+            g.fillOval(s.getX(), s.getY(), s.getWidth(), s.getHeight());
+          }
+        }
       }
     }
   }

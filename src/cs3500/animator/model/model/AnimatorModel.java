@@ -2,9 +2,16 @@ package cs3500.animator.model.model;
 
 import java.util.ArrayList;
 
+import cs3500.animator.model.actions.ColorChange;
+import cs3500.animator.model.actions.Move;
+import cs3500.animator.model.actions.Scale;
+import cs3500.animator.model.misc.IMyColor;
+import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.misc.Posn;
+import cs3500.animator.model.shapes.MyOval;
+import cs3500.animator.model.shapes.MyRectangle;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.model.actions.ActionType;
 import cs3500.animator.model.actions.IAction;
@@ -27,16 +34,36 @@ public class AnimatorModel implements IAnimatorOperations {
   }
 
   @Override
-  public void createShape(ShapeType st, String name, Posn location, Posn dimensions, int sides,
-                          MyColor color, Posn lifetime) {
-    shapes.add(st.create(name, location, dimensions, sides, color, lifetime));
+  public void createShape(ShapeType st, String name, IPosn location, IPosn dimensions, int sides,
+                          IMyColor color, IPosn lifetime) {
+    IShape s = null;
+    if (st == ShapeType.OVAL) {
+      s = new MyOval(name, location, dimensions, color, lifetime);
+    }
+    else {
+      s = new MyRectangle(name, location, dimensions, color, lifetime);
+    }
+    shapes.add(s);
   }
 
   @Override
   public void createAction(ActionType at, String shapeName, Object oldTrait, Object newTrait,
-                           Posn duration) {
+                           IPosn duration) {
+    IShape s = getShape(shapeName);
+    IAction a;
+    switch (at) {
+      case MOVE:
+        a = new Move(s, (IPosn) oldTrait, (IPosn) newTrait, duration);
+        break;
+      case COLOR_CHANGE:
+        a = new ColorChange(s, (IMyColor) oldTrait, (IMyColor) newTrait, duration);
+        break;
+      default:
+        a = new Scale(s, (IPosn) oldTrait,(IPosn) newTrait, duration);
+    }
+    s.addAction(a);
     if (!checkDuration(at, shapeName, duration)) {
-      actions.add(at.create(this.getShape(shapeName), oldTrait, newTrait, duration));
+      actions.add(a);
     }
     else {
       throw new IllegalArgumentException("This new action would conflict with existing ones");
@@ -196,7 +223,7 @@ public class AnimatorModel implements IAnimatorOperations {
    * @param duration  The duration that could potentially cause a conflict
    * @return          True if there is a conflict, false otherwise
    */
-  private boolean checkDuration(ActionType at, String shapeName, Posn duration) {
+  private boolean checkDuration(ActionType at, String shapeName, IPosn duration) {
     for (IAction a : actions) {
       if (a.getType() == at && a.getShapeName().equals(shapeName)) {
         // If the start or end of the given duration is within the duration of the action in the

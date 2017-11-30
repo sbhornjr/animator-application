@@ -1,7 +1,8 @@
 package cs3500.animator.model.actions;
 
-import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.Posn;
+import cs3500.animator.model.shapes.IShape;
 
 /**
  * Represents a move applied to a shape in the animator.
@@ -11,7 +12,7 @@ public class Move implements IAction {
   private IShape s;
   private Posn oldLocation;
   private Posn newLocation;
-  private Posn duration;
+  private IPosn duration;
   private final ActionType type;
 
   /**
@@ -22,10 +23,10 @@ public class Move implements IAction {
    * @param newLocation  The shape's location after the move
    * @param duration     The duration of this move
    */
-  public Move(IShape s, Posn oldLocation, Posn newLocation, Posn duration) {
+  public Move(IShape s, IPosn oldLocation, IPosn newLocation, IPosn duration) {
     this.s = s;
-    this.oldLocation = oldLocation;
-    this.newLocation = newLocation;
+    this.oldLocation = (Posn) oldLocation;
+    this.newLocation = (Posn) newLocation;
     type = ActionType.MOVE;
 
     if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getY()) {
@@ -54,7 +55,7 @@ public class Move implements IAction {
   }
 
   @Override
-  public Posn getDuration() {
+  public IPosn getDuration() {
     return this.duration;
   }
 
