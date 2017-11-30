@@ -1,8 +1,4 @@
-package cs3500.animator.provider.view.visual;
-
-import cs3500.animator.provider.model.ShapeOperations;
-import cs3500.animator.provider.view.AbstractView;
-import cs3500.animator.provider.view.ShapeViewOperations;
+package cs3500.animator.view.visual;
 
 import java.awt.Graphics;
 import java.awt.Color;
@@ -26,6 +22,13 @@ import javax.swing.BorderFactory;
 import javax.swing.Timer;
 import javax.swing.text.NumberFormatter;
 
+import cs3500.animator.model.shapes.ShapeOperations;
+import cs3500.animator.view.AbstractView;
+import cs3500.animator.view.animations.AnimationViewOperations;
+import cs3500.animator.view.shapes.ShapeViewOperations;
+import cs3500.animator.provider.view.visitors.AnimationVisitor;
+import cs3500.animator.provider.view.visitors.ShapeVisitor;
+
 /**
  * Used to animate the given state using java swing and have an interface to control said view.
  */
@@ -45,7 +48,9 @@ public class HybridView extends AbstractView implements InteractiveViewOperation
   /**
    * Used to construct this Hybrid View.
    */
-  public HybridView() {
+  public HybridView(ShapeVisitor<ShapeViewOperations> sv,
+                    AnimationVisitor<AnimationViewOperations> av) {
+    super(sv, av);
     this.ticks = 1;
     this.loop = false;
     this.buttons = new ArrayList<>();

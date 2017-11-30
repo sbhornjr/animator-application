@@ -1,5 +1,7 @@
 package cs3500.animator.provider.model;
 
+import cs3500.animator.provider.view.visitors.AnimationVisitor;
+
 /**
  * represents the functionality of an animation object.
  */

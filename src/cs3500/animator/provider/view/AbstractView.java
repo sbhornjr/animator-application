@@ -2,8 +2,8 @@ package cs3500.animator.provider.view;
 
 import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.ShapeOperations;
-import cs3500.animator.provider.view.visitors.ViewAnimationVisitor;
-import cs3500.animator.provider.view.visitors.ViewShapeVisitor;
+import cs3500.animator.provider.view.visitors.AnimationVisitor;
+import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
 import java.util.ArrayList;
 
@@ -15,6 +15,14 @@ public abstract class AbstractView implements AnimatorViewOperations {
    */
   protected int tempo;
   protected ArrayList<ShapeViewOperations> state;
+  protected final ShapeVisitor<ShapeViewOperations> sv;
+  protected final AnimationVisitor<AnimationViewOperations> av;
+
+  protected AbstractView(ShapeVisitor<ShapeViewOperations> sv,
+                         AnimationVisitor<AnimationViewOperations> av) {
+    this.sv = sv;
+    this.av = av;
+  }
 
   /**
    * Used to initalize the given state of ShapeOperations into a state of ShapeViewOperations that
@@ -23,13 +31,9 @@ public abstract class AbstractView implements AnimatorViewOperations {
    */
   protected void initializeState(ArrayList<ShapeOperations> modelState) {
     this.state = new ArrayList<>();
-    ViewShapeVisitor sv = new ViewShapeVisitor();
     for (ShapeOperations s : modelState) {
       this.state.add(s.accept(sv));
     }
-
-    ViewAnimationVisitor av = new ViewAnimationVisitor();
-    ArrayList<AnimationViewOperations> listAnims = new ArrayList<>();
 
     for (int i = 0; i < modelState.size() ; i++) {
       for (AnimationOperations a : modelState.get(i).getAnimations()) {
