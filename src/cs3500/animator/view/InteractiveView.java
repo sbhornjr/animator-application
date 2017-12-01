@@ -186,11 +186,9 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     paused = !paused;
     if (paused) {
       pauseButton.setText("Play");
-      pauseButton.setActionCommand(pauseButton.getText());
     }
     else {
       pauseButton.setText("Pause");
-      pauseButton.setActionCommand(pauseButton.getText());
     }
   }
 
@@ -295,6 +293,7 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
 
   @Override
   public void setActionListener(ActionListener controller) {
+    System.out.println("hello");
     startButton.addActionListener(controller);
     pauseButton.addActionListener(controller);
     loopButton.addActionListener(controller);

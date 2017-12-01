@@ -76,7 +76,7 @@ public class AnimatorModel implements IAnimatorOperations {
   @Override
   public void executeAction(int actionIndex, double time) {
     IAction a = (IAction) actions.get(actionIndex);
-    if (time >= a.getDuration().getX() && time <= a.getDuration().getDoubleY()) {
+    if (time >= a.getDuration().getDoubleX() && time <= a.getDuration().getDoubleY()) {
       a.execute(time);
     }
   }
