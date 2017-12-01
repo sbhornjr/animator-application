@@ -4,6 +4,9 @@ import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.provider.model.AnimationOperations;
+import cs3500.animator.provider.model.ShapeOperations;
+import cs3500.animator.provider.view.visitors.AnimationVisitor;
 
 /**
  * Represents a color change applied to a shape in the animator.
@@ -96,5 +99,57 @@ public class ColorChange implements IAction {
             + "ms\" attributeName=\"fill\" from=\"rgb" + this.oldColor.asInt() + "\" to=\"rgb"
             + this.newColor.asInt() + "\" fill=\"freeze\" />\n";
     return str;
+  }
+
+  //================================================================================================
+
+  @Override
+  public void animate(ShapeOperations shapeToBeChanged, float currentTime) {
+    s = (IShape) shapeToBeChanged;
+    execute(currentTime);
+  }
+
+  @Override
+  public float getFromTime() {
+    return (float) duration.getX();
+  }
+
+  @Override
+  public float getToTime() {
+    return (float) duration.getY();
+  }
+
+  @Override
+  public <T> T accept(AnimationVisitor<T> v) {
+    TODO
+  }
+
+  @Override
+  public MyColor getFrom() {
+    return oldColor;
+  }
+
+  @Override
+  public MyColor getTo() {
+    return newColor;
+  }
+
+  @Override
+  public boolean hasNoConflictsWith(ShapeOperations stateAtFromTime, ShapeOperations stateAtToTime,
+                                    AnimationOperations a) {
+    // unsupported
+    return false;
+  }
+
+  @Override
+  public boolean noConflictsWithHelper(ShapeOperations givenFrom, ShapeOperations givenTo,
+                                       float givenFromTime, float givenToTime) {
+    // unsupported
+    return false;
+  }
+
+  @Override
+  public void setShapeToBeAnimated(String shapeName) {
+    s.setName(shapeName);
   }
 }

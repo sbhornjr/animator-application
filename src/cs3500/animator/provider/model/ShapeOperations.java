@@ -43,7 +43,7 @@ public interface ShapeOperations {
    * @param to - the time we are changing until.
    * @param currentTime - the time we are at right now.
    */
-  void changePosition(IPosn fromPosn, IPosn toPosn, float from, float to,
+  void changePosition(IProviderPosn fromPosn, IProviderPosn toPosn, float from, float to,
                       float currentTime);
 
   /**
@@ -80,7 +80,7 @@ public interface ShapeOperations {
    * gets the position of this shape.
    * @return the position of this shape as a Posn.
    */
-  IPosn getPosition();
+  IProviderPosn getPosition();
 
   /**
    * gets the color of this shape.

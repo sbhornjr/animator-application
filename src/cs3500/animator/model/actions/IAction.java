@@ -1,11 +1,12 @@
 package cs3500.animator.model.actions;
 
 import cs3500.animator.model.misc.IPosn;
+import cs3500.animator.provider.model.AnimationOperations;
 
 /**
  * Details the methods that any action class must implement.
  */
-public interface IAction {
+public interface IAction extends AnimationOperations {
 
   /**
    * Executes this action.
