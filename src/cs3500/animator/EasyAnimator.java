@@ -113,7 +113,7 @@ public final class EasyAnimator {
     // creates the controller and starts the animation
     IAnimationController controller;
     if (viewType.equals("interactive") || viewType.equals("pinteractive")) {
-      controller = new InteractiveAnimationController(model, (InteractiveViewOperations) view);
+      controller = new InteractiveAnimationController(model, (InteractiveViewOperations) view, speed);
     }
     else {
       controller = new AnimationController(model, view, speed);
