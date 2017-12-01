@@ -145,7 +145,8 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
    * Returns each shape in the model to their initial location, position, and color values.
    */
   private void initShapes() {
-    for (IShape sh : model.getShapes()) {
+    for (ShapeOperations s : model.getShapes()) {
+      IShape sh = (IShape) s;
       sh.setDefault();
     }
   }
@@ -247,7 +248,8 @@ public class InteractiveView extends JFrame implements IAnimationView, IInteract
     public void paintComponent(Graphics g) {
       super.paintComponent(g);
 
-      for (IShape s : model.getShapes()) {
+      for (ShapeOperations sh : model.getShapes()) {
+        IShape s = (IShape)sh;
         if (s.isVisible()) {
           if (s.getType() == ShapeType.RECTANGLE) {
             g.setColor(s.getColor());

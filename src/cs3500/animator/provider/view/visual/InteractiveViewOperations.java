@@ -1,7 +1,7 @@
 package cs3500.animator.provider.view.visual;
 
 import cs3500.animator.provider.model.ShapeOperations;
-import cs3500.animator.provider.view.AnimatorViewOperations;
+import cs3500.animator.provider.view.model.AnimatorViewOperations;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

@@ -4,6 +4,12 @@ import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.provider.model.AnimationOperations;
+import cs3500.animator.provider.model.IDimension;
+import cs3500.animator.provider.model.IProviderPosn;
+import cs3500.animator.provider.model.ShapeOperations;
+import cs3500.animator.provider.view.model.AnimationViewOperations;
+import cs3500.animator.provider.view.model.ShapeViewOperations;
+import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -18,7 +24,7 @@ public abstract class ReadOnlyShape implements IShape {
   /**
    * Represents a generic read-only shape.
    *
-   * @param sh  The regular shape that should be represented in a read-only way here.
+   * @param sh The regular shape that should be represented in a read-only way here.
    */
   public ReadOnlyShape(IShape sh) {
     this.shape = sh;

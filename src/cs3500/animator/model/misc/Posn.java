@@ -1,5 +1,7 @@
 package cs3500.animator.model.misc;
 
+import cs3500.animator.provider.model.IProviderPosn;
+
 import java.awt.geom.Point2D;
 
 /**

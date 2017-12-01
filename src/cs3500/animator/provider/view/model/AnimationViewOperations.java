@@ -1,4 +1,4 @@
-package cs3500.animator.provider.view;
+package cs3500.animator.provider.view.model;
 
 import cs3500.animator.provider.model.AnimationOperations;
 

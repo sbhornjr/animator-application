@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.ShapeOperations;
+import cs3500.animator.provider.view.model.ShapeViewOperations;
 
 /**
  * Displays an animation as a textual description.
@@ -34,15 +36,15 @@ public class TextualView implements IAnimationView {
    * Displays an animation as a text description.
    */
   public void display() {
-    ArrayList<IShape> shapes = model.getShapes();
-    ArrayList<IAction> actions = model.getActions();
+    ArrayList<ShapeOperations> shapes = model.getShapes();
+    ArrayList<AnimationOperations> actions = model.getActions();
     String s = "";
     s += "Shapes:\n";
     for (int i = 0; i < shapes.size(); i++) {
       if (i != 0) {
         s += "\n";
       }
-      IShape curr = shapes.get(i);
+      IShape curr = (IShape) shapes.get(i);
       s += "Name: " + curr.getName() + "\n";
       s += "Type: " + curr.getType().toString().toLowerCase() + "\n";
       s += curr.getPosLocation() + ": " + "(" + (double) curr.getX()
@@ -57,7 +59,7 @@ public class TextualView implements IAnimationView {
 
     for (int i = 0; i < actions.size(); i++) {
       s += "\n";
-      IAction curr = actions.get(i);
+      IAction curr = (IAction) actions.get(i);
       s += "Shape " + curr.getShapeName() + " ";
       String str = curr.getDescription();
       s += str;

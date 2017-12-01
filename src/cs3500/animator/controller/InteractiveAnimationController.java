@@ -7,6 +7,7 @@ import javax.swing.*;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.provider.controller.ControllerOperations;
 import cs3500.animator.provider.model.AnimatorModelOperations;
+import cs3500.animator.provider.view.model.AnimatorViewOperations;
 import cs3500.animator.provider.view.visual.InteractiveViewOperations;
 import cs3500.animator.view.IInteractiveView;
 
@@ -17,45 +18,50 @@ import cs3500.animator.view.IInteractiveView;
 public class InteractiveAnimationController implements IAnimationController,
         IInteractiveAnimationController, ControllerOperations, ProviderController {
 
-  private IInteractiveView view;
+  private AnimatorModelOperations model;
+  private IInteractiveView ourView;
+  private InteractiveViewOperations theirView;
 
   /**
    * Constructor for the InteractiveAnimationController.
    * @param view  The view.
    */
-  public InteractiveAnimationController(IInteractiveView view) {
-    this.view = view;
-    this.view.setActionListener(this);
+  public InteractiveAnimationController(AnimatorModelOperations model, InteractiveViewOperations view) {
+    this.theirView = view;
+    this.theirView.setActionListener(this);
+    this.ourView = (IInteractiveView) view;
+    this.ourView.setActionListener(this);
+    this.model = model;
   }
 
   @Override
   public void start() {
-    view.run();
+    ourView.run();
   }
 
   @Override
   public void pauseToggled() {
-    view.togglePause();
+    ourView.togglePause();
   }
 
   @Override
   public void loopToggled() {
-    view.toggleLoop();
+    ourView.toggleLoop();
   }
 
   @Override
   public void export(String ofile) {
-    view.export(ofile);
+    ourView.export(ofile);
   }
 
   @Override
   public void speedChanged(int newSpeed) {
-    view.setSpeed(newSpeed);
+    ourView.setSpeed(newSpeed);
   }
 
   @Override
   public void shapeToggled(IShape s) {
-    view.toggleShape(s);
+    ourView.toggleShape(s);
   }
 
   @Override

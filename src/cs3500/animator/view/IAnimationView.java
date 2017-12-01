@@ -1,6 +1,6 @@
 package cs3500.animator.view;
 
-import cs3500.animator.provider.view.AnimatorViewOperations;
+import cs3500.animator.provider.view.model.AnimatorViewOperations;
 
 /**
  * Describes the methods that an animation view must implement.

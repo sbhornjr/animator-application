@@ -5,13 +5,14 @@ import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.provider.model.AnimationOperations;
+import cs3500.animator.provider.model.IColorAnimation;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.visitors.AnimationVisitor;
 
 /**
  * Represents a color change applied to a shape in the animator.
  */
-public class ColorChange implements IAction {
+public class ColorChange implements IAction, IColorAnimation {
 
   private IShape s;
   private MyColor oldColor;
@@ -121,7 +122,7 @@ public class ColorChange implements IAction {
 
   @Override
   public <T> T accept(AnimationVisitor<T> v) {
-    TODO
+    return v.visit(this);
   }
 
   @Override
