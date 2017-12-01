@@ -295,7 +295,7 @@ public abstract class Shape implements IShape {
 
   @Override
   public <T> T accept(ShapeVisitor<T> v) {
-    throw new UnsupportedOperationException();
+    TODO
   }
 
   @Override
