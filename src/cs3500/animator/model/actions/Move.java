@@ -3,6 +3,10 @@ package cs3500.animator.model.actions;
 import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.Posn;
 import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.model.shapes.Shape;
+import cs3500.animator.provider.model.AnimationOperations;
+import cs3500.animator.provider.model.ShapeOperations;
+import cs3500.animator.provider.view.visitors.AnimationVisitor;
 
 /**
  * Represents a move applied to a shape in the animator.
@@ -51,7 +55,7 @@ public class Move implements IAction {
     b = newLocation.getY();
     int ftY = (int) (a * ((tb - t) / (tb - ta)) + b * ((t - ta) / (tb - ta)));
 
-    s.setLocation(new Posn(ftX, ftY));
+    ((IShape) s).setLocation(new Posn(ftX, ftY));
   }
 
   @Override
@@ -95,5 +99,57 @@ public class Move implements IAction {
     }
 
     return str;
+  }
+
+  //================================================================================================
+
+  @Override
+  public void animate(ShapeOperations shapeToBeChanged, float currentTime) {
+    s = (IShape) shapeToBeChanged;
+    execute(currentTime);
+  }
+
+  @Override
+  public float getFromTime() {
+    return (float) duration.getX();
+  }
+
+  @Override
+  public float getToTime() {
+    return (float) duration.getY();
+  }
+
+  @Override
+  public <T> T accept(AnimationVisitor<T> v) {
+    TODO
+  }
+
+  @Override
+  public Posn getFrom() {
+    return oldLocation;
+  }
+
+  @Override
+  public Posn getTo() {
+    return newLocation;
+  }
+
+  @Override
+  public boolean hasNoConflictsWith(ShapeOperations stateAtFromTime, ShapeOperations stateAtToTime,
+                                    AnimationOperations a) {
+    // unsupported
+    return false;
+  }
+
+  @Override
+  public boolean noConflictsWithHelper(ShapeOperations givenFrom, ShapeOperations givenTo,
+                                       float givenFromTime, float givenToTime) {
+    // unsupported
+    return false;
+  }
+
+  @Override
+  public void setShapeToBeAnimated(String shapeName) {
+    s.setName(shapeName);
   }
 }

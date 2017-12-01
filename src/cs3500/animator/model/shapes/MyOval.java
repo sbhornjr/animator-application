@@ -3,6 +3,7 @@ package cs3500.animator.model.shapes;
 import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
+import cs3500.animator.model.misc.Posn;
 import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.IDimension;
 import cs3500.animator.provider.model.ShapeOperations;
@@ -25,7 +26,7 @@ public class MyOval extends Shape implements cs3500.animator.model.shapes.IOval 
    * @param color       This MyOval's color
    * @param lifetime    The times that this MyOval appears and disappears
    */
-  public MyOval(String name, IPosn location, IPosn dimensions, IMyColor color, IPosn lifetime) {
+  public MyOval(String name, Posn location, Posn dimensions, MyColor color, Posn lifetime) {
     super(name, location, dimensions, color, lifetime);
     this.type = ShapeType.OVAL;
   }
@@ -34,5 +35,10 @@ public class MyOval extends Shape implements cs3500.animator.model.shapes.IOval 
   public String[] getWLTypes() {
     String[] arr = {"X radius", "Y radius"};
     return arr;
+  }
+
+  @Override
+  public ShapeOperations makeClone() {
+    return new MyOval(name, location, dimensions, color, lifetime);
   }
 }

@@ -7,30 +7,33 @@ import cs3500.animator.model.actions.ColorChange;
 import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.actions.Move;
 import cs3500.animator.model.actions.Scale;
+import cs3500.animator.model.misc.Dimension;
 import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.misc.Posn;
+import cs3500.animator.model.misc.ProviderPosn;
 import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.IDimension;
+import cs3500.animator.provider.model.IProviderPosn;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
 /**
  * Represents a polygon in an animation.
  */
-public abstract class Shape implements IShape, ShapeOperations {
+public abstract class Shape implements IShape {
 
   protected String name;
-  protected IPosn location;
-  protected IPosn dimensions;
-  protected IMyColor color;
-  protected IPosn lifetime;
+  protected Posn location;
+  protected Posn dimensions;
+  protected MyColor color;
+  protected Posn lifetime;
   protected ShapeType type;
-  protected ArrayList<IAction> actions;
-  protected IPosn initLocation;
-  protected IPosn initDimensions;
-  protected IMyColor initColor;
+  protected ArrayList<AnimationOperations> actions;
+  protected Posn initLocation;
+  protected Posn initDimensions;
+  protected MyColor initColor;
   protected boolean isVisible;
 
   /**
@@ -42,7 +45,7 @@ public abstract class Shape implements IShape, ShapeOperations {
    * @param color       This shape's color
    * @param lifetime    The times that this shape appears and disappears
    */
-  public Shape(String name, IPosn location, IPosn dimensions, IMyColor color, IPosn lifetime) {
+  public Shape(String name, Posn location, Posn dimensions, MyColor color, Posn lifetime) {
     this.name = name;
     this.dimensions = dimensions;
     this.color = color;
@@ -72,7 +75,7 @@ public abstract class Shape implements IShape, ShapeOperations {
 
   @Override
   public Color getColor() {
-    return (Color) this.color;
+    return this.color;
   }
 
   @Override
@@ -113,17 +116,17 @@ public abstract class Shape implements IShape, ShapeOperations {
 
   @Override
   public void setLocation(IPosn newLocation) {
-    location = newLocation;
+    location = (Posn) newLocation;
   }
 
   @Override
   public void setDimensions(IPosn newDimensions) {
-    dimensions = newDimensions;
+    dimensions = (Posn) newDimensions;
   }
 
   @Override
   public void setColor(IMyColor newColor) {
-    color = newColor;
+    color = (MyColor) newColor;
   }
 
   @Override
@@ -132,7 +135,7 @@ public abstract class Shape implements IShape, ShapeOperations {
   }
 
   @Override
-  public ArrayList<IAction> getActions() {
+  public ArrayList<AnimationOperations> getActions() {
     return this.actions;
   }
 
@@ -193,85 +196,110 @@ public abstract class Shape implements IShape, ShapeOperations {
             + this.getColor().getRGB();
   }
 
-  //======================================================================================================
+  //================================================================================================
 
   @Override
   public void changeColor(Color fromColor, Color toColor, float from, float to, float currentTime) {
-    ColorChange cc = new ColorChange(this, (MyColor) fromColor, (MyColor) toColor, new Posn(from, to));
+    ColorChange cc = new ColorChange(this, (MyColor) fromColor, (MyColor) toColor,
+            new Posn(from, to));
     cc.execute(currentTime);
     actions.add(cc);
   }
 
   @Override
   public void changeAngle(float fromAngle, float toAngle, float from, float to, float currentTime) {
-
+    throw new UnsupportedOperationException();
   }
 
   @Override
-  public void changePosition(IPosn fromPosn, IPosn toPosn, float from, float to, float currentTime) {
+  public void changePosition(IProviderPosn fromPosn,
+                             IProviderPosn toPosn, float from, float to,
+                             float currentTime) {
     Move m = new Move(this, (Posn) fromPosn, (Posn) toPosn, new Posn(from, to));
     m.execute(currentTime);
     actions.add(m);
   }
 
   @Override
-  public void changeDimension(ArrayList<IDimension> fromDimension, ArrayList<IDimension> toDimension,
-                              float from, float to, float currentTime) {
-    Scale s = new Scale(this, )
+  public void changeDimension(ArrayList<IDimension> fromDimension,
+                              ArrayList<IDimension> toDimension, float from, float to,
+                              float currentTime) {
+    Scale s = new Scale(this,
+            new Posn(fromDimension.get(0).getValue(), fromDimension.get(1).getValue()),
+            new Posn(fromDimension.get(0).getValue(), fromDimension.get(1).getValue()),
+            new Posn(from, to));
+    s.execute(currentTime);
+    actions.add(s);
   }
 
   @Override
   public ArrayList<IDimension> getDimensions() {
-    return null;
+    ArrayList<IDimension> result = new ArrayList<>();
+    result.add(new Dimension("width", (float) dimensions.getX()));
+    result.add(new Dimension("height", (float) dimensions.getY()));
+    return result;
   }
 
   @Override
   public float getAngle() {
-    return 0;
+    throw new UnsupportedOperationException();
   }
 
   @Override
-  public cs3500.animator.provider.model.IPosn getPosition() {
-    return null;
+  public IProviderPosn getPosition() {
+    return new ProviderPosn((float) location.getX(), (float) location.getY());
   }
 
   @Override
   public float getAppearTime() {
-    return 0;
+    return (float) lifetime.getX();
   }
 
   @Override
   public float getDisappearTime() {
-    return 0;
+    return (float) lifetime.getY();
   }
 
   @Override
   public ArrayList<AnimationOperations> getAnimations() {
-    return null;
+    return actions;
   }
 
   @Override
   public void addAnimation(AnimationOperations... toBeAdded) {
-
+    for (AnimationOperations a : toBeAdded) {
+      actions.add(a);
+    }
   }
 
   @Override
   public void animate(float currentTime) {
-
+    for (AnimationOperations a : actions) {
+      a.animate(this, currentTime);
+    }
   }
 
   @Override
   public void removeAnimation(AnimationOperations... toBeRemoved) {
-
+    for (AnimationOperations a : toBeRemoved) {
+      if (actions.contains(a)) {
+        actions.remove(a);
+      }
+    }
   }
 
   @Override
   public ShapeOperations makeClone() {
-    return null;
+    throw new UnsupportedOperationException("Shapes cannot be initialized.");
   }
 
   @Override
   public <T> T accept(ShapeVisitor<T> v) {
-    return null;
+    TODO
+  }
+
+  @Override
+  public void setName(String newName) {
+    name = newName;
   }
 }

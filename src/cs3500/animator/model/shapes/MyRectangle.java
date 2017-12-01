@@ -1,7 +1,8 @@
 package cs3500.animator.model.shapes;
 
-import cs3500.animator.model.misc.IMyColor;
-import cs3500.animator.model.misc.IPosn;
+import cs3500.animator.model.misc.MyColor;
+import cs3500.animator.model.misc.Posn;
+import cs3500.animator.provider.model.ShapeOperations;
 
 /**
  * Represents a rectangle in an animation.
@@ -17,8 +18,8 @@ public class MyRectangle extends Shape implements cs3500.animator.model.shapes.I
    * @param color       This MyRectangle's color
    * @param lifetime    The times that this MyRectangle appears and disappears
    */
-  public MyRectangle(String name, IPosn location, IPosn dimensions, IMyColor color,
-                     IPosn lifetime) {
+  public MyRectangle(String name, Posn location, Posn dimensions, MyColor color,
+                     Posn lifetime) {
     super(name, location, dimensions, color, lifetime);
     this.type = ShapeType.RECTANGLE;
   }
@@ -26,5 +27,10 @@ public class MyRectangle extends Shape implements cs3500.animator.model.shapes.I
   @Override
   public String getPosLocation() {
     return "Lower-left corner";
+  }
+
+  @Override
+  public ShapeOperations makeClone() {
+    return new MyRectangle(name, location, dimensions, color, lifetime);
   }
 }

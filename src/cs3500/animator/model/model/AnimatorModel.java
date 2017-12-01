@@ -15,6 +15,8 @@ import cs3500.animator.model.shapes.MyRectangle;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.model.actions.ActionType;
 import cs3500.animator.model.actions.IAction;
+import cs3500.animator.provider.model.AnimationOperations;
+import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.view.TweenModelBuilder;
 
 /**
@@ -22,8 +24,8 @@ import cs3500.animator.view.TweenModelBuilder;
  */
 public class AnimatorModel implements IAnimatorOperations {
 
-  private ArrayList<IShape> shapes;
-  private ArrayList<IAction> actions;
+  private ArrayList<ShapeOperations> shapes;
+  private ArrayList<AnimationOperations> actions;
 
   /**
    * Constructs an AnimatorModel.
@@ -36,12 +38,13 @@ public class AnimatorModel implements IAnimatorOperations {
   @Override
   public void createShape(ShapeType st, String name, IPosn location, IPosn dimensions, int sides,
                           IMyColor color, IPosn lifetime) {
-    IShape s = null;
+    IShape s;
     if (st == ShapeType.OVAL) {
-      s = new MyOval(name, location, dimensions, color, lifetime);
+      s = new MyOval(name, (Posn) location, (Posn) dimensions, (MyColor) color, (Posn) lifetime);
     }
     else {
-      s = new MyRectangle(name, location, dimensions, color, lifetime);
+      s = new MyRectangle(name, (Posn) location, (Posn) dimensions, (MyColor) color,
+              (Posn) lifetime);
     }
     shapes.add(s);
   }
@@ -49,7 +52,7 @@ public class AnimatorModel implements IAnimatorOperations {
   @Override
   public void createAction(ActionType at, String shapeName, Object oldTrait, Object newTrait,
                            IPosn duration) {
-    IShape s = getShape(shapeName);
+    IShape s = getShapeWithName(shapeName);
     IAction a;
     switch (at) {
       case MOVE:
@@ -59,7 +62,7 @@ public class AnimatorModel implements IAnimatorOperations {
         a = new ColorChange(s, (MyColor) oldTrait, (MyColor) newTrait, duration);
         break;
       default:
-        a = new Scale(s, (Posn) oldTrait,(Posn) newTrait, duration);
+        a = new Scale(s, (Posn) oldTrait,(Posn) newTrait, (Posn) duration);
     }
     s.addAction(a);
     if (!checkDuration(at, shapeName, duration)) {
@@ -72,7 +75,7 @@ public class AnimatorModel implements IAnimatorOperations {
 
   @Override
   public void executeAction(int actionIndex, double time) {
-    IAction a = actions.get(actionIndex);
+    IAction a = (IAction) actions.get(actionIndex);
     if (time >= a.getDuration().getX() && time <= a.getDuration().getY()) {
       a.execute(time);
     }
@@ -86,7 +89,7 @@ public class AnimatorModel implements IAnimatorOperations {
       if (i != 0) {
         s += "\n";
       }
-      IShape curr = shapes.get(i);
+      IShape curr = (IShape) shapes.get(i);
       s += "Name: " + curr.getName() + "\n";
       s += "Type: " + curr.getType().toString().toLowerCase() + "\n";
       s += curr.getPosLocation() + ": " + "(" + curr.getX()
@@ -101,7 +104,7 @@ public class AnimatorModel implements IAnimatorOperations {
 
     for (int i = 0; i < actions.size(); i++) {
       s += "\n";
-      IAction curr = actions.get(i);
+      IAction curr = (IAction) actions.get(i);
       s += "Shape " + curr.getShapeName() + " ";
       String str = curr.getDescription();
       s += str;
@@ -111,20 +114,20 @@ public class AnimatorModel implements IAnimatorOperations {
   }
 
   @Override
-  public ArrayList<IShape> getShapes() {
+  public ArrayList<ShapeOperations> getShapes() {
     return this.shapes;
   }
 
   @Override
-  public ArrayList<IAction> getActions() {
+  public ArrayList<AnimationOperations> getActions() {
     return this.actions;
   }
 
   @Override
   public double getEndTime() {
     double result = 0;
-    for (IShape s : shapes) {
-      double t = s.getDisappear();
+    for (ShapeOperations s : shapes) {
+      double t = s.getDisappearTime();
       if (t > result) {
         result = t;
       }
@@ -206,10 +209,10 @@ public class AnimatorModel implements IAnimatorOperations {
    * @param name  The name of the desired shape
    * @return      The desired shape
    */
-  private IShape getShape(String name) {
-    for (IShape s : shapes) {
+  private IShape getShapeWithName(String name) {
+    for (ShapeOperations s : shapes) {
       if (s.getName().equals(name)) {
-        return s;
+        return (IShape) s;
       }
     }
     throw new IllegalArgumentException("No shape found with that name.");
@@ -224,7 +227,8 @@ public class AnimatorModel implements IAnimatorOperations {
    * @return          True if there is a conflict, false otherwise
    */
   private boolean checkDuration(ActionType at, String shapeName, IPosn duration) {
-    for (IAction a : actions) {
+    for (AnimationOperations an : actions) {
+      IAction a = (IAction) an;
       if (a.getType() == at && a.getShapeName().equals(shapeName)) {
         // If the start or end of the given duration is within the duration of the action in the
         // model
@@ -236,5 +240,57 @@ public class AnimatorModel implements IAnimatorOperations {
       }
     }
     return false;
+  }
+
+  //================================================================================================
+
+  @Override
+  public void addAnimation(String shapeName, AnimationOperations anim) {
+    anim.setShapeToBeAnimated(shapeName);
+    actions.add(anim);
+  }
+
+  @Override
+  public void removeAnimation(String shapeName, AnimationOperations anim) {
+    // unsupported
+  }
+
+  @Override
+  public void addShape(ShapeOperations s) {
+    shapes.add(s);
+  }
+
+  @Override
+  public void addShape(ShapeOperations s, int position) {
+    shapes.add(position, s);
+  }
+
+  @Override
+  public void removeShape(String name) {
+    for (ShapeOperations s : shapes) {
+      if (s.getName().equals(name)) {
+        shapes.remove(s);
+      }
+    }
+  }
+
+  @Override
+  public ShapeOperations getShape(String name) {
+    return getShapeWithName(name);
+  }
+
+  @Override
+  public boolean contains(String name) {
+    for (ShapeOperations s : shapes) {
+      if (s.getName().equals(name)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @Override
+  public ArrayList<ShapeOperations> getState() {
+    return shapes;
   }
 }

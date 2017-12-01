@@ -3,8 +3,7 @@ package cs3500.animator.model.shapes;
 import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.IPosn;
-import cs3500.animator.model.misc.MyColor;
-import cs3500.animator.model.misc.Posn;
+import cs3500.animator.provider.model.AnimationOperations;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -101,7 +100,7 @@ public abstract class ReadOnlyShape implements IShape {
   }
 
   @Override
-  public ArrayList<IAction> getActions() {
+  public ArrayList<AnimationOperations> getActions() {
     return shape.getActions();
   }
 

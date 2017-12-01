@@ -8,12 +8,15 @@ import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.model.actions.ActionType;
+import cs3500.animator.provider.model.AnimationOperations;
+import cs3500.animator.provider.model.AnimatorModelOperations;
+import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.view.TweenModelBuilder;
 
 /**
  * Details the operations that any Animator model implementing this interface must provide.
  */
-public interface IAnimatorOperations {
+public interface IAnimatorOperations extends AnimatorModelOperations {
 
   /**
    * Creates a new shape and adds it to the model.
@@ -61,14 +64,14 @@ public interface IAnimatorOperations {
    *
    * @return  An ArrayList of the shapes
    */
-  ArrayList<IShape> getShapes();
+  ArrayList<ShapeOperations> getShapes();
 
   /**
    * Returns the actions in this model.
    *
    * @return  An ArrayList of the models
    */
-  ArrayList<IAction> getActions();
+  ArrayList<AnimationOperations> getActions();
 
   /**
    * Returns the time that the animation ends.

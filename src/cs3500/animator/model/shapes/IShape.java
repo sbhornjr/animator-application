@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.IPosn;
+import cs3500.animator.provider.model.AnimationOperations;
+import cs3500.animator.provider.model.ShapeOperations;
 
 /**
  * Details the methods that a shape in the animator must use.
  */
-public interface IShape {
+public interface IShape extends ShapeOperations {
 
   /**
    * Gets this shape's name.
@@ -18,6 +20,13 @@ public interface IShape {
    * @return  The name
    */
   String getName();
+
+  /**
+   * Sets this shape's name to the given one.
+   *
+   * @param newName the name
+   */
+  void setName(String newName);
 
   /**
    * Gets this shape's x-coordinate.
@@ -122,7 +131,7 @@ public interface IShape {
    *
    * @return  The list of actions.
    */
-  ArrayList<IAction> getActions();
+  ArrayList<AnimationOperations> getActions();
 
   /**
    * Returns this shape's color with rgb components as ints instead of floats.
