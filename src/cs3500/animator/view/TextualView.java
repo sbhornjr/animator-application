@@ -47,7 +47,7 @@ public class TextualView implements IAnimationView {
       IShape curr = (IShape) shapes.get(i);
       s += "Name: " + curr.getName() + "\n";
       s += "Type: " + curr.getType().toString().toLowerCase() + "\n";
-      s += curr.getPosLocation() + ": " + "(" + (double) curr.getX()
+      s += curr.getPosLocation() + ": (" + (double) curr.getX()
               + "," + (double) curr.getY() + ")" + ", ";
       String[] wl = curr.getWLTypes();
       s += wl[0] + ": " + (double) curr.getWidth() + ", "
@@ -64,7 +64,7 @@ public class TextualView implements IAnimationView {
       String str = curr.getDescription();
       s += str;
       s += "from t=" + curr.getDuration().getX() / speed + "s to t="
-              + curr.getDuration().getY() / speed + "s";
+              + curr.getDuration().getDoubleY() / speed + "s";
     }
     try {
       ap.append(s);

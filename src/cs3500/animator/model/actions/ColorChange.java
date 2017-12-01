@@ -1,6 +1,5 @@
 package cs3500.animator.model.actions;
 
-import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.shapes.IShape;
@@ -34,7 +33,7 @@ public class ColorChange implements IAction, IColorAnimation {
     this.newColor = newColor;
     type = ActionType.COLOR_CHANGE;
 
-    if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getY()) {
+    if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getDoubleY()) {
       this.duration = duration;
     }
     else {
@@ -46,7 +45,7 @@ public class ColorChange implements IAction, IColorAnimation {
   @Override
   public void execute(double time) {
     float ta = (float) duration.getX();
-    float tb = (float) duration.getY();
+    float tb = (float) duration.getDoubleY();
     float t = (float) time;
     float[] oldRGB = new float[3];
     float[] newRGB = new float[3];
@@ -96,7 +95,7 @@ public class ColorChange implements IAction, IColorAnimation {
     String str = "";
     str += "    <animate attributeType=\"xml\" begin=\""
             + (int) ((this.duration.getX() / speed) * 1000) + "ms\" dur=\""
-            + (int) (((this.duration.getY() - this.duration.getX()) / speed) * 1000)
+            + (int) (((this.duration.getDoubleY() - this.duration.getX()) / speed) * 1000)
             + "ms\" attributeName=\"fill\" from=\"rgb" + this.oldColor.asInt() + "\" to=\"rgb"
             + this.newColor.asInt() + "\" fill=\"freeze\" />\n";
     return str;
@@ -117,7 +116,7 @@ public class ColorChange implements IAction, IColorAnimation {
 
   @Override
   public float getToTime() {
-    return (float) duration.getY();
+    return (float) duration.getDoubleY();
   }
 
   @Override

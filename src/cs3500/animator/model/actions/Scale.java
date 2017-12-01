@@ -33,7 +33,7 @@ public class Scale implements IAction, IScaleAnimation {
     this.newDimensions = newDimensions;
     this.type = ActionType.SCALE;
 
-    if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getY()) {
+    if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getDoubleY()) {
       this.duration = duration;
     }
     else {
@@ -45,14 +45,14 @@ public class Scale implements IAction, IScaleAnimation {
   @Override
   public void execute(double t) {
     double ta = duration.getX();
-    double tb = duration.getY();
+    double tb = duration.getDoubleY();
 
     double a = oldDimensions.getX();
     double b = newDimensions.getX();
     double ftWidth = a * ((tb - t) / (tb - ta)) + b * ((t - ta) / (tb - ta));
 
-    a = oldDimensions.getY();
-    b = newDimensions.getY();
+    a = oldDimensions.getDoubleY();
+    b = newDimensions.getDoubleY();
     int ftHeight = (int) (a * ((tb - t) / (tb - ta)) + b * ((t - ta) / (tb - ta)));
 
     s.setDimensions(new Posn(ftWidth, ftHeight));
@@ -78,9 +78,9 @@ public class Scale implements IAction, IScaleAnimation {
     String str = "";
     String[] wl = s.getWLTypes();
     str += "scales from " + wl[0] + ": " + oldDimensions.getX() + ", "
-            + wl[1] + ": " + oldDimensions.getY() + " to ";
+            + wl[1] + ": " + oldDimensions.getDoubleY() + " to ";
     str += wl[0] + ": " + newDimensions.getX() + ", "
-            + wl[1] + ": " + newDimensions.getY() + " ";
+            + wl[1] + ": " + newDimensions.getDoubleY() + " ";
     return str;
   }
 
@@ -90,14 +90,14 @@ public class Scale implements IAction, IScaleAnimation {
     if (this.oldDimensions.getIntX() != this.newDimensions.getIntX()) {
       str += "    <animate attributeType=\"xml\" begin=\""
               + (int) ((this.duration.getX() / speed) * 1000) + "ms\" dur=\""
-              + (int) (((this.duration.getY() - this.duration.getX()) / speed) * 1000)
+              + (int) (((this.duration.getDoubleY() - this.duration.getX()) / speed) * 1000)
               + "ms\" attributeName=\"width\" from=\"" + this.oldDimensions.getIntX() + "\" to=\""
               + this.newDimensions.getIntX() + "\" fill=\"freeze\" />\n";
     }
     if (this.oldDimensions.getIntY() != this.newDimensions.getIntY()) {
       str += "    <animate attributeType=\"xml\" begin=\""
               + (int) ((this.duration.getX() / speed) * 1000) + "ms\" dur=\""
-              + (int) (((this.duration.getY() - this.duration.getX()) / speed) * 1000)
+              + (int) (((this.duration.getDoubleY() - this.duration.getX()) / speed) * 1000)
               + "ms\" attributeName=\"height\" from=\"" + this.oldDimensions.getIntY() + "\" to=\""
               + this.newDimensions.getIntY() + "\" fill=\"freeze\" />\n";
     }
@@ -120,7 +120,7 @@ public class Scale implements IAction, IScaleAnimation {
 
   @Override
   public float getToTime() {
-    return (float) duration.getY();
+    return (float) duration.getDoubleY();
   }
 
   @Override

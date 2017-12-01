@@ -76,7 +76,7 @@ public class AnimatorModel implements IAnimatorOperations {
   @Override
   public void executeAction(int actionIndex, double time) {
     IAction a = (IAction) actions.get(actionIndex);
-    if (time >= a.getDuration().getX() && time <= a.getDuration().getY()) {
+    if (time >= a.getDuration().getX() && time <= a.getDuration().getDoubleY()) {
       a.execute(time);
     }
   }
@@ -108,7 +108,7 @@ public class AnimatorModel implements IAnimatorOperations {
       s += "Shape " + curr.getShapeName() + " ";
       String str = curr.getDescription();
       s += str;
-      s += "from t=" + curr.getDuration().getX() + " to t=" + curr.getDuration().getY();
+      s += "from t=" + curr.getDuration().getX() + " to t=" + curr.getDuration().getDoubleY();
     }
     return s;
   }
@@ -232,9 +232,9 @@ public class AnimatorModel implements IAnimatorOperations {
       if (a.getType() == at && a.getShapeName().equals(shapeName)) {
         // If the start or end of the given duration is within the duration of the action in the
         // model
-        if (duration.getX() > a.getDuration().getX() && duration.getX() < a.getDuration().getY()
+        if (duration.getX() > a.getDuration().getX() && duration.getX() < a.getDuration().getDoubleY()
                 || duration.getX() > a.getDuration().getX() && duration.getX() < a.getDuration()
-                .getY()) {
+                .getDoubleY()) {
           return true;
         }
       }

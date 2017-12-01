@@ -1,6 +1,6 @@
 package cs3500.animator.model.misc;
 
-public interface IPosn {
+public interface IPosn extends cs3500.animator.provider.model.IPosn {
 
   /**
    * Changes the coordinates of this Posn based on the factors in the given Posn.
@@ -14,14 +14,14 @@ public interface IPosn {
    *
    * @return  The number
    */
-  double getX();
+  double getDoubleX();
 
   /**
    * Returns this Posn's second number.
    *
    * @return  The number
    */
-  double getY();
+  double getDoubleY();
 
   /**
    * Returns this Posn's first number as an int.

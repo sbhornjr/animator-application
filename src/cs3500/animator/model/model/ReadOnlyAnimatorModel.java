@@ -4,8 +4,6 @@ import cs3500.animator.model.actions.ActionType;
 import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.IPosn;
-import cs3500.animator.model.misc.MyColor;
-import cs3500.animator.model.misc.Posn;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.model.shapes.MyRectangle;
 import cs3500.animator.model.shapes.MyOval;
@@ -61,7 +59,7 @@ public class ReadOnlyAnimatorModel implements IAnimatorOperations {
   @Override
   public void executeAction(int actionIndex, double time) {
     IAction a = getActions().get(actionIndex);
-    if (time >= a.getDuration().getX() && time <= a.getDuration().getY()) {
+    if (time >= a.getDuration().getX() && time <= a.getDuration().getDoubleY()) {
       a.execute(time);
     }
   }

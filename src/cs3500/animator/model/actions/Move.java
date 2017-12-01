@@ -33,7 +33,7 @@ public class Move implements IAction, IMoveAnimation {
     this.newLocation = newLocation;
     type = ActionType.MOVE;
 
-    if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getY()) {
+    if (s.getAppear() <= duration.getX() && s.getDisappear() >= duration.getDoubleY()) {
       this.duration = duration;
     }
     else {
@@ -45,14 +45,14 @@ public class Move implements IAction, IMoveAnimation {
   @Override
   public void execute(double t) {
     double ta = duration.getX();
-    double tb = duration.getY();
+    double tb = duration.getDoubleY();
 
     double a = oldLocation.getX();
     double b = newLocation.getX();
     int ftX = (int) (a * ((tb - t) / (tb - ta)) + b * ((t - ta) / (tb - ta)));
 
-    a = oldLocation.getY();
-    b = newLocation.getY();
+    a = oldLocation.getDoubleY();
+    b = newLocation.getDoubleY();
     int ftY = (int) (a * ((tb - t) / (tb - ta)) + b * ((t - ta) / (tb - ta)));
 
     ((IShape) s).setLocation(new Posn(ftX, ftY));
@@ -86,14 +86,14 @@ public class Move implements IAction, IMoveAnimation {
     if (this.oldLocation.getIntX() != this.newLocation.getIntX()) {
       str += "    <animate attributeType=\"xml\" begin=\""
               + (int) ((this.duration.getX() / speed) * 1000) + "ms\" dur=\""
-              + (int) (((this.duration.getY() - this.duration.getX()) / speed) * 1000)
+              + (int) (((this.duration.getDoubleY() - this.duration.getX()) / speed) * 1000)
               + "ms\" attributeName=\"x\" from=\"" + this.oldLocation.getIntX() + "\" to=\""
               + this.newLocation.getIntX() + "\" fill=\"freeze\" />\n";
     }
     if (this.oldLocation.getIntY() != this.newLocation.getIntY()) {
       str += "    <animate attributeType=\"xml\" begin=\""
               + (int) ((this.duration.getX() / speed) * 1000) + "ms\" dur=\""
-              + (int) (((this.duration.getY() - this.duration.getX()) / speed) * 1000)
+              + (int) (((this.duration.getDoubleY() - this.duration.getX()) / speed) * 1000)
               + "ms\" attributeName=\"y\" from=\"" + this.oldLocation.getIntY() + "\" to=\""
               + this.newLocation.getIntY() + "\" fill=\"freeze\" />\n";
     }
@@ -116,7 +116,7 @@ public class Move implements IAction, IMoveAnimation {
 
   @Override
   public float getToTime() {
-    return (float) duration.getY();
+    return (float) duration.getDoubleY();
   }
 
   @Override
