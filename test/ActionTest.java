@@ -18,7 +18,7 @@ public class ActionTest {
           new MyColor(1,0,0), new Posn(30, 60));
   Move m = new Move(c, new Posn(c.getX(), c.getY()), new Posn(100, 200),
           new Posn(40, 50));
-  ColorChange cc = new ColorChange(c, c.getColor(), new MyColor(1,1,0),
+  ColorChange cc = new ColorChange(c, (MyColor) c.getColor(), new MyColor(1,1,0),
           new Posn(30, 40));
   Scale s = new Scale(c, new Posn(c.getWidth(), c.getHeight()), new Posn(100, 100),
           new Posn(50, 60));
@@ -50,3 +50,4 @@ public class ActionTest {
     assertEquals(true, c.getWidth() == 75 && c.getHeight() == 100);
   }
 }
+

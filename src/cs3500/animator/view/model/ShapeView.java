@@ -1,8 +1,9 @@
 package cs3500.animator.view.model;
 
+import cs3500.animator.model.misc.Posn;
 import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.IDimension;
-import cs3500.animator.provider.model.IProviderPosn;
+import cs3500.animator.provider.model.IPosn;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.model.AnimationViewOperations;
 import cs3500.animator.provider.view.model.ShapeViewOperations;
@@ -51,7 +52,7 @@ public abstract class ShapeView implements ShapeViewOperations {
   }
 
   @Override
-  public void changePosition(IProviderPosn fromPosn, IProviderPosn toPosn, float from, float to, float currentTime) {
+  public void changePosition(IPosn fromPosn, IPosn toPosn, float from, float to, float currentTime) {
     shape.changePosition(fromPosn, toPosn, from, to, currentTime);
   }
 
@@ -76,13 +77,13 @@ public abstract class ShapeView implements ShapeViewOperations {
   }
 
   @Override
-  public IProviderPosn getPosition() {
-    return getPosition();
+  public IPosn getPosition() {
+    return shape.getPosition();
   }
 
   @Override
   public Color getColor() {
-    return getColor();
+    return shape.getColor();
   }
 
   @Override

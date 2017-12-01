@@ -10,7 +10,7 @@ import cs3500.animator.model.actions.Scale;
 import cs3500.animator.model.misc.Dimension;
 import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.MyColor;
-import cs3500.animator.model.misc.ProviderPosn;
+import cs3500.animator.model.misc.Posn;
 import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.IDimension;
 import cs3500.animator.provider.model.IPosn;
@@ -232,8 +232,8 @@ public abstract class Shape implements IShape {
   @Override
   public ArrayList<IDimension> getDimensions() {
     ArrayList<IDimension> result = new ArrayList<>();
-    result.add(new Dimension("width", (float) dimensions.getX()));
-    result.add(new Dimension("height", (float) dimensions.getY()));
+    result.add(new Dimension("width", dimensions.getX()));
+    result.add(new Dimension("height", dimensions.getY()));
     return result;
   }
 
@@ -244,17 +244,17 @@ public abstract class Shape implements IShape {
 
   @Override
   public IPosn getPosition() {
-    return new ProviderPosn((float) location.getX(), (float) location.getY());
+    return new Posn(location.getX(), location.getY());
   }
 
   @Override
   public float getAppearTime() {
-    return (float) lifetime.getX();
+    return lifetime.getX();
   }
 
   @Override
   public float getDisappearTime() {
-    return (float) lifetime.getY();
+    return lifetime.getY();
   }
 
   @Override

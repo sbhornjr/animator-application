@@ -93,4 +93,14 @@ public class ColorChangeView implements AnimationViewOperations {
   public void setShapeToBeAnimated(String shapeName) {
     colChange.setShapeToBeAnimated(shapeName);
   }
+
+  @Override
+  public String toString() {
+    String s = "";
+    s += "Shape " + colChange.getShapeName() + " ";
+    String str = colChange.getDescription();
+    s += str;
+    s += "from t=" + colChange.getDuration().getX() + " to t=" + colChange.getDuration().getDoubleY();
+    return s;
+  }
 }
