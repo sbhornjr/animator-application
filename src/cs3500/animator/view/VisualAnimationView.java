@@ -96,7 +96,8 @@ public class VisualAnimationView extends JFrame implements IAnimationView, Actio
     public void paintComponent(Graphics g) {
       super.paintComponent(g);
 
-      for (IShape s : model.getShapes()) {
+      for (ShapeOperations sh : model.getShapes()) {
+        IShape s = (IShape) sh;
         if (s.isVisible()) {
           if (s.getType() == ShapeType.RECTANGLE) {
             g.setColor(s.getColor());
