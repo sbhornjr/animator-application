@@ -7,7 +7,9 @@ import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.model.shapes.ShapeType;
+import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.ShapeOperations;
+import cs3500.animator.provider.view.model.AnimationViewOperations;
 
 public class SVGAnimationView implements IAnimationView {
   private Appendable ap;
@@ -33,13 +35,14 @@ public class SVGAnimationView implements IAnimationView {
    * Displays an animation an formatted SVG text.
    */
   public void display() {
-    ArrayList<IShape> shapes = model.getShapes();
+    ArrayList<ShapeOperations> shapes = model.getShapes();
     String s = "";
 
     s += "<svg width=\"" + SVG_WIDTH + "\" height=\"" + SVG_HEIGHT
             + "\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n\n";
 
-    for (IShape sh : shapes) {
+    for (ShapeOperations sOp : shapes) {
+      IShape sh = (IShape) sOp;
       if (sh.getType() == ShapeType.RECTANGLE) {
         s += "<rect id=\"" + sh.getName() + "\" x=\"" + sh.getX() + "\" y=\"" + sh.getY()
                 + "\" width=\"" + sh.getWidth() + "\" height=\"" + sh.getHeight()
@@ -87,7 +90,8 @@ public class SVGAnimationView implements IAnimationView {
    */
   private String actionsAsString(IShape sh) {
     String s = "";
-    for (IAction a : sh.getActions()) {
+    for (AnimationOperations ao : sh.getActions()) {
+      IAction a = (IAction) ao;
       s += a.getSVGDescription(speed);
     }
     return s;

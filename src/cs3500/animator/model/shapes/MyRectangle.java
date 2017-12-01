@@ -3,6 +3,7 @@ package cs3500.animator.model.shapes;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.misc.Posn;
 import cs3500.animator.provider.model.ShapeOperations;
+import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
 /**
  * Represents a rectangle in an animation.
@@ -32,5 +33,10 @@ public class MyRectangle extends Shape implements cs3500.animator.model.shapes.I
   @Override
   public ShapeOperations makeClone() {
     return new MyRectangle(name, location, dimensions, color, lifetime);
+  }
+
+  @Override
+  public <T> T accept(ShapeVisitor<T> v) {
+    return v.visit(this);
   }
 }

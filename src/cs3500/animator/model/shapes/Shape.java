@@ -15,7 +15,6 @@ import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.IDimension;
 import cs3500.animator.provider.model.IPosn;
 import cs3500.animator.provider.model.ShapeOperations;
-import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
 /**
  * Represents a polygon in an animation.
@@ -289,11 +288,6 @@ public abstract class Shape implements IShape {
   @Override
   public ShapeOperations makeClone() {
     throw new UnsupportedOperationException("Shapes cannot be initialized.");
-  }
-
-  @Override
-  public <T> T accept(ShapeVisitor<T> v) {
-    TODO
   }
 
   @Override

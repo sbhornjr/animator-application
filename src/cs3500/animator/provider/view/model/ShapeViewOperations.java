@@ -1,6 +1,7 @@
-package cs3500.animator.provider.view;
+package cs3500.animator.provider.view.model;
 
 import cs3500.animator.provider.model.ShapeOperations;
+import cs3500.animator.provider.view.model.AnimationViewOperations;
 
 import java.awt.Graphics;
 import java.util.ArrayList;

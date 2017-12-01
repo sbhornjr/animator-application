@@ -4,18 +4,19 @@ import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.Posn;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.provider.model.AnimationOperations;
+import cs3500.animator.provider.model.IMoveAnimation;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.visitors.AnimationVisitor;
 
 /**
  * Represents a move applied to a shape in the animator.
  */
-public class Move implements IAction {
+public class Move implements IAction, IMoveAnimation {
 
   private IShape s;
   private Posn oldLocation;
   private Posn newLocation;
-  private IPosn duration;
+  private Posn duration;
   private final ActionType type;
 
   /**
@@ -58,7 +59,7 @@ public class Move implements IAction {
   }
 
   @Override
-  public IPosn getDuration() {
+  public Posn getDuration() {
     return this.duration;
   }
 
@@ -120,7 +121,7 @@ public class Move implements IAction {
 
   @Override
   public <T> T accept(AnimationVisitor<T> v) {
-    TODO
+    return v.visit(this);
   }
 
   @Override

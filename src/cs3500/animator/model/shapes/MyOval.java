@@ -41,4 +41,10 @@ public class MyOval extends Shape implements cs3500.animator.model.shapes.IOval 
   public ShapeOperations makeClone() {
     return new MyOval(name, location, dimensions, color, lifetime);
   }
+
+
+  @Override
+  public <T> T accept(ShapeVisitor<T> v) {
+    return v.visit(this);
+  }
 }

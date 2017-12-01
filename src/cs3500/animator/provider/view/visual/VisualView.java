@@ -13,8 +13,8 @@ import javax.swing.Timer;
 
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.AbstractView;
-import cs3500.animator.provider.view.AnimationViewOperations;
-import cs3500.animator.provider.view.ShapeViewOperations;
+import cs3500.animator.provider.view.model.AnimationViewOperations;
+import cs3500.animator.provider.view.model.ShapeViewOperations;
 import cs3500.animator.provider.view.visitors.AnimationVisitor;
 import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
