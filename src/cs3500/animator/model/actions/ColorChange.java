@@ -1,5 +1,7 @@
 package cs3500.animator.model.actions;
 
+import java.util.Arrays;
+
 import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.shapes.IShape;
@@ -44,8 +46,8 @@ public class ColorChange implements IAction, IColorAnimation {
 
   @Override
   public void execute(double time) {
-    float ta = (float) duration.getX();
-    float tb = (float) duration.getDoubleY();
+    float ta = duration.getX();
+    float tb = duration.getY();
     float t = (float) time;
     float[] oldRGB = new float[3];
     float[] newRGB = new float[3];
@@ -106,7 +108,9 @@ public class ColorChange implements IAction, IColorAnimation {
   @Override
   public void animate(ShapeOperations shapeToBeChanged, float currentTime) {
     s = (IShape) shapeToBeChanged;
-    execute(currentTime);
+    if (currentTime >= getDuration().getDoubleX() && currentTime <= getDuration().getDoubleY()) {
+      execute(currentTime);
+    }
   }
 
   @Override

@@ -31,13 +31,19 @@ public class InteractiveAnimationController implements IAnimationController,
    * @param view  The view.
    */
   public InteractiveAnimationController(AnimatorModelOperations model, InteractiveViewOperations view, int speed) {
+    view.setActionListener(this);
     this.theirView = view;
-    this.theirView.setActionListener(this);
-    this.ourView = (IInteractiveView) view;
-    this.ourView.setActionListener(this);
+
     this.model = model;
     this.fw = null;
     this.tempo = speed;
+
+    try {
+      this.ourView = (IInteractiveView) view;
+    } catch (ClassCastException e) {
+      // the given view is a provider hybrid view
+      startAnimator(tempo);
+    }
   }
 
   @Override
@@ -87,6 +93,7 @@ public class InteractiveAnimationController implements IAnimationController,
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    System.out.println(e.getActionCommand());
     switch (e.getActionCommand()) {
       case "START":
         start();
@@ -139,7 +146,7 @@ public class InteractiveAnimationController implements IAnimationController,
 
   @Override
   public void pPlay() {
-    theirView.playAnimation(tempo, model.getState());
+    theirView.play();
   }
 
   @Override

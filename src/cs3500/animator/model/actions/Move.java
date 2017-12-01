@@ -106,7 +106,9 @@ public class Move implements IAction, IMoveAnimation {
   @Override
   public void animate(ShapeOperations shapeToBeChanged, float currentTime) {
     s = (IShape) shapeToBeChanged;
-    execute(currentTime);
+    if (currentTime >= getDuration().getDoubleX() && currentTime <= getDuration().getDoubleY()) {
+      execute(currentTime);
+    }
   }
 
   @Override

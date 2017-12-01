@@ -108,7 +108,7 @@ public class VisualView extends AbstractView {
   @Override
   public void playAnimation(int tempo, ArrayList<ShapeOperations> state) {
     this.tempo = tempo;
-    tm.setDelay(00 / tempo);
+    tm.setDelay(500 / tempo);
     this.initializeState(state);
     ticks = 0;
     tm.start();

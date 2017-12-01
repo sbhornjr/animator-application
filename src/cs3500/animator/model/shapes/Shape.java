@@ -197,36 +197,26 @@ public abstract class Shape implements IShape {
 
   @Override
   public void changeColor(Color fromColor, Color toColor, float from, float to, float currentTime) {
-    ColorChange cc = new ColorChange(this, (MyColor) fromColor, (MyColor) toColor,
-            new Posn(from, to));
-    cc.execute(currentTime);
-    actions.add(cc);
+    // not used
   }
 
   @Override
   public void changeAngle(float fromAngle, float toAngle, float from, float to, float currentTime) {
-    throw new UnsupportedOperationException();
+    // not used
   }
 
   @Override
   public void changePosition(IPosn fromPosn,
                              IPosn toPosn, float from, float to,
                              float currentTime) {
-    Move m = new Move(this, (Posn) fromPosn, (Posn) toPosn, new Posn(from, to));
-    m.execute(currentTime);
-    actions.add(m);
+    // not used
   }
 
   @Override
   public void changeDimension(ArrayList<IDimension> fromDimension,
                               ArrayList<IDimension> toDimension, float from, float to,
                               float currentTime) {
-    Scale s = new Scale(this,
-            new Posn(fromDimension.get(0).getValue(), fromDimension.get(1).getValue()),
-            new Posn(fromDimension.get(0).getValue(), fromDimension.get(1).getValue()),
-            new Posn(from, to));
-    s.execute(currentTime);
-    actions.add(s);
+    // not used
   }
 
   @Override

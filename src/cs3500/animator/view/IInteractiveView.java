@@ -1,8 +1,5 @@
 package cs3500.animator.view;
 
-import cs3500.animator.controller.ButtonListener;
-import cs3500.animator.controller.ComboBoxListener;
-import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.provider.view.visual.InteractiveViewOperations;
 
