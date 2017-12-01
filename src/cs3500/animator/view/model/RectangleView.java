@@ -29,14 +29,14 @@ public class RectangleView extends ShapeView {
   @Override
   public String printAsSVG(int tempo, boolean loop) {
     MyColor color = (MyColor) getColor();
-    String s = "";
+    String s = "\n";
     s += "<rect id=\"" + getName() + "\" x=\"" + getPosition().getX() + "\" y=\"" + getPosition().getY()
             + "\" width=\"" + getDimensions().get(0).getValue() + "\" height=\"" + getDimensions().get(1).getValue()
-            + "\" fill=\"rgb" + color + "\" visibility=\"visible\" >\n";
+            + "\" fill=\"rgb" + color.asInt() + "\" visibility=\"visible\" >\n";
     for (AnimationViewOperations avo : animations) {
       s += avo.printAsSVG(tempo, loop);
     }
-    s += "</rect>\n\n";
+    s += "</rect>\n";
     return s;
   }
 

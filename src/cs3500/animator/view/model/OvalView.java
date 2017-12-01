@@ -29,10 +29,10 @@ public class OvalView extends ShapeView {
   @Override
   public String printAsSVG(int tempo, boolean loop) {
     MyColor color = (MyColor) getColor();
-    String s = "";
+    String s = "\n";
     s += "<ellipse id=\"" + getName() + "\" cx=\"" + getPosition().getX() + "\" cy=\"" + getPosition().getY()
             + "\" rx=\"" + getDimensions().get(0).getValue() + "\" ry=\"" + getDimensions().get(1).getValue()
-            + "\" fill=\"rgb" + color + "\" visibility=\"visible\" >\n";
+            + "\" fill=\"rgb" + color.asInt() + "\" visibility=\"visible\" >\n";
     for (AnimationViewOperations avo : animations) {
       s += avo.printAsSVG(tempo, loop);
     }
@@ -40,7 +40,7 @@ public class OvalView extends ShapeView {
     s = s.replace("\"y\"", "\"cy\"");
     s = s.replace("\"width\"", "\"rx\"");
     s = s.replace("\"height\"", "\"ry\"");
-    s += "</ellipse>\n\n";
+    s += "</ellipse>\n";
     return s;
   }
 
