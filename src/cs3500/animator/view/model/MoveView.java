@@ -1,5 +1,6 @@
 package cs3500.animator.view.model;
 
+import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.actions.Move;
 import cs3500.animator.model.misc.Posn;
 import cs3500.animator.provider.model.AnimationOperations;
@@ -98,5 +99,15 @@ public class MoveView implements AnimationViewOperations {
   @Override
   public void setShapeToBeAnimated(String shapeName) {
     move.setShapeToBeAnimated(shapeName);
+  }
+
+  @Override
+  public String toString() {
+    String s = "";
+    s += "Shape " + move.getShapeName() + " ";
+    String str = move.getDescription();
+    s += str;
+    s += "from t=" + move.getDuration().getX() + " to t=" + move.getDuration().getDoubleY();
+    return s;
   }
 }

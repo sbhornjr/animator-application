@@ -3,8 +3,11 @@ import cs3500.animator.controller.InteractiveAnimationController;
 import cs3500.animator.controller.ButtonListener;
 import cs3500.animator.controller.TextFieldListener;
 import cs3500.animator.controller.ComboBoxListener;
+import cs3500.animator.model.model.AnimatorModel;
+import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.view.IInteractiveView;
 
+import cs3500.animator.view.TestInteractiveView;
 import org.junit.Test;
 
 import javax.swing.JButton;
@@ -22,7 +25,8 @@ import static org.junit.Assert.assertEquals;
 public class ControllerTest {
   StringBuffer ap = new StringBuffer();
   IInteractiveView view = new TestInteractiveView(ap);
-  IInteractiveAnimationController controller = new InteractiveAnimationController(view);
+  IAnimatorOperations model = new AnimatorModel();
+  IInteractiveAnimationController controller = new InteractiveAnimationController(model, view);
   ButtonListener bl = new ButtonListener(controller);
   TextFieldListener tfl = new TextFieldListener(controller);
   ComboBoxListener cbl = new ComboBoxListener(controller);

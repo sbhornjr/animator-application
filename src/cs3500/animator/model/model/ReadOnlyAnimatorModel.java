@@ -10,6 +10,8 @@ import cs3500.animator.model.shapes.MyOval;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.model.shapes.ReadOnlyRectangle;
 import cs3500.animator.model.shapes.ReadOnlyOval;
+import cs3500.animator.provider.model.AnimationOperations;
+import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.view.TweenModelBuilder;
 
 import java.util.ArrayList;
@@ -29,10 +31,16 @@ public class ReadOnlyAnimatorModel implements IAnimatorOperations {
    */
   public ReadOnlyAnimatorModel(IAnimatorOperations model) {
     this.model = model;
-    this.actions = model.getActions();
+    this.actions = new ArrayList<>();
+    for (AnimationOperations ao : model.getActions()) {
+      actions.add((IAction) ao);
+    }
     this.shapes = new ArrayList<>();
 
-    ArrayList<IShape> oldShapes = model.getShapes();
+    ArrayList<IShape> oldShapes = new ArrayList<>();
+    for (ShapeOperations so : model.getShapes()) {
+      oldShapes.add((IShape) so);
+    }
 
     for (IShape sh : oldShapes) {
       if (sh instanceof MyRectangle) {
@@ -58,7 +66,7 @@ public class ReadOnlyAnimatorModel implements IAnimatorOperations {
 
   @Override
   public void executeAction(int actionIndex, double time) {
-    IAction a = getActions().get(actionIndex);
+    IAction a = actions.get(actionIndex);
     if (time >= a.getDuration().getX() && time <= a.getDuration().getDoubleY()) {
       a.execute(time);
     }
@@ -70,13 +78,21 @@ public class ReadOnlyAnimatorModel implements IAnimatorOperations {
   }
 
   @Override
-  public ArrayList<IShape> getShapes() {
-    return this.shapes;
+  public ArrayList<ShapeOperations> getShapes() {
+    ArrayList<ShapeOperations> al = new ArrayList<>();
+    for (IShape s : shapes) {
+      al.add(s);
+    }
+    return al;
   }
 
   @Override
-  public ArrayList<IAction> getActions() {
-    return this.actions;
+  public ArrayList<AnimationOperations> getActions() {
+    ArrayList<AnimationOperations> al = new ArrayList<>();
+    for (IAction a : actions) {
+      al.add(a);
+    }
+    return al;
   }
 
   @Override
@@ -87,5 +103,47 @@ public class ReadOnlyAnimatorModel implements IAnimatorOperations {
   @Override
   public TweenModelBuilder<IAnimatorOperations> builder() {
     return model.builder();
+  }
+
+  //===================================================================================
+
+  @Override
+  public void addAnimation(String shapeName, AnimationOperations anim) {
+    throw new UnsupportedOperationException("Can't mutate the read-only model");
+  }
+
+  @Override
+  public void removeAnimation(String shapeName, AnimationOperations anim) {
+    throw new UnsupportedOperationException("Can't mutate the read-only model");
+  }
+
+  @Override
+  public void addShape(ShapeOperations s) {
+    throw new UnsupportedOperationException("Can't mutate the read-only model");
+  }
+
+  @Override
+  public void addShape(ShapeOperations s, int position) {
+    throw new UnsupportedOperationException("Can't mutate the read-only model");
+  }
+
+  @Override
+  public void removeShape(String name) {
+    throw new UnsupportedOperationException("Can't mutate the read-only model");
+  }
+
+  @Override
+  public ShapeOperations getShape(String name) {
+    return model.getShape(name);
+  }
+
+  @Override
+  public boolean contains(String name) {
+    return model.contains(name);
+  }
+
+  @Override
+  public ArrayList<ShapeOperations> getState() {
+    return model.getState();
   }
 }

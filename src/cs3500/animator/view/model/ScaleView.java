@@ -101,4 +101,14 @@ public class ScaleView implements AnimationViewOperations {
   public void setShapeToBeAnimated(String shapeName) {
     scale.setShapeToBeAnimated(shapeName);
   }
+
+  @Override
+  public String toString() {
+    String s = "";
+    s += "Shape " + scale.getShapeName() + " ";
+    String str = scale.getDescription();
+    s += str;
+    s += "from t=" + scale.getDuration().getX() + " to t=" + scale.getDuration().getDoubleY();
+    return s;
+  }
 }
