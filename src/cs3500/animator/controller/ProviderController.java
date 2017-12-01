@@ -36,11 +36,23 @@ public interface ProviderController {
    * The provider's svg field has been activated:
    * relay this information to the view.
    */
-  void psvgField();
+  void psvgField(String ofile);
 
   /**
    * The provider's speed functionality has been activated:
    * relay this information to the view.
    */
-  void pSpeed();
+  void pSpeed(int newSpeed);
+
+  /**
+   * The provider's speed up button has been pushed:
+   * relay this information to the view.
+   */
+  void pSpeedUp();
+
+  /**
+   * The provider's slow down button has been pushed:
+   * relay this information to the view.
+   */
+  void pSpeedDown();
 }
