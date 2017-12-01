@@ -1,7 +1,5 @@
 package cs3500.animator.model.misc;
 
-import java.awt.geom.Point2D;
-
 /**
  * Represents a position (x,y).
  * Can also be used to represent other pairs of numbers such as shape dimensions and time durations.
@@ -24,16 +22,16 @@ public class Posn implements IPosn {
   @Override
   public void move(IPosn changeInLocation) {
     this.x += changeInLocation.getX();
-    this.y += changeInLocation.getY();
+    this.y += changeInLocation.getDoubleY();
   }
 
   @Override
-  public double getX() {
+  public double getDoubleX() {
     return this.x;
   }
 
   @Override
-  public double getY() {
+  public double getDoubleY() {
     return this.y;
   }
 
@@ -50,5 +48,15 @@ public class Posn implements IPosn {
   @Override
   public int getIntY() {
     return (int) this.y;
+  }
+
+  @Override
+  public float getX() {
+    return (float) this.x;
+  }
+
+  @Override
+  public float getY() {
+    return (float) this.y;
   }
 }

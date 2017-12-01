@@ -3,7 +3,7 @@ package cs3500.animator.provider.model;
 /**
  * Represents the functionality of a Posn object.
  */
-public interface IProviderPosn {
+public interface IPosn {
 
   /**
    * Gets the x coord of this posn.

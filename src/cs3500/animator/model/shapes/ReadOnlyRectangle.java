@@ -1,5 +1,7 @@
 package cs3500.animator.model.shapes;
 
+import cs3500.animator.provider.view.visitors.ShapeVisitor;
+
 /**
  * A read-only version of the MyRectangle class that cannot be mutated by the view.
  */

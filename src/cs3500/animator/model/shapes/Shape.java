@@ -9,13 +9,11 @@ import cs3500.animator.model.actions.Move;
 import cs3500.animator.model.actions.Scale;
 import cs3500.animator.model.misc.Dimension;
 import cs3500.animator.model.misc.IMyColor;
-import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
-import cs3500.animator.model.misc.Posn;
 import cs3500.animator.model.misc.ProviderPosn;
 import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.IDimension;
-import cs3500.animator.provider.model.IProviderPosn;
+import cs3500.animator.provider.model.IPosn;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
@@ -115,12 +113,12 @@ public abstract class Shape implements IShape {
   }
 
   @Override
-  public void setLocation(IPosn newLocation) {
+  public void setLocation(cs3500.animator.model.misc.IPosn newLocation) {
     location = (Posn) newLocation;
   }
 
   @Override
-  public void setDimensions(IPosn newDimensions) {
+  public void setDimensions(cs3500.animator.model.misc.IPosn newDimensions) {
     dimensions = (Posn) newDimensions;
   }
 
@@ -212,8 +210,8 @@ public abstract class Shape implements IShape {
   }
 
   @Override
-  public void changePosition(IProviderPosn fromPosn,
-                             IProviderPosn toPosn, float from, float to,
+  public void changePosition(IPosn fromPosn,
+                             IPosn toPosn, float from, float to,
                              float currentTime) {
     Move m = new Move(this, (Posn) fromPosn, (Posn) toPosn, new Posn(from, to));
     m.execute(currentTime);
@@ -246,7 +244,7 @@ public abstract class Shape implements IShape {
   }
 
   @Override
-  public IProviderPosn getPosition() {
+  public IPosn getPosition() {
     return new ProviderPosn((float) location.getX(), (float) location.getY());
   }
 
