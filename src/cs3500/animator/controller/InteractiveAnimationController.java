@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 import cs3500.animator.model.model.AnimatorModel;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.provider.controller.ControllerOperations;
 import cs3500.animator.provider.model.AnimatorModelOperations;
-import cs3500.animator.provider.view.model.AnimatorViewOperations;
 import cs3500.animator.provider.view.visual.InteractiveViewOperations;
 import cs3500.animator.view.IInteractiveView;
 
@@ -32,7 +32,8 @@ public class InteractiveAnimationController implements IAnimationController,
    * Constructor for the InteractiveAnimationController.
    * @param view  The view.
    */
-  public InteractiveAnimationController(AnimatorModelOperations model, InteractiveViewOperations view, int speed) {
+  public InteractiveAnimationController(AnimatorModelOperations model,
+                                        InteractiveViewOperations view, int speed) {
     view.setActionListener(this);
     this.theirView = view;
 

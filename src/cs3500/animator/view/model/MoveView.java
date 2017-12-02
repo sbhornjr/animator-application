@@ -1,6 +1,5 @@
 package cs3500.animator.view.model;
 
-import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.actions.Move;
 import cs3500.animator.model.misc.Posn;
 import cs3500.animator.provider.model.AnimationOperations;
@@ -87,12 +86,14 @@ public class MoveView implements AnimationViewOperations {
   }
 
   @Override
-  public boolean hasNoConflictsWith(ShapeOperations stateAtFromTime, ShapeOperations stateAtToTime, AnimationOperations a) {
+  public boolean hasNoConflictsWith(ShapeOperations stateAtFromTime, ShapeOperations stateAtToTime,
+                                    AnimationOperations a) {
     return move.hasNoConflictsWith(stateAtFromTime, stateAtToTime, a);
   }
 
   @Override
-  public boolean noConflictsWithHelper(ShapeOperations givenFrom, ShapeOperations givenTo, float givenFromTime, float givenToTime) {
+  public boolean noConflictsWithHelper(ShapeOperations givenFrom, ShapeOperations givenTo,
+                                       float givenFromTime, float givenToTime) {
     return move.noConflictsWithHelper(givenFrom, givenTo, givenFromTime, givenToTime);
   }
 

@@ -1,12 +1,9 @@
 package cs3500.animator.model.shapes;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 
-import cs3500.animator.model.actions.ColorChange;
 import cs3500.animator.model.actions.IAction;
-import cs3500.animator.model.actions.Move;
-import cs3500.animator.model.actions.Scale;
 import cs3500.animator.model.misc.Dimension;
 import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.MyColor;

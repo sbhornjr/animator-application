@@ -1,6 +1,5 @@
 package cs3500.animator.model.actions;
 
-import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.model.misc.Posn;
 import cs3500.animator.provider.model.AnimationOperations;

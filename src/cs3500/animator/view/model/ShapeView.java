@@ -8,7 +8,7 @@ import cs3500.animator.provider.view.model.AnimationViewOperations;
 import cs3500.animator.provider.view.model.ShapeViewOperations;
 import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -29,13 +29,6 @@ public abstract class ShapeView implements ShapeViewOperations {
   }
 
   @Override
-  public void addAnimation(AnimationViewOperations... toBeAdded) {
-    for (AnimationViewOperations avo : toBeAdded) {
-      animations.add(avo);
-    }
-  }
-
-  @Override
   public ArrayList<AnimationViewOperations> getViewAnimations() {
     return animations;
   }
@@ -51,12 +44,15 @@ public abstract class ShapeView implements ShapeViewOperations {
   }
 
   @Override
-  public void changePosition(IPosn fromPosn, IPosn toPosn, float from, float to, float currentTime) {
+  public void changePosition(IPosn fromPosn, IPosn toPosn, float from, float to,
+                             float currentTime) {
     shape.changePosition(fromPosn, toPosn, from, to, currentTime);
   }
 
   @Override
-  public void changeDimension(ArrayList<IDimension> fromDimension, ArrayList<IDimension> toDimension, float from, float to, float currentTime) {
+  public void changeDimension(ArrayList<IDimension> fromDimension,
+                              ArrayList<IDimension> toDimension, float from, float to,
+                              float currentTime) {
     shape.changeDimension(fromDimension, toDimension, from, to, currentTime);
   }
 

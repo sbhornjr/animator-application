@@ -9,7 +9,6 @@ import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.ShapeOperations;
-import cs3500.animator.provider.view.model.AnimationViewOperations;
 
 public class SVGAnimationView implements IAnimationView {
   private Appendable ap;

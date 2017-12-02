@@ -1,16 +1,9 @@
 package cs3500.animator.model.shapes;
 
-import cs3500.animator.model.misc.IMyColor;
-import cs3500.animator.model.misc.IPosn;
 import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.model.misc.Posn;
-import cs3500.animator.provider.model.AnimationOperations;
-import cs3500.animator.provider.model.IDimension;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.visitors.ShapeVisitor;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * Represents an oval in the animator.
