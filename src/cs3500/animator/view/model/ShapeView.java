@@ -1,6 +1,5 @@
 package cs3500.animator.view.model;
 
-import cs3500.animator.model.misc.Posn;
 import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.IDimension;
 import cs3500.animator.provider.model.IPosn;

@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+import cs3500.animator.model.model.AnimatorModel;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.provider.controller.ControllerOperations;
 import cs3500.animator.provider.model.AnimatorModelOperations;
@@ -25,6 +26,7 @@ public class InteractiveAnimationController implements IAnimationController,
   private InteractiveViewOperations theirView;
   private FileWriter fw;
   private int tempo;
+  private AnimatorModelOperations m;
 
   /**
    * Constructor for the InteractiveAnimationController.
@@ -37,6 +39,7 @@ public class InteractiveAnimationController implements IAnimationController,
     this.model = model;
     this.fw = null;
     this.tempo = speed;
+    this.m = new AnimatorModel();
 
     try {
       this.ourView = (IInteractiveView) view;
@@ -93,7 +96,6 @@ public class InteractiveAnimationController implements IAnimationController,
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    System.out.println(e.getActionCommand());
     switch (e.getActionCommand()) {
       case "START":
         start();
@@ -141,6 +143,8 @@ public class InteractiveAnimationController implements IAnimationController,
       case "SLOW DOWN":
         pSpeedDown();
         break;
+      default:
+        pShape(e.getActionCommand());
     }
   }
 
@@ -169,6 +173,7 @@ public class InteractiveAnimationController implements IAnimationController,
     String svg = theirView.getSVG(tempo, model.getState(), 1000, 1000);
     try {
       fw.append(svg);
+      fw.close();
     } catch (IOException e) {
       System.out.println("ERROR: " + e.getMessage());
     }
@@ -199,5 +204,18 @@ public class InteractiveAnimationController implements IAnimationController,
   public void pSpeedDown() {
     this.tempo -= 1;
     theirView.setTempo(tempo);
+  }
+
+  @Override
+  public void pShape(String shape) {
+    if (model.contains(shape)) {
+      m.addShape(model.getShape(shape));
+      model.removeShape(shape);
+      startAnimator(tempo);
+    } else {
+      model.addShape(m.getShape(shape));
+      m.removeShape(shape);
+      startAnimator(tempo);
+    }
   }
 }

@@ -270,6 +270,7 @@ public class AnimatorModel implements IAnimatorOperations {
     for (ShapeOperations s : shapes) {
       if (s.getName().equals(name)) {
         shapes.remove(s);
+        return;
       }
     }
   }
