@@ -1,0 +1,18 @@
+REVIEW OF THE EXPERIENCE
+
+One thing that we learned from our provider's code is that you can use the methods, setActionCommand
+and getActionCommand to communicate between the swing elements in the interactive view and the
+actionListener that responds to them. This made our design simpler because before, we had our
+own listener classes for each type of swing element and used the tool tip text to communicate
+between them; it was a bit of a mess. With setActionCommand, all we needed to do was give a command
+to each swing element and then interpret them in one actionListener which ended up being the
+controller (another idea we got from our providers).
+
+Also, as we were preparing our code for our customers, we realized that the methods we had in the
+ShapeType and ActionType enums which created shapes and actions were completely pointless. In our
+model, there were createShape and createAction methods that called the methods in the enums. So we
+just moved the body of the enums' method into the models' which allowed us to send our customers
+the enums. We didn't run into any other issues with our design.
+
+Our providers were quite helpful. They always emailed us back in a timely fashion and fixed their
+code for us multiple times.
