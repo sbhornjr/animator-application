@@ -35,12 +35,14 @@ public interface ProviderController {
   /**
    * The provider's svg field has been activated:
    * relay this information to the view.
+   * @param ofile   The requested output file as a String.
    */
   void psvgField(String ofile);
 
   /**
    * The provider's speed functionality has been activated:
    * relay this information to the view.
+   * @param newSpeed  The new inputted speed of the animation.
    */
   void pSpeed(int newSpeed);
 
@@ -55,4 +57,11 @@ public interface ProviderController {
    * relay this information to the view.
    */
   void pSpeedDown();
+
+  /**
+   * One of the provider's shapes have been toggled:
+   * relay this information to the view.
+   * @param shape   The name of the shape that has been toggled.
+   */
+  void pShape(String shape);
 }
