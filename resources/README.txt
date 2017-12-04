@@ -1,2 +1,5 @@
-In order to run the provider's views from the command line, simple put a 'p' in front of the view
-type after -iv.
+To run the providers' views from the command line:
+- hybrid view:  -iv "provider"
+- visual view:  -iv "pvisual"
+- SVG view:     -iv "psvg"
+- textual view: -iv "ptext"

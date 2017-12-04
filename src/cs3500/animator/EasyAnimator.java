@@ -111,7 +111,7 @@ public final class EasyAnimator {
 
     // creates the controller and starts the animation
     IAnimationController controller;
-    if (viewType.equals("interactive") || viewType.equals("pinteractive")) {
+    if (viewType.equals("interactive") || viewType.equals("provider")) {
       controller = new InteractiveAnimationController(model, (InteractiveViewOperations) view,
               speed);
     }
@@ -173,7 +173,7 @@ public final class EasyAnimator {
       case "psvg":
         return new cs3500.animator.provider.view.stringbased.SVGView(1000, 1000,
                 out, new ShapeVisitorImpl(), new AnimationVisitorImpl());
-      case "pinteractive":
+      case "provider":
         return new cs3500.animator.provider.view.visual.HybridView(new ShapeVisitorImpl(),
                 new AnimationVisitorImpl());
       default:
