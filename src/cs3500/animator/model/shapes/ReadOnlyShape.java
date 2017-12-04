@@ -8,7 +8,7 @@ import cs3500.animator.provider.model.IPosn;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.visitors.ShapeVisitor;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -158,12 +158,15 @@ public abstract class ReadOnlyShape implements IShape {
   }
 
   @Override
-  public void changePosition(IPosn fromPosn, IPosn toPosn, float from, float to, float currentTime) {
+  public void changePosition(IPosn fromPosn, IPosn toPosn, float from, float to,
+                             float currentTime) {
     shape.changePosition(fromPosn, toPosn, from, to, currentTime);
   }
 
   @Override
-  public void changeDimension(ArrayList<IDimension> fromDimension, ArrayList<IDimension> toDimension, float from, float to, float currentTime) {
+  public void changeDimension(ArrayList<IDimension> fromDimension,
+                              ArrayList<IDimension> toDimension, float from, float to,
+                              float currentTime) {
     shape.changeDimension(fromDimension, toDimension, from, to, currentTime);
   }
 

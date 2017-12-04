@@ -2,10 +2,8 @@ package cs3500.animator.model.model;
 
 import java.util.ArrayList;
 
-import cs3500.animator.model.actions.IAction;
 import cs3500.animator.model.misc.IMyColor;
 import cs3500.animator.model.misc.IPosn;
-import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.model.actions.ActionType;
 import cs3500.animator.provider.model.AnimationOperations;

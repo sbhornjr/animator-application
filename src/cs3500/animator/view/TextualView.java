@@ -8,7 +8,6 @@ import cs3500.animator.model.model.IAnimatorOperations;
 import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.ShapeOperations;
-import cs3500.animator.provider.view.model.ShapeViewOperations;
 
 /**
  * Displays an animation as a textual description.

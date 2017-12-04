@@ -4,7 +4,7 @@ import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.model.AnimationViewOperations;
 
-import java.awt.*;
+import java.awt.Graphics;
 
 /**
  * Represents a rectangle that the view can interact with.
@@ -30,9 +30,10 @@ public class RectangleView extends ShapeView {
   public String printAsSVG(int tempo, boolean loop) {
     MyColor color = (MyColor) getColor();
     String s = "\n";
-    s += "<rect id=\"" + getName() + "\" x=\"" + getPosition().getX() + "\" y=\"" + getPosition().getY()
-            + "\" width=\"" + getDimensions().get(0).getValue() + "\" height=\"" + getDimensions().get(1).getValue()
-            + "\" fill=\"rgb" + color.asInt() + "\" visibility=\"visible\" >\n";
+    s += "<rect id=\"" + getName() + "\" x=\"" + getPosition().getX() + "\" y=\""
+            + getPosition().getY() + "\" width=\"" + getDimensions().get(0).getValue()
+            + "\" height=\"" + getDimensions().get(1).getValue() + "\" fill=\"rgb" + color.asInt()
+            + "\" visibility=\"visible\" >\n";
     for (AnimationViewOperations avo : animations) {
       s += avo.printAsSVG(tempo, loop);
     }

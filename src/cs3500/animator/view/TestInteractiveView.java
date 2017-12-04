@@ -99,41 +99,42 @@ public class TestInteractiveView implements IInteractiveView, IAnimationView {
 
   @Override
   public void loop() {
-
+    // not used
   }
 
   @Override
   public void pause() {
-
+    // not used
   }
 
   @Override
   public void play() {
-
+    // not used
   }
 
   @Override
   public void setTempo(int tempo) {
-
+    // not used
   }
 
   @Override
   public void reset() {
-
+    // not used
   }
 
   @Override
   public void setActionListener(ActionListener controller) {
-
+    // not used
   }
 
   @Override
   public String getSVG(int tempo, ArrayList<ShapeOperations> state, int svgHeight, int svgWidth) {
+    // not used
     return null;
   }
 
   @Override
   public void playAnimation(int tempo, ArrayList<ShapeOperations> state) {
-
+    // not used
   }
 }

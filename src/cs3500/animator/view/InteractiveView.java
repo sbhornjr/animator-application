@@ -15,7 +15,10 @@ import javax.swing.WindowConstants;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;

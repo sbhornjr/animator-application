@@ -1,10 +1,8 @@
 package cs3500.animator.view.model;
 
-import cs3500.animator.model.actions.Move;
 import cs3500.animator.model.actions.Scale;
 import cs3500.animator.model.misc.Posn;
 import cs3500.animator.provider.model.AnimationOperations;
-import cs3500.animator.provider.model.IMoveAnimation;
 import cs3500.animator.provider.model.IScaleAnimation;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.model.AnimationViewOperations;
@@ -88,12 +86,14 @@ public class ScaleView implements AnimationViewOperations {
   }
 
   @Override
-  public boolean hasNoConflictsWith(ShapeOperations stateAtFromTime, ShapeOperations stateAtToTime, AnimationOperations a) {
+  public boolean hasNoConflictsWith(ShapeOperations stateAtFromTime, ShapeOperations stateAtToTime,
+                                    AnimationOperations a) {
     return scale.hasNoConflictsWith(stateAtFromTime, stateAtToTime, a);
   }
 
   @Override
-  public boolean noConflictsWithHelper(ShapeOperations givenFrom, ShapeOperations givenTo, float givenFromTime, float givenToTime) {
+  public boolean noConflictsWithHelper(ShapeOperations givenFrom, ShapeOperations givenTo,
+                                       float givenFromTime, float givenToTime) {
     return scale.noConflictsWithHelper(givenFrom, givenTo, givenFromTime, givenToTime);
   }
 

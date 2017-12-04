@@ -1,8 +1,5 @@
 package cs3500.animator.controller;
 
-import java.util.ArrayList;
-
-import cs3500.animator.model.model.AnimatorModel;
 import cs3500.animator.provider.model.AnimatorModelOperations;
 import cs3500.animator.provider.view.model.AnimatorViewOperations;
 
@@ -20,7 +17,8 @@ public class AnimationController implements IAnimationController {
    * Constructor for the AnimationController.
    * @param view  The view.
    */
-  public AnimationController(AnimatorModelOperations model, AnimatorViewOperations view, int speed) {
+  public AnimationController(AnimatorModelOperations model, AnimatorViewOperations view,
+                             int speed) {
     this.model = model;
     this.view = view;
     this.speed = speed;

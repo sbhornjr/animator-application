@@ -232,9 +232,9 @@ public class AnimatorModel implements IAnimatorOperations {
       if (a.getType() == at && a.getShapeName().equals(shapeName)) {
         // If the start or end of the given duration is within the duration of the action in the
         // model
-        if (duration.getX() > a.getDuration().getX() && duration.getX() < a.getDuration().getDoubleY()
-                || duration.getX() > a.getDuration().getX() && duration.getX() < a.getDuration()
-                .getDoubleY()) {
+        if (duration.getX() > a.getDuration().getX() && duration.getX() < a.getDuration().getY()
+                || duration.getX() > a.getDuration().getX()
+                && duration.getX() < a.getDuration().getY()) {
           return true;
         }
       }

@@ -18,7 +18,6 @@ import cs3500.animator.model.model.ReadOnlyAnimatorModel;
 import cs3500.animator.provider.view.model.AnimatorViewOperations;
 import cs3500.animator.provider.view.visual.InteractiveViewOperations;
 import cs3500.animator.view.AnimationFileReader;
-import cs3500.animator.view.IInteractiveView;
 import cs3500.animator.view.InteractiveView;
 import cs3500.animator.view.SVGAnimationView;
 import cs3500.animator.view.TextualView;
@@ -113,7 +112,8 @@ public final class EasyAnimator {
     // creates the controller and starts the animation
     IAnimationController controller;
     if (viewType.equals("interactive") || viewType.equals("pinteractive")) {
-      controller = new InteractiveAnimationController(model, (InteractiveViewOperations) view, speed);
+      controller = new InteractiveAnimationController(model, (InteractiveViewOperations) view,
+              speed);
     }
     else {
       controller = new AnimationController(model, view, speed);
@@ -152,8 +152,8 @@ public final class EasyAnimator {
    * @param speed The speed at which the animation will run
    * @return      The view
    */
-  private static AnimatorViewOperations viewFactory(String type, Appendable out, IAnimatorOperations model,
-                                                    int speed) {
+  private static AnimatorViewOperations viewFactory(String type, Appendable out, IAnimatorOperations
+          model, int speed) {
     String errorMsg;
     switch (type) {
       case "text":
@@ -165,14 +165,17 @@ public final class EasyAnimator {
       case "interactive":
         return new InteractiveView(new ReadOnlyAnimatorModel(model), speed);
       case "ptext":
-        return new cs3500.animator.provider.view.stringbased.TextualView(out, new ShapeVisitorImpl(), new AnimationVisitorImpl());
+        return new cs3500.animator.provider.view.stringbased.TextualView(out,
+                new ShapeVisitorImpl(), new AnimationVisitorImpl());
       case "pvisual":
-        return new cs3500.animator.provider.view.visual.VisualView(new ShapeVisitorImpl(), new AnimationVisitorImpl());
+        return new cs3500.animator.provider.view.visual.VisualView(new ShapeVisitorImpl(),
+                new AnimationVisitorImpl());
       case "psvg":
         return new cs3500.animator.provider.view.stringbased.SVGView(1000, 1000,
                 out, new ShapeVisitorImpl(), new AnimationVisitorImpl());
       case "pinteractive":
-        return new cs3500.animator.provider.view.visual.HybridView(new ShapeVisitorImpl(), new AnimationVisitorImpl());
+        return new cs3500.animator.provider.view.visual.HybridView(new ShapeVisitorImpl(),
+                new AnimationVisitorImpl());
       default:
         errorMsg = "Invalid view type provided";
     }

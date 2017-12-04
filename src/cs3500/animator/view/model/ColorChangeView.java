@@ -2,14 +2,11 @@ package cs3500.animator.view.model;
 
 import cs3500.animator.model.actions.ColorChange;
 import cs3500.animator.model.misc.MyColor;
-import cs3500.animator.model.misc.Posn;
 import cs3500.animator.provider.model.AnimationOperations;
 import cs3500.animator.provider.model.IColorAnimation;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.model.AnimationViewOperations;
 import cs3500.animator.provider.view.visitors.AnimationVisitor;
-
-import java.awt.*;
 
 /**
  * Represents a color change that the view can interact with.
@@ -31,7 +28,8 @@ public class ColorChangeView implements AnimationViewOperations {
     String str = "";
     str += "    <animate attributeType=\"xml\" begin=\""
             + (int) ((colChange.getDuration().getX() / tempo) * 1000) + "ms\" dur=\""
-            + (int) (((colChange.getDuration().getY() - colChange.getDuration().getX()) / tempo) * 1000)
+            + (int) (((colChange.getDuration().getY()
+            - colChange.getDuration().getX()) / tempo) * 1000)
             + "ms\" attributeName=\"fill\" from=\"rgb" + getFrom().asInt() + "\" to=\"rgb"
             + getTo().asInt() + "\" fill=\"freeze\" />\n";
 
@@ -80,12 +78,14 @@ public class ColorChangeView implements AnimationViewOperations {
   }
 
   @Override
-  public boolean hasNoConflictsWith(ShapeOperations stateAtFromTime, ShapeOperations stateAtToTime, AnimationOperations a) {
+  public boolean hasNoConflictsWith(ShapeOperations stateAtFromTime, ShapeOperations stateAtToTime,
+                                    AnimationOperations a) {
     return colChange.hasNoConflictsWith(stateAtFromTime, stateAtToTime, a);
   }
 
   @Override
-  public boolean noConflictsWithHelper(ShapeOperations givenFrom, ShapeOperations givenTo, float givenFromTime, float givenToTime) {
+  public boolean noConflictsWithHelper(ShapeOperations givenFrom, ShapeOperations givenTo,
+                                       float givenFromTime, float givenToTime) {
     return colChange.noConflictsWithHelper(givenFrom, givenTo, givenFromTime, givenToTime);
   }
 
@@ -100,7 +100,8 @@ public class ColorChangeView implements AnimationViewOperations {
     s += "Shape " + colChange.getShapeName() + " ";
     String str = colChange.getDescription();
     s += str;
-    s += "from t=" + colChange.getDuration().getX() + " to t=" + colChange.getDuration().getDoubleY();
+    s += "from t=" + colChange.getDuration().getX() + " to t="
+            + colChange.getDuration().getDoubleY();
     return s;
   }
 }

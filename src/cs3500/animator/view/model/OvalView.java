@@ -4,10 +4,10 @@ import cs3500.animator.model.misc.MyColor;
 import cs3500.animator.provider.model.ShapeOperations;
 import cs3500.animator.provider.view.model.AnimationViewOperations;
 
-import java.awt.*;
+import java.awt.Graphics;
 
 /**
- * Represents an oval that the view can interact with,
+ * Represents an oval that the view can interact with.
  */
 public class OvalView extends ShapeView {
 
@@ -30,9 +30,10 @@ public class OvalView extends ShapeView {
   public String printAsSVG(int tempo, boolean loop) {
     MyColor color = (MyColor) getColor();
     String s = "\n";
-    s += "<ellipse id=\"" + getName() + "\" cx=\"" + getPosition().getX() + "\" cy=\"" + getPosition().getY()
-            + "\" rx=\"" + getDimensions().get(0).getValue() + "\" ry=\"" + getDimensions().get(1).getValue()
-            + "\" fill=\"rgb" + color.asInt() + "\" visibility=\"visible\" >\n";
+    s += "<ellipse id=\"" + getName() + "\" cx=\"" + getPosition().getX() + "\" cy=\""
+            + getPosition().getY() + "\" rx=\"" + getDimensions().get(0).getValue() + "\" ry=\""
+            + getDimensions().get(1).getValue() + "\" fill=\"rgb" + color.asInt()
+            + "\" visibility=\"visible\" >\n";
     for (AnimationViewOperations avo : animations) {
       s += avo.printAsSVG(tempo, loop);
     }
