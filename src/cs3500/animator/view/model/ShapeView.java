@@ -29,6 +29,13 @@ public abstract class ShapeView implements ShapeViewOperations {
   }
 
   @Override
+  public void addAnimation(AnimationViewOperations... toBeAdded) {
+    for (AnimationViewOperations avo : toBeAdded) {
+      animations.add(avo);
+    }
+  }
+
+  @Override
   public ArrayList<AnimationViewOperations> getViewAnimations() {
     return animations;
   }
